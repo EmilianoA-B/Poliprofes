@@ -1,2 +1,2 @@
 # Poliprofes
-Proyecto para la página poliprofes
+Repositorio para la página Poliprofes
