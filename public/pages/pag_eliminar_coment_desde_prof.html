@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/pag_eliminar_coment_desde_prof.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="admin-menu">
+            <button id="admin-button">Administrar</button>
+            <div id="admin-dropdown" class="dropdown-content">
+                <ul>
+                    <li><a href="#">Alta</a></li>
+                    <li><a href="#">Solicitudes</a></li>
+                    <li><a href="#">Eliminar profesor</a></li>
+                    <li><a href="#">Modificar profesores</a></li>
+                    <li><a href="#">Dar de baja opiniones</a></li>
+                    <li><a href="#">Dar de alta carreras y materias</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul>
+                    <li><a href="#">Añade tu profesor</a></li>
+                    <li><a href="#">Evaluaciones</a></li>
+                    <li><a href="#">Carrera</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+    <main>
+        <section class="profesor-info">
+            <div class="info-block">
+                <div class="info-item">
+                    <strong>Nombre completo del profesor:</strong> <span>Nombre del Profesor</span>
+                </div>
+                <div class="info-item">
+                    <strong>Carreras que imparte el profesor:</strong> <span>Carrera 1, Carrera 2</span>
+                </div>
+                <div class="info-item">
+                    <strong>Calificación general del profesor:</strong> <span>8.5</span>
+                </div>
+            </div>
+            <div class="probabilidad">
+                <strong>Probabilidad de pasar la materia con el profesor:</strong> <span>75%</span>
+            </div>
+        </section>
+        <section class="comentarios">
+            <div class="comentario">
+                <div class="info-item"><strong>Nombre completo del alumno:</strong> Nombre del Alumno</div>
+                <div class="info-item"><strong>Materia:</strong> Materia 1</div>
+                <div class="info-item"><strong>Carrera:</strong> Carrera A</div>
+                <div class="info-item"><strong>Calificación:</strong> 9</div>
+                <div class="info-item"><strong>Dificultad:</strong> Intermedio</div>
+            </div>
+        </section>
+        
+        <div id="comentarios-container">
+            <h2>Comentarios</h2>
+            <ul id="comentarios-list">
+                <!-- Aquí se cargarán dinámicamente los comentarios -->
+            </ul>
+            <div id="pagination">
+                <!-- Enlaces numerados aquí -->
+            </div>
+            <div class="comentario">
+                <!-- Contenido del comentario -->
+            
+                <!-- Botón de Eliminar -->
+                <button class="eliminar-btn">Eliminar</button>
+            </div>
+        </div>
+
+
+        
+    </main>
+    
+
+    <script src="../scripts/pag_eliminar_coment_desde_prof.js"></script>
+</body>
+
+</html>

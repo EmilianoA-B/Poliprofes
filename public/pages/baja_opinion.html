@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/baja_opinion.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="user-info" >
+            <span id="user-name"></span>
+            <span id="user-email"></span>
+        </div>
+
+        <div class="account-menu" id="account-menu">
+            <button id="account-button">Mi cuenta</button>
+            <div id="account-dropdown" class="dropdown-content">
+                <ul>
+                    <li><a href="#">Cambiar Contraseña</a></li>
+                    <li><a href="#">Mis opiniones</a></li>
+                    <li><a href="#">Borrar mi cuenta</a></li>
+                    <li><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul>
+                    <li><a href="#">Añade tu profesor</a></li>
+                    <li><a href="#">Evaluaciones</a></li>
+                    <li><a href="#">Carrera</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+    <main>
+        <section id="comentarios">
+            <!-- Aquí se cargarán dinámicamente los comentarios -->
+        </section>
+        
+    </main>
+
+
+    <script src="../scripts/baja_opinion.js"></script>
+</body>
+
+</html>

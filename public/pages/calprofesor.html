@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar Profesor</title>
+    <link rel="stylesheet" href="../styles/header-nav.css">
+    <link rel="stylesheet" href="../styles/calprofesor.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="auth-buttons">
+            <button>Registro</button>
+            <button>Inicio de sesión</button>
+        </div>
+        <div class="user-menu">
+            <div id="user-info" class="info"></div>
+             <div class="micuenta">
+                <details>
+                    <summary>Mi cuenta</summary>
+                    <ul>
+                      <li><a href="#">Cambiar contraseña</a></li>
+                      <li><a href="#">Mis opiniones</a></li>
+                      <li><a href="#">Borrar mi cuenta</a></li>
+                      <li><a href="#">Cerrar sesión</a></li>
+                    </ul>
+                </details>
+             </div>
+        </div>  
+        <div class="menu-admin">
+            <details>
+                <summary>Administrar</summary>
+                <ul>
+                    <li><a href="#">Alta</a></li>
+                    <li><a href="#">Solicitudes</a></li>
+                    <li><a href="#">Eliminar profesor</a></li>
+                    <li><a href="#">Modificar profesores</a></li>
+                    <li><a href="#">Dar de baja opiniones</a></li>
+                    <li><a href="alta_carreras_materias.html">Dar de alta carreras y materias</a></li>
+                </ul>
+            </details>
+        </div>    
+    </header>
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul id="menu-list">
+                    <li>
+                        <details>
+                            <summary>Evaluaciones</summary>
+                            <ul>
+                                <li><a href="#">Mejores evaluaciones</a></li>
+                                <li><a href="#">Peores evaluaciones</a></li>
+                                <li><a href="#">Mas recientes</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                     <details>
+                        <summary>Carrera</summary>
+                        <ul>
+                            <li><a href="#">Ing. en computación</a></li>
+                            <li><a href="#">Ing. Mecánica</a></li>
+                            <li><a href="#">Ing. en Sistemas Automotrices</a></li>
+                            <li><a href="#">Ing. en comunicaciones y en electronica</a></li>
+                        </ul>
+                    </details>
+                </li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+    <main class="container-form">
+        <form action="#" method="post"">
+            <label for="materia">Seleccionar materia:</label>
+            <select id="materia" name="materia" required>
+                <option value="">--Seleccione una materia--</option>
+                <option value="computación">Ing. en computación</option>
+                <option value="mecánica">Ing. Mecánica</option>
+                <option value="Automotrices">Ing. en Sistemas Automotrices</option>
+                <option value="comunicaciones-electronica">Ing. en comunicaciones y en electronica</option>
+            </select>
+            <br><br>
+            <label>Calificación del profesor:</label>
+            <div>
+                <input type="radio" id="cal1" name="calificacion" value="1" required><label for="cal1">1</label>
+                <input type="radio" id="cal2" name="calificacion" value="2"><label for="cal2">2</label>
+                <input type="radio" id="cal3" name="calificacion" value="3"><label for="cal3">3</label>
+                <input type="radio" id="cal4" name="calificacion" value="4"><label for="cal4">4</label>
+                <input type="radio" id="cal5" name="calificacion" value="5"><label for="cal5">5</label>
+                <input type="radio" id="cal6" name="calificacion" value="6"><label for="cal6">6</label>
+                <input type="radio" id="cal7" name="calificacion" value="7"><label for="cal7">7</label>
+                <input type="radio" id="cal8" name="calificacion" value="8"><label for="cal8">8</label>
+                <input type="radio" id="cal9" name="calificacion" value="9"><label for="cal9">9</label>
+                <input type="radio" id="cal10" name="calificacion" value="10"><label for="cal10">10</label>
+            </div>
+            <br><br>
+            <label for="dificultad">Dificultad del profesor:</label>
+            <select id="dificultad" name="dificultad" required>
+                <option value="">--Seleccione una opción--</option>
+                <option value="muy_facil">Muy fácil</option>
+                <option value="facil">Fácil</option>
+                <option value="intermedio">Intermedio</option>
+                <option value="dificil">Difícil</option>
+                <option value="muy_dificil">Muy difícil</option>
+            </select>
+            <br><br>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea>
+            <br><br>
+    
+            <label>¿Recomiendas?</label>
+            <div>
+                <input type="radio" id="recomienda_si" name="recomienda" value="si" required><label for="recomienda_si">Sí</label>
+                <input type="radio" id="recomienda_no" name="recomienda" value="no"><label for="recomienda_no">No</label>
+            </div>
+            <br><br>
+            <label>¿Aprobaste?</label>
+            <div>
+                <input type="radio" id="aprobo_si" name="aprobo" value="si" required><label for="aprobo_si">Sí</label>
+                <input type="radio" id="aprobo_no" name="aprobo" value="no"><label for="aprobo_no">No</label>
+            </div>
+            <br><br>
+            <button type="submit" class="calf">Calificar</button>
+        </form>
+    </main>
+    <script src="../scripts/header-nav.js"></script>
+</body>
+</html>

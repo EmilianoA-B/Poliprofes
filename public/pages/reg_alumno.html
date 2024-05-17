@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/reg_alumno.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="user-info" style="display: none;">
+            <span id="user-name"></span>
+            <span id="user-email"></span>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <button id="register-button">Registro</button>
+            <button id="login-button">Inicio de sesión</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul>
+                    <li><a href="#">Añade tu profesor</a></li>
+                    <li><a href="#">Evaluaciones</a></li>
+                    <li><a href="#">Carrera</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <form id="registroForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br><br>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required><br><br>
+
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" required><br><br>
+
+            <div class="password-input">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" required>
+                <button type="button" id="toggle-password">Mostrar</button>
+            </div>
+            <button type="submit">Finalizar registro</button>
+        </form>
+    </div>
+
+    <script src="../scripts/reg_alumno.js"></script>
+</body>
+
+</html>

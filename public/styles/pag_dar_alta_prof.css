@@ -1,0 +1,180 @@
+body {
+    font-family: Poppins ;
+    margin: 0;
+    padding: 0;
+    justify-content: center; /* Centrar contenido horizontalmente */
+    align-items: center; /* Centrar contenido verticalmente */
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ajusta según sea necesario */
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 60%; /* Asegúrate de que el input ocupe todo el espacio disponible */
+}
+
+
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-buttons button {
+    width: 100%; 
+    margin-bottom: 10px; 
+}
+.menu-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; 
+}
+
+
+.menu-button {
+    display: flex;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 4px;
+    position:relative; 
+}
+
+.menu-button ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    position: center;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    white-space: nowrap; /* Evita que los elementos se envuelvan */
+}
+
+.menu-button ul li {
+    display: inline-block; /* Muestra los elementos en línea */
+    border-right: 1px solid #ddd; /* Borde entre elementos */
+}
+
+.menu-button ul li:last-child {
+    border-right: none; /* Elimina el borde del último elemento */
+}
+
+.menu-button ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.menu-button ul li a:hover {
+    background-color: #f4f4f4;
+}
+
+.menu-button:hover ul {
+    display: block;
+}
+
+.container {
+    font-family: Poppins ;
+    justify-content: center; /* Centrar contenido horizontalmente */
+    text-align: center;
+    width: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+}
+.admin-menu {
+    position: relative;
+}
+
+#admin-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.admin-menu:hover #admin-dropdown {
+    display: block;
+}
+
+
+#admin-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px; /* Ancho del menú desplegable */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.admin-menu:hover #admin-dropdown {
+    display: block;
+}
+
+#admin-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#admin-dropdown ul li {
+    border-bottom: 1px solid #ddd; /* Línea divisoria entre elementos */
+}
+
+#admin-dropdown ul li:last-child {
+    border-bottom: none; /* Eliminar la línea divisoria del último elemento */
+}
+
+#admin-dropdown ul li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+#admin-dropdown ul li a:hover {
+    background-color: #f4f4f4; /* Cambia el color de fondo al pasar el cursor sobre los elementos */
+}

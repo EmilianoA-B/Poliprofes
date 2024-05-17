@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/recup_cont.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="user-info" style="display: none;">
+            <span id="user-name"></span>
+            <span id="user-email"></span>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <button id="register-button">Registro</button>
+            <button id="login-button">Inicio de sesión</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul>
+                    <li><a href="#">Añade tu profesor</a></li>
+                    <li><a href="#">Evaluaciones</a></li>
+                    <li><a href="#">Carrera</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form id="registroForm"> <!-- Corregido el ID del formulario a "registroForm" -->
+            <label for="correo">Correo de usuario:</label>
+            <input type="text" id="correo" name="correo" required><br><br>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div id="mensaje-box" class="mensaje-box" style="display: none;"></div> <!-- Div para mostrar el mensaje -->
+
+    <script src="../scripts/recup_cont.js"></script>
+</body>
+
+</html>

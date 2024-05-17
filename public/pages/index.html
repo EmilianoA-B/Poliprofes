@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/header-nav.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="auth-buttons">
+            <button>Registro</button>
+            <button>Inicio de sesión</button>
+        </div>
+        <div class="user-menu">
+            <div id="user-info" class="info"></div>
+             <div class="micuenta">
+                <details>
+                    <summary>Mi cuenta</summary>
+                    <ul>
+                      <li><a href="#">Cambiar contraseña</a></li>
+                      <li><a href="#">Mis opiniones</a></li>
+                      <li><a href="#">Borrar mi cuenta</a></li>
+                      <li><a href="#">Cerrar sesión</a></li>
+                    </ul>
+                </details>
+             </div>
+        </div>  
+        <div class="menu-admin">
+            <details>
+                <summary>Administrar</summary>
+                <ul>
+                    <li><a href="#">Alta</a></li>
+                    <li><a href="#">Solicitudes</a></li>
+                    <li><a href="#">Eliminar profesor</a></li>
+                    <li><a href="#">Modificar profesores</a></li>
+                    <li><a href="#">Dar de baja opiniones</a></li>
+                    <li><a href="alta_carreras_materias.html">Dar de alta carreras y materias</a></li>
+                </ul>
+            </details>
+        </div>    
+    </header>
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul id="menu-list">
+                    <li>
+                        <details>
+                            <summary>Evaluaciones</summary>
+                            <ul>
+                                <li><a href="#">Mejores evaluaciones</a></li>
+                                <li><a href="#">Peores evaluaciones</a></li>
+                                <li><a href="#">Mas recientes</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                     <details>
+                        <summary>Carrera</summary>
+                        <ul>
+                            <li><a href="#">Ing. en computación</a></li>
+                            <li><a href="#">Ing. Mecánica</a></li>
+                            <li><a href="#">Ing. en Sistemas Automotrices</a></li>
+                            <li><a href="#">Ing. en comunicaciones y en electronica</a></li>
+                        </ul>
+                    </details>
+                </li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+    <main class="main">
+        <section class="registration-section">
+            <p>¡Califica, revisa, opina e inscríbelos!<br> Regístrate para poder calificar y opinar sobre tus profesores.</p>
+            <div class="container-btn"><button id="registroBtn">Registrarse</button></div>
+        </section>
+        <section class="registration-teacher">
+            <p>No encuentras a tu profesor, ¡Regístralo!</p>
+            <div><button>Solicitar</button></div>
+        </section>
+        <section class="container-comments">
+            <div class="comentarios">
+                <h3 class="n_profe">Nombre del profesor:<span class="nombre"></span></h3>
+                 <p>Calificacion General:<span class="calificacion"></span></p>
+                 <p>Indice de aprobacion:<span class="indiceaprobacion"></span></p>
+            </div>
+            <div class="comentarios">
+                <h3 class="n_profe">Nombre del profesor:<span class="nombre"></span></h3>
+                <p>Calificacion General:<span class="calificacion"></span></p>
+                <p>Indice de aprobacion:<span class="indiceaprobacion"></span></p>
+            </div>
+            <div class="comentarios">
+                <h3 class="n_profe">Nombre del profesor:<span class="nombre"></span></h3>
+                <p>Calificacion General:<span class="calificacion"></span></p>
+                <p>Indice de aprobacion:<span class="indiceaprobacion"></span></p>
+            </div>
+        </section>
+    </main>
+    <script src="../scripts/header-nav.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/section.js"></script>
+</body>
+
+</html>

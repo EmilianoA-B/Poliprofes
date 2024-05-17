@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliProfesores</title>
+    <link rel="stylesheet" href="../styles/pag_prof.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text">
+            <button>Buscar</button>
+        </div>
+        <div class="user-info" style="display: none;">
+            <span id="user-name"></span>
+            <span id="user-email"></span>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <button id="register-button">Registro</button>
+            <button id="login-button">Inicio de sesión</button>
+        </div>
+        <div class="account-menu" id="account-menu" style="display: none;">
+            <button id="account-button">Mi cuenta</button>
+            <div id="account-dropdown" class="dropdown-content">
+                <ul>
+                    <li><a href="#">Cambiar Contraseña</a></li>
+                    <li><a href="#">Mis opiniones</a></li>
+                    <li><a href="#">Borrar mi cuenta</a></li>
+                    <li><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="menu-button-container">
+            <details class="menu-button">
+                <summary>Menu</summary>
+                <ul>
+                    <li><a href="#">Añade tu profesor</a></li>
+                    <li><a href="#">Evaluaciones</a></li>
+                    <li><a href="#">Carrera</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+    <main>
+        <section class="profesor-info">
+            <div class="info-block">
+                <div class="info-item">
+                    <strong>Nombre completo del profesor:</strong> <span>Nombre del Profesor</span>
+                </div>
+                <div class="info-item">
+                    <strong>Carreras que imparte el profesor:</strong> <span>Carrera 1, Carrera 2</span>
+                </div>
+                <div class="info-item">
+                    <strong>Calificación general del profesor:</strong> <span>8.5</span>
+                </div>
+            </div>
+            <div class="probabilidad">
+                <strong>Probabilidad de pasar la materia con el profesor:</strong> <span>75%</span>
+            </div>
+        </section>
+        <section class="comentarios">
+            <div class="comentario">
+                <div class="info-item"><strong>Nombre completo del alumno:</strong> Nombre del Alumno</div>
+                <div class="info-item"><strong>Materia:</strong> Materia 1</div>
+                <div class="info-item"><strong>Carrera:</strong> Carrera A</div>
+                <div class="info-item"><strong>Calificación:</strong> 9</div>
+                <div class="info-item"><strong>Dificultad:</strong> Intermedio</div>
+            </div>
+        </section>
+        
+        <div id="comentarios-container">
+            <h2>Comentarios</h2>
+            <ul id="comentarios-list">
+                <!-- Aquí se cargarán dinámicamente los comentarios -->
+            </ul>
+            <div id="pagination">
+                <!-- Enlaces numerados aquí -->
+            </div>
+        </div>
+    </main>
+    <script src="../scripts/pag_prof.js"></script>
+</body>
+
+</html>

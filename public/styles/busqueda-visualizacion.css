@@ -1,0 +1,34 @@
+.container-divr{
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-resultados{
+    width:60%;
+}
+.profesor {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.nombre {
+    font-weight: bold;
+    text-decoration: none;
+    color: blue;
+    font-size: 1.2rem;
+}
+
+.calificacion {
+    float: right;
+    font-size: 2rem;
+    color:black;
+}
+
+.carreras {
+    margin-top: 5px;
+}
