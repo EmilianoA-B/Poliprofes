@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Función para crear y agregar un comentario al contenedor
     function agregarComentario(comentario) {
         const opinionElement = document.createElement('div');
-        opinionElement.classList.add('opinion');
+        opinionElement.classList.add('comentario-Eliminar');
 
         const contenidoHTML = `
             <p>${comentario.profesor}</p>
@@ -60,14 +60,14 @@ document.addEventListener("DOMContentLoaded", function() {
             <p>${comentario.comentario}</p>
             <p>Aprobaste: ${comentario.aprobaste}</p>
             <p>Recomiendas: ${comentario.recomiendas}</p>
-            <button class="eliminar-opinion">Eliminar opinión</button>
+            <button class="Botones-General">Eliminar opinión</button>
         `;
 
         opinionElement.innerHTML = contenidoHTML;
         comentariosContainer.appendChild(opinionElement);
 
         // Manejar clic en el botón de eliminar dentro de esta opinión
-        const eliminarButton = opinionElement.querySelector('.eliminar-opinion');
+        const eliminarButton = opinionElement.querySelector('.Botones-General');
         eliminarButton.addEventListener('click', function() {
             const confirmarEliminar = confirm('¿Estás seguro de que quieres eliminar esta opinión?');
             if (confirmarEliminar) {

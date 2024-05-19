@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calificar Profesor</title>
     <link rel="stylesheet" href="../styles/header-nav.css">
-    <link rel="stylesheet" href="../styles/calprofesor.css">
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
     <header>
@@ -76,10 +76,10 @@
             </details>
         </div>
     </nav>
-    <main class="container-form">
-        <form action="#" method="post"">
-            <label for="materia">Seleccionar materia:</label>
-            <select id="materia" name="materia" required>
+    <main class="container-califProf">
+        <form action="#" method="post"" class="form-califProf">
+            <label for="materia" class="label-1">Seleccionar materia:</label>
+            <select id="materia" name="materia" required class="select-califProf">
                 <option value="">--Seleccione una materia--</option>
                 <option value="computación">Ing. en computación</option>
                 <option value="mecánica">Ing. Mecánica</option>
@@ -87,22 +87,22 @@
                 <option value="comunicaciones-electronica">Ing. en comunicaciones y en electronica</option>
             </select>
             <br><br>
-            <label>Calificación del profesor:</label>
+            <label class="label-1">Calificación del profesor:</label>
             <div>
-                <input type="radio" id="cal1" name="calificacion" value="1" required><label for="cal1">1</label>
-                <input type="radio" id="cal2" name="calificacion" value="2"><label for="cal2">2</label>
-                <input type="radio" id="cal3" name="calificacion" value="3"><label for="cal3">3</label>
-                <input type="radio" id="cal4" name="calificacion" value="4"><label for="cal4">4</label>
-                <input type="radio" id="cal5" name="calificacion" value="5"><label for="cal5">5</label>
-                <input type="radio" id="cal6" name="calificacion" value="6"><label for="cal6">6</label>
-                <input type="radio" id="cal7" name="calificacion" value="7"><label for="cal7">7</label>
-                <input type="radio" id="cal8" name="calificacion" value="8"><label for="cal8">8</label>
-                <input type="radio" id="cal9" name="calificacion" value="9"><label for="cal9">9</label>
-                <input type="radio" id="cal10" name="calificacion" value="10"><label for="cal10">10</label>
+                <input type="radio" id="cal1" name="calificacion" value="1" required><label for="cal1" >1</label>
+                <input type="radio" id="cal2" name="calificacion" value="2"><label for="cal2" >2</label>
+                <input type="radio" id="cal3" name="calificacion" value="3"><label for="cal3" >3</label>
+                <input type="radio" id="cal4" name="calificacion" value="4"><label for="cal4" >4</label>
+                <input type="radio" id="cal5" name="calificacion" value="5"><label for="cal5" >5</label>
+                <input type="radio" id="cal6" name="calificacion" value="6"><label for="cal6" >6</label>
+                <input type="radio" id="cal7" name="calificacion" value="7"><label for="cal7" >7</label>
+                <input type="radio" id="cal8" name="calificacion" value="8"><label for="cal8" >8</label>
+                <input type="radio" id="cal9" name="calificacion" value="9"><label for="cal9" >9</label>
+                <input type="radio" id="cal10" name="calificacion" value="10"><label for="cal10" >10</label>
             </div>
             <br><br>
-            <label for="dificultad">Dificultad del profesor:</label>
-            <select id="dificultad" name="dificultad" required>
+            <label for="dificultad" class="label-1">Dificultad del profesor:</label>
+            <select id="dificultad" name="dificultad" class="select-califProf" required>
                 <option value="">--Seleccione una opción--</option>
                 <option value="muy_facil">Muy fácil</option>
                 <option value="facil">Fácil</option>
@@ -111,23 +111,23 @@
                 <option value="muy_dificil">Muy difícil</option>
             </select>
             <br><br>
-            <label for="comentario">Comentario:</label>
-            <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea>
+            <label for="comentario" class="label-1">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" cols="50" class="textarea-califProf" required></textarea>
             <br><br>
     
-            <label>¿Recomiendas?</label>
+            <label class="label-1">¿Recomiendas?</label>
             <div>
                 <input type="radio" id="recomienda_si" name="recomienda" value="si" required><label for="recomienda_si">Sí</label>
                 <input type="radio" id="recomienda_no" name="recomienda" value="no"><label for="recomienda_no">No</label>
             </div>
             <br><br>
-            <label>¿Aprobaste?</label>
+            <label class="label-1">¿Aprobaste?</label>
             <div>
                 <input type="radio" id="aprobo_si" name="aprobo" value="si" required><label for="aprobo_si">Sí</label>
                 <input type="radio" id="aprobo_no" name="aprobo" value="no"><label for="aprobo_no">No</label>
             </div>
             <br><br>
-            <button type="submit" class="calf">Calificar</button>
+            <button type="submit" class="Botones-General">Calificar</button>
         </form>
     </main>
     <script src="../scripts/header-nav.js"></script>

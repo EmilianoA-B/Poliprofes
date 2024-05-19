@@ -25,19 +25,19 @@ function mostrarResultados(resultados) {
 
     resultados.forEach(function(profesor) {
         var divProfesor = document.createElement("div");
-        divProfesor.classList.add("profesor"); //elemento div class=profesor
+        divProfesor.classList.add("resultado-profesor"); //elemento div class=profesor
 
         var enlaceNombre = document.createElement("a");
         enlaceNombre.href = "pagina_profesor.html"; // Enlace a la página del profesor
-        enlaceNombre.classList.add("nombre");  //elemento a class="nombre"
+        enlaceNombre.classList.add("resultado-nombre");  //elemento a class="nombre"
         enlaceNombre.innerText = profesor.nombre;  
 
         var calificacionSpan = document.createElement("span");
-        calificacionSpan.classList.add("calificacion");  //span class="calificacion"
+        calificacionSpan.classList.add("resultado-calificacion");  //span class="calificacion"
         calificacionSpan.innerText = profesor.calificacion; 
 
         var carrerasParrafo = document.createElement("p");
-        carrerasParrafo.classList.add("carreras");  // p class="carreras"
+        carrerasParrafo.classList.add("resultado-carreras");  // p class="carreras"
         //carrerasParrafo.innerText = profesor.carreras.join(", ");
         // Agregar cada carrera al párrafo en una línea separada
         profesor.carreras.forEach(function(carrera, index) {

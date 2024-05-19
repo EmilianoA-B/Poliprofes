@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoliProfesores</title>
-    <link rel="stylesheet" href="../styles/pag_dar_alta_prof.css">
+    <link rel="stylesheet" href="../styles/header-nav.css">
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
 
 <body>
@@ -44,10 +45,10 @@
     </nav>
 
     
-    <div class="container">
-        <form id="professorForm">
-            <label for="nombre">Nombre del profesor:</label>
-            <input type="text" id="nombre" name="nombre" required><br><br>
+    <main class="container-AltaProf">
+        <form id="" class="form-AltaProf">
+            <label class="label-1" for="nombre">Nombre del profesor:</label>
+            <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
 
             <select id="materia" name="materia">
                 <option value="" disabled selected>Materia</option>
@@ -66,9 +67,9 @@
                 <option value="economia">Economía</option>
                 <!-- Agrega más opciones según tus necesidades -->
             </select><br><br>
-            <button type="submit">Dar de Alta</button>
+            <button class="Botones-General" type="submit">Dar de Alta</button>
         </form>
-    </div>
+    </main>
 
     <script src="../scripts/pag_dar_alta_prof.js"></script>
 </body>

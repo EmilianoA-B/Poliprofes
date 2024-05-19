@@ -1,12 +1,12 @@
 
   // Verifica si el usuario está registrado
   function usuarioRegistrado(){
-    return false;
+    return true;
  }
 // Función para mostrar u ocultar la sección de registro según si el usuario está registrado
     function actualizarRegistro() {
-        var registroSection = document.querySelector('.registration-section');
-        var registroTeacher = document.querySelector('.registration-teacher');
+        var registroSection = document.querySelector('.seccion-Solicitud');
+        var registroTeacher = document.querySelector('.solicitud-Profesor');
 
         if (!usuarioRegistrado()) {
             registroSection.style.display = 'flex'; // Mostrar la sección de registro
@@ -27,14 +27,14 @@
 // Función para mostrar u ocultar la sección de registro según si el usuario está registrado
 function actualizarRegistro() {
 
-    var registroSection = document.querySelector('.registration-section');
+    var registroSection = document.querySelector('.seccion-Solicitud');
     if (!usuarioRegistrado()) {
         registroSection.style.display = 'flex'; // Mostrar la sección de registro
     } else {
         registroSection.style.display = 'none'; // Ocultar la sección de registro
     }
 
-    var registroTeacher = document.querySelector('.registration-teacher');
+    var registroTeacher = document.querySelector('.solicitud-Profesor');
     if(usuarioRegistrado()){
         registroTeacher.style.display='flex';
     }else{

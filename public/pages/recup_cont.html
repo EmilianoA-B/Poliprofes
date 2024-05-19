@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoliProfesores</title>
-    <link rel="stylesheet" href="../styles/recup_cont.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/header-nav.css">
 </head>
 
 <body>
@@ -37,17 +38,16 @@
             </details>
         </div>
     </nav>
-
-    <div class="container">
-        <form id="registroForm"> <!-- Corregido el ID del formulario a "registroForm" -->
+    <br>
+    <div class="recupCont">
+        <form id="registroForm" class=""> <!-- Corregido el ID del formulario a "registroForm" -->
             <label for="correo">Correo de usuario:</label>
-            <input type="text" id="correo" name="correo" required><br><br>
-
-            <button type="submit">Enviar</button>
+            <input class="Input-General" type="text" id="correo" name="correo" required><br><br>
+            <button class="Botones-General" type="submit">Enviar</button>
         </form>
     </div>
 
-    <div id="mensaje-box" class="mensaje-box" style="display: none;"></div> <!-- Div para mostrar el mensaje -->
+    <div id="mensaje-box" class="" style="display: none;"></div> <!-- Div para mostrar el mensaje -->
 
     <script src="../scripts/recup_cont.js"></script>
 </body>

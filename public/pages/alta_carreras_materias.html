@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de carreras y materias</title>
     <link rel="stylesheet" href="../styles/header-nav.css">
-    <link rel="stylesheet" href="../styles/alta_carreras_materias.css">
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
     <header>
@@ -77,24 +77,24 @@
         </div>
     </nav>
     <main class="container-alta">
-        <form id="altaCarreraForm">
-            <label for="carrera">Carrera:</label>
-            <input  class="inputalta"  type="text" id="carrera" name="carrera" required>
-            <button  class="carrera"   type="submit">Dar de alta carrera</button>
+        <form id="altaCarreraForm" class= "form-Altas">
+            <label for="carrera" class="label-1">Carrera:</label>
+            <input  class="Input-General"  type="text" id="carrera" name="carrera" required>
+            <button  class="Botones-General" type="submit">Dar de alta carrera</button>
         </form>
-        
-        <form id="altaMateriaForm">
-            <label for="carreraSeleccionada">Seleccionar carrera:</label>
-            <select id="carreraSeleccionada" name="carreraSeleccionada" required>
+        <br>
+        <form id="altaMateriaForm" class= "form-Altas">
+            <label for="carreraSeleccionada" class="label-1">Seleccionar carrera:</label>
+            <select id="carreraSeleccionada" name="" required>
                 <option value="">-- Selecciona una carrera --</option>
                 <option value="computación">Ing. en computación</option>
                 <option value="mecánica">Ing. Mecánica</option>
                 <option value="Automotrices">Ing. en Sistemas Automotrices</option>
                 <option value="comunicaciones-electronica">Ing. en comunicaciones y en electronica</option>
             </select>
-            <label for="materia">Materia:</label>
-            <input  class="inputalta" type="text" id="materia" name="materia" required>
-            <button class="materia"  type="submit">Dar de alta materia</button>
+            <label for="materia" class="label-1">Materia:</label>
+            <input  class="Input-General" type="text" id="materia" name="materia" required>
+            <button class="Botones-General"  type="submit">Dar de alta materia</button>
         </form>
         <div class="popup" id="popup">
             <p>Registro realizado con éxito.</p>

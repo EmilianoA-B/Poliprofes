@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+*{
+    font-family: Poppins;
+}
+.label-1 { /*Tipo de letra 1*/
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+.label-2 { /*Tipo de letra 2*/
+    display: block;
+    margin-bottom: 5px;
+}
+.label-3 { /*Tipo de letra 3*/
+    display: block;
+    margin-bottom: 5px;
+}
+.label-4 { /*Tipo de letra 4*/
+    display: block;
+    margin-bottom: 5px;
+}
+
 .main{
     display: flex;
     justify-content:center;
@@ -6,13 +28,54 @@
     height: 60%;
 }
 
-.registration-section , .registration-teacher{
+@media (max-width: 767px) {
+    .container-comments{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+    }
+}
+
+.Botones-General {
+    background-color: #800040;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}
+
+.Botones-General:hover {
+    background-color: #45a049;
+}
+
+.Input-General, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*Index*/
+.main-Index{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    height: 60%;
+}
+
+.seccion-Solicitud , .solicitud-Profesor{
   display: flex;
   height: 50%;
   flex-direction: column;
   align-items: center;
 }
-.registration-section > p , .registration-teacher > p{
+.seccion-Solicitud > p , .solicitud-Profesor > p{
   border:2px solid black;
   border-radius: 12px;
   width: 80%;
@@ -20,7 +83,7 @@
   text-align: center;
 }
 
-.container-comments{
+.container-comentarios{
     display: flex;
     width: 80%;
     height: 50%;
@@ -37,10 +100,307 @@
     align-items: center;
 }
 
-@media (max-width: 767px) {
-    .container-comments{
-        display: flex;
-        flex-direction: column;
-        width: 60%;
-    }
+/*Alta Carreras Materias*/
+.container-alta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.form-Altas{
+    max-width: 400px;
+    min-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/*Baja de opiniones*/
+.container-baja{
+    display: block;
+    justify-content: left;
+    align-items: center;
+    padding: 2rem;
+}
+.comentario-Eliminar{
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.comentario-Eliminar p {
+    margin-bottom: 10px;
+}
+
+
+/*Busqueda y visualizacion de profesores*/
+.container-busqueda{
+    display: flex;
+    margin-left: 10%;
+    padding: 1rem;
+    align-items: center;
+    justify-content: left;
+}
+
+.container-resultados{
+    width:90%;
+}
+.resultado-profesor {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.resultado-nombre {
+    font-weight: bold;
+    text-decoration: none;
+    color: #800040;
+    font-size: 1.2rem;
+}
+
+.resultado-calificacion {
+    float: right;
+    font-size: 2rem;
+    color:black;
+}
+
+.resultado-carreras {
+    margin-top: 5px;
+}
+
+/*Calificar Profesor*/
+
+.container-califProf{
+    padding:2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-califProf {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+.select-califProf, .textarea-califProf {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+
+/*Pagina Dar de Alta Profesores*/
+.container-AltaProf {
+    padding:2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-AltaProf {
+    min-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/*Pag prof y Pag eliminar coment desde pag prof*/
+
+.infoProfesor {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 100%;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.comentarioAlumno {
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.infoAl {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 100px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 1rem;
+    display:block;
+    position: absolute;
+}
+
+.infoAl p{
+    margin-top:5px;
+}
+
+.infoProfesor > h2{
+    margin-top: 3px;    
+    margin-bottom: 3px;
+}
+
+.infoProfesor p{
+    margin-top: 5px;    
+    margin-bottom: 5px;
+}
+
+.comentarioAl {
+    max-width: 100%;
+    min-height: 168px;
+    padding: 20px;
+    margin-left: 360px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display:block;
+}
+
+.Boton-Eliminar-Opinion {
+    background-color: #800040;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
+}
+
+/*Recup cont*/
+
+.recupCont {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.recupCont label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+/*Reg alumno*/
+
+.regAlumno {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;  
+}
+
+.registroForm {
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.regContra {
+    border-bottom: 5px;
+}
+
+.BotonFinReg {
+    background-color: #800040;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+/*Solicitar prof*/
+
+.solicitarProf {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-content: center;
+    margin-top: 2rem;
+}
+
+.solicitarProf label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+/*Ver profes eliminar coment*/
+
+.verTodosLosProfes{
+    margin-top: 2rem;
+}
+
+.verProfBorrarComment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 90%;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.verTextoProf {
+    font-weight: bold;
+    text-decoration: none;
 }

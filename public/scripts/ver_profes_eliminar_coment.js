@@ -68,12 +68,13 @@ function renderizarProfesores() {
     // Iteramos sobre cada profesor y creamos un elemento para mostrarlo
     profesores.forEach((profesor, index) => {
         const profesorElement = document.createElement("div");
-        profesorElement.classList.add("profesor");
+        profesorElement.classList.add("verProfBorrarComment");
 
         // Creamos elementos para mostrar el nombre y las materias
         const nombreElement = document.createElement("a");
+        nombreElement.classList.add("verTextoProf");
         nombreElement.textContent = profesor.nombre;
-        nombreElement.href = `profesor.html?nombre=${profesor.nombre}`; // Enlace a la página del profesor
+        nombreElement.href = 'profesor.html?nombre=${profesor.nombre}'; // Enlace a la página del profesor
 
         const materiasElement = document.createElement("div");
         materiasElement.textContent = `Materias: ${profesor.materias.join(", ")}`;

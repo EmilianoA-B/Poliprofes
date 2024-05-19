@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoliProfesores</title>
-    <link rel="stylesheet" href="../styles/solicitar_prof.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/header-nav.css">
 </head>
 
 <body>
@@ -45,24 +46,22 @@
             </details>
         </div>
     </nav>
-    <div class="container">
+    <div class="solicitarProf">
         <form id="professorForm">
             <label for="nombre">Nombre del profesor:</label>
-            <input type="text" id="nombre" name="nombre" required><br><br>
+            <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
 
             <label for="apellidos">Apellidos del profesor:</label>
-            <input type="text" id="apellidos" name="apellidos" required><br><br>
+            <input class="Input-General" type="text" id="apellidos" name="apellidos" required><br><br>
 
             <label for="carrera">Carrera:</label>
             <select id="carrera" name="carrera">
                 <option value="ingenieria">Ingeniería</option>
             </select><br><br>
 
-                    <button type="submit">Solicitar</button>
+                    <button class="Botones-General" type="submit">Solicitar</button>
                 </form>
             </div>
-
-
     <script src="../scripts/solicitar_prof.js"></script>
 </body>
 
