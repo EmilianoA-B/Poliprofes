@@ -15,8 +15,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     event.preventDefault();
 
     const nombre = document.getElementById('nombre').value;
-    const apellido_paterno = document.getElementById('apellidos').value;
-    const apellido_materno = document.getElementById('apellidos').value;
+    const apellidos = document.getElementById('apellidos').value;
     const correo = document.getElementById('correo').value;
     const contrasenia = document.getElementById('contrasena').value;
     
@@ -26,11 +25,11 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         headers: {
             'Content-Type': 'application/json'
         },
-            body: JSON.stringify({ nombre, apellido_paterno, apellido_materno, correo, contrasenia })
+            body: JSON.stringify({ nombre, apellidos, correo, contrasenia })
         });
 
         if (response.ok) {
-            console.error('Se anadio al usuario');
+            console.log('Se anadio al usuario');
         } else {
             console.error('Error adding user');
         }

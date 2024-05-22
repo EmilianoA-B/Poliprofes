@@ -8,10 +8,10 @@ const mysql = require ('mysql2');
 
 //Coneccion base de datos
 const connection = mysql.createConnection({
-    host: '',
-    user: '',
-    password: '',
-    database: ''
+    host: 'localhost',
+    user: 'root',
+    password: 'pandora',
+    database: 'poliprofes'
 });
 
 connection.connect(err => {
@@ -46,9 +46,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 //Routes
 app.use(routes);
 //Configuracion para que la raiz sirva el archivo inicial
-/*app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'pages', 'pag_dar_alta_prof.html'));
-});*/
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'pages', 'index.html'));
+});
 
 //Static files, o sea, el front
 app.use(express.static(path.join(__dirname, 'public')));
@@ -60,9 +60,12 @@ app.listen(app.get('port'), ()=>{
 
 //Registro de alumno =====> AQUI SE TIENE QUE CAMBIAR COSITAS PARA QUE SOLO HAYA 1 CAMPO DE APELLIDO
 app.post('/regAlumno', (req, res) => {
-    const{ nombre, apellido_paterno, apellido_materno, correo, contrasenia} = req.body;
-    const query = 'INSERT INTO alumnos (nombre, apellido_paterno, apellido_materno, correo, contrasenia) VALUES (?, ?, ?, ?, ?)'
-    connection.query(query, [nombre, apellido_paterno, apellido_materno, correo, contrasenia], (err, results) => {
+    const nombre = req.body.nombre;
+    const apellidos = req.body.apellidos;
+    const correo = req.body.correo;
+    const contrasenia = req.body.contrasenia;
+    const query = 'INSERT INTO alumnos (nombre, apellidos, correo, contrasenia) VALUES (?, ?, ?, ?)'
+    connection.query(query, [nombre, apellidos, correo, contrasenia], (err, results) => {
         /*console.log(req.body);*/ //Linea de debug
         if (err) {
             console.error('Error al anadir alumno', err);
