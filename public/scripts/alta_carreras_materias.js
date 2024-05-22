@@ -1,48 +1,97 @@
-document.getElementById("altaCarreraForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var carrera = document.getElementById("carrera").value;
-    darAltaCarrera(carrera);
+//Desplegar carreras existentes
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost:3000/api/carreras')
+        .then(response => response.json())
+        .then(data => {
+            const carreraList = document.getElementById('carreraSeleccionada');
+            data.forEach(carrera => {
+                const newCarrera = document.createElement('option');
+                newCarrera.textContent = `${carrera.carrera}`;
+                carreraList.appendChild(newCarrera);
+            });
+        })
+        .catch(error => console.error('Error fetching user data:', error));
 });
 
-document.getElementById("altaMateriaForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var carreraSeleccionada = document.getElementById("carreraSeleccionada").value;
-    var materia = document.getElementById("materia").value;
-    darAltaMateria(carreraSeleccionada, materia);
-});
 
-function darAltaCarrera(carrera) {
-    fetch('/ruta/', {
+//Dar de alta carrera
+document.getElementById('altaCarreraForm').addEventListener('submit', async function(event){
+    event.preventDefault();
+
+    const carrera = document.getElementById('carrera').value;
+    
+    try{
+        const response = await fetch('http://localhost:3000/regCarrera', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ carrera: carrera })
-    })
-    .then(response => response.json())
-    .then(data => {
-        mostrarPopup();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
+            body: JSON.stringify({ carrera })
+        });
 
-function darAltaMateria(carreraId, materia) {
-    fetch('/ruta/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ carreraId: carreraId, materia: materia })
-    })
-    .then(response => response.json())
-    .then(data => {
-        mostrarPopup();
-    })
-    .catch(error => {
+        if (response.ok) {
+            mostrarPopup();
+            console.error('Se anadio la carrera');
+        } else {
+            console.error('Error al anadir carrera');
+        }
+    }catch (error) {
         console.error('Error:', error);
-    });
+    }
+});
+
+//Dar de alta materia
+document.getElementById('altaMateriaForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const carrera = document.getElementById('carreraSeleccionada').value;
+    
+
+    if (!carrera) {
+        console.error('Carrera is required');
+        return;
+    }
+    console.log('Carrera Seleccionada:', carrera);
+    try {
+        const response = await fetch('http://localhost:3000/api/getID', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ carrera })
+        });
+
+        if (response.ok) {    
+            const data = await response.json();
+            addMateria(data.id);
+        } else {
+            console.error('Error fetching ID:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+//Funcion POST para ingresar materia
+async function addMateria (ID_Carrera){
+    const materia = document.getElementById("materia").value;
+    try {
+        const response = await fetch('http://localhost:3000/materias', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ materia, ID_Carrera })
+        });
+
+        if (response.ok) {    
+            console.log('Se registro la materia correctamente');
+        } else {
+            console.error('Error al registrar:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 function mostrarPopup() {

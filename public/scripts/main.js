@@ -16,24 +16,3 @@ dataFromBackend.forEach((item, index) => {
     spansIndiceAprobacion[index].textContent = item.indiceaprobacion;
 });
 
-
-
-//Seccion de llamada y consulta a la base de datos
-const Connection = require('../../tosql');
-
-async function main() {
-  const db = new Connection();
-
-  try {
-    const results = await db.query('SELECT * FROM ALUMNOS');
-    results.forEach((row) => {
-      console.log(`ID: ${row.ID}, Nombre: ${row.NOMBRE}, Apellido Paterno: ${row.APELLIDO_PATERNO}, Apellido Materno: ${row.APELLIDO_MATERNO}, Correo: ${row.CORREO}`);
-    });
-  } catch (error) {
-    console.error('Error ejecutando la consulta:', error);
-  } finally {
-    await db.close();
-  }
-}
-
-main();

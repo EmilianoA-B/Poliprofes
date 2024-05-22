@@ -1,4 +1,4 @@
-
+// Mostrar o Ocultar passwd
 document.addEventListener('DOMContentLoaded', function () {
     const togglePasswordButton = document.getElementById('toggle-password');
     const passwordField = document.getElementById('contrasena');
@@ -10,36 +10,43 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Al mandar el registro manda los datos a la base de datos.
+document.getElementById('registroForm').addEventListener('submit', async function(event){
+    event.preventDefault();
 
+    const nombre = document.getElementById('nombre').value;
+    const apellido_paterno = document.getElementById('apellidos').value;
+    const apellido_materno = document.getElementById('apellidos').value;
+    const correo = document.getElementById('correo').value;
+    const contrasenia = document.getElementById('contrasena').value;
+    
+    try{
+        const response = await fetch('http://localhost:3000/regAlumno', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify({ nombre, apellido_paterno, apellido_materno, correo, contrasenia })
+        });
 
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const registrationForm = document.getElementById('registroForm');
-
-    registrationForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Evitar el envío por defecto del formulario
-
-        // Simulación de registro exitoso (aquí puedes agregar tu lógica real de registro)
-        const registroExitoso = Math.random() < .001; // Simulación aleatoria de éxito
-
-        if (registroExitoso) {
-            mostrarMensaje('Registro exitoso');
+        if (response.ok) {
+            console.error('Se anadio al usuario');
         } else {
-            mostrarMensaje('Registro erróneo');
+            console.error('Error adding user');
         }
-    });
-
-    function mostrarMensaje(mensaje) {
-        const mensajeBox = document.createElement('div');
-        mensajeBox.classList.add('mensaje-box');
-        mensajeBox.textContent = mensaje;
-
-        document.body.appendChild(mensajeBox);
-
-        // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
-        setTimeout(function () {
-            mensajeBox.remove();
-        }, 3000);
+    }catch (error) {
+        console.error('Error:', error);
     }
 });
+//Funcion para mostrar un mensaje 
+function mostrarMensaje(mensaje) {
+    const mensajeBox = document.createElement('div');
+    mensajeBox.classList.add('mensaje-box');
+    mensajeBox.textContent = mensaje;
+    
+    document.body.appendChild(mensajeBox);
+    // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
+    setTimeout(function () {
+        mensajeBox.remove();
+    }, 3000);
+}
