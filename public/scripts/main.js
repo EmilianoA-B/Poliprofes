@@ -1,3 +1,12 @@
+// Busqueda de profs. Redireccion ===> Esto se tiene que añadir a todas las páginas
+document.getElementById('barraBusqueda').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const inputBusqueda = document.getElementById('inputBusqueda').value;
+    window.location.href = `/pages/busqueda-visualizacion.html?query=${encodeURIComponent(inputBusqueda)}`;
+});
+
+
 //Los valores de los comentarios
 const dataFromBackend = [
     { nombre: "Profesor 1", calificacion: 4.5, indiceaprobacion: 80 },

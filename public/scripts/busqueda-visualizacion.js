@@ -50,7 +50,6 @@ function mostrarResultados(resultados) {
         divProfesor.appendChild(enlaceNombre);
         divProfesor.appendChild(calificacionSpan);
         divProfesor.appendChild(carrerasParrafo);
-
         resultadosDiv.appendChild(divProfesor);
     });
 }
