@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching user data:', error));
 });
 
-
 //Dar de alta carrera
 document.getElementById('altaCarreraForm').addEventListener('submit', async function(event){
     event.preventDefault();
@@ -43,10 +42,7 @@ document.getElementById('altaCarreraForm').addEventListener('submit', async func
 //Dar de alta materia
 document.getElementById('altaMateriaForm').addEventListener('submit', async function(event) {
     event.preventDefault();
-
     const carrera = document.getElementById('carreraSeleccionada').value;
-    
-
     if (!carrera) {
         console.error('Carrera is required');
         return;
@@ -76,7 +72,7 @@ document.getElementById('altaMateriaForm').addEventListener('submit', async func
 async function addMateria (ID_Carrera){
     const materia = document.getElementById("materia").value;
     try {
-        const response = await fetch('http://localhost:3000/materias', {
+        const response = await fetch('http://localhost:3000/regMateria', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
