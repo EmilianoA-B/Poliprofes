@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
-const connection = require('./routes/db');
 const indexRoutes = require('./routes/index');
 const apiRoutes = require('./routes/api');
 const endpointRoutes = require('./routes/endpoint');
@@ -18,6 +17,7 @@ app.use((req, res, next)=>{
     console.log(`${req.url} -${req.method}`);
     next();
 })
+
 //Para que el servidor entienda lo que envia del navegador
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //Routes
 app.use('/', indexRoutes);
 app.use('/api', apiRoutes);
-app.use(endpointRoutes);
+app.use('/endpoint', endpointRoutes);
 
 //Static files, definimos la ruta publica de nuestra pagina
 app.use(express.static(path.join(__dirname, 'public')));

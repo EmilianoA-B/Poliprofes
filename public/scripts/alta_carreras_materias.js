@@ -4,8 +4,7 @@ limpiarInput('altaMateriaForm');
 
 //Desplegar carreras existentes
 document.addEventListener('DOMContentLoaded', function() {
-    //Para desplegar 
-    fetch('http://localhost:3000/api/carreras')
+    fetch('http://localhost:3000/api/getCarreras')
         .then(response => response.json())
         .then(data => {
             const carreraList = document.getElementById('carreraSeleccionada');
@@ -25,7 +24,7 @@ document.getElementById('altaCarreraForm').addEventListener('submit', async func
     const carrera = document.getElementById('carrera').value;
     
     try{
-        const response = await fetch('http://localhost:3000/regCarrera', {
+        const response = await fetch('http://localhost:3000/endpoint/regCarrera', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -55,7 +54,7 @@ document.getElementById('altaMateriaForm').addEventListener('submit', async func
     }
     console.log('Carrera Seleccionada:', carrera);
     try {
-        const response = await fetch('http://localhost:3000/api/getID', {
+        const response = await fetch('http://localhost:3000/api/getIdByCarrera', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -78,7 +77,7 @@ document.getElementById('altaMateriaForm').addEventListener('submit', async func
 async function addMateria (ID_Carrera){
     const materia = document.getElementById("materia").value;
     try {
-        const response = await fetch('http://localhost:3000/regMateria', {
+        const response = await fetch('http://localhost:3000/endpoint/regMateria', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
