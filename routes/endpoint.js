@@ -53,20 +53,72 @@ router.post('/regMateria', (req, res) => {
     });
 });
 
-//Alta de profesores desde ADMIN 
+//Alta de profesores desde ADMIN ===> CUIDADO CON REGISTRAR REPETIDOS, SE PETA EL SERVIDOR
 router.post('/regProf', (req, res) => {
-    const carrera = req.body.ID_Carrera;
-    const nombreProf = req.body.
-    console.log('ID:',carrera);
-    const query = "INSERT INTO profesores (nombreProf, carrera) VALUES (?, ?)";
-    connection.query(query, [nombreProf, carrera], (err, results) => {
+    console.log("TEST");
+    const nombreProf = req.body.nombreProf;
+    const apellido_p = req.body.apellidoP;
+    const apellido_m = req.body.apellidoM;
+    const todasLasMaterias = req.body.selections;
+    console.log(req.body.selections);
+    const query1 = "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado) VALUES (?, ?, ?, ?)";
+    connection.query(query1, [nombreProf, apellido_p, apellido_m, 1], (err, results) => {
         if(err){
             console.error('Error agregando al profesor', err);
             res.status(500).send('Error agregando al profesor');
             return;
         }
-        console.log("Registro de materia existoso");
-        res.status(200).send('Registro de materia exitoso');
+        console.log("Exito agregando al profesor");
+        //res.status(200).send('Exito agregando al profesor');
+
+    });
+    //Segundo query para sacar ID de profesor
+    const query2 = "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?";
+    connection.query(query2, [nombreProf, apellido_p, apellido_m], (err, results) =>{
+        if(results.length.id === 0){
+            return res.status(400).send('No se encontro IDS');
+        }
+        if(err){
+            console.error('Error al buscar id del prof', err);
+            res.status(500).send('Error al buscar id del prof');
+            return;
+        }
+        console.log("Exito encontrando el ID del profesor");
+        console.log(results);
+        const idProfesor = results[0].id;
+
+        //3ER query para materias
+        const materiasConComas = todasLasMaterias.map(() => '?').join(',');
+        const query3 = `SELECT id FROM materias WHERE materia IN (${materiasConComas})`;
+        connection.query(query3, todasLasMaterias, (err, results) =>{
+            if(err){
+                console.error('Error encontrando el ID de las materias', err);
+                res.status(500).send('Error encontrando el ID de las materias');
+                return;
+            }
+            console.log("Exito encontrando el ID de las materias");
+            console.log(results);
+            const idMaterias = results.map(row => row.id);
+            console.log("MATERIAS ID:",idMaterias);
+
+            //4to query para insertar en tabla profesores_materias
+            const materiasConProf = idMaterias.map(() => '(?, ?)').join(',');
+            const valoresQuery = [];
+            idMaterias.forEach(id=>{
+                valoresQuery.push(id, idProfesor);
+            });
+
+            const query4 = `INSERT INTO profesor_materias (materia_id, profesor_id) VALUES ${materiasConProf}`;
+            connection.query(query4, valoresQuery, (err, results) =>{
+                if(err){
+                    console.error('Error registrando materias en tabla', err);
+                    res.status(500).send('Error registrando materias en tabla');
+                    return;
+                }
+                console.log("Exito registrando materias en tabla");
+                res.status(200).json({ message:'Se registro el profesor y sus materias con exito'});
+            });
+        });
     });
 });
 

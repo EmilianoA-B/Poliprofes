@@ -252,6 +252,10 @@ input[type="radio"] {
     background-color: #f9f9f9;
 }
 
+.selectsMateria{
+    max-width: 400px;
+}
+
 /*Pag prof y Pag eliminar coment desde pag prof*/
 
 .infoProfesor {

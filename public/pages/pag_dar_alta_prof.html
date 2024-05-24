@@ -56,19 +56,22 @@
             <input class="Input-General" type="text" id="apellidoM" name="apellidoM" required><br><br>
 
             <select id="carrera" name="carrera">
-                <option value="" disabled selected>Carrera</option>
+                <option value="" disabled selected>Elige la carrera</option>
                 <!--Aqui se cargan dinámicamente las carreras de la base de datos-->
             </select><br><br>
-
-            <select id="materia" name="materia">
-                <option value="" disabled selected>Materia</option>
-                <!--Aqui se cargan dinámicamente las materias de la base de datos-->
-            </select><br><br>
-
+            <div id="contieneTodasMaterias">
+                <select id="materia" name="materia">
+                    <option value="" disabled selected>Elige la materia</option>
+                    <!--Aqui se cargan dinámicamente las materias de la base de datos-->
+                </select><br><br>
+                <div id="selectsDeMateria" class="selectsMateria"></div>
+                    <!--Aqui se duplican las materias-->
+                </div>
+            </div>
+            <button class="Botones-General" id="agregarMateria" type="button">Agregar Materia</button><br><br>
             <button class="Botones-General" type="submit">Dar de Alta</button>
         </form>
     </main>
-
     <script src="../scripts/pag_dar_alta_prof.js"></script>
 </body>
 

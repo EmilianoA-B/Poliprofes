@@ -40,12 +40,57 @@ document.addEventListener("DOMContentLoaded", function() {
     userEmailElement.textContent = "john@example.com"; // Email simulado del usuario*/
 });
 
+document.getElementById("altaProf").addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    const nombreProf = document.getElementById("nombre").value;
+    const apellidoP = document.getElementById("apellidoP").value;
+    const apellidoM = document.getElementById("apellidoM").value;
+    const divtodasLasMaterias = document.getElementById("contieneTodasMaterias");
+    
+    const todosLosSelects = divtodasLasMaterias.querySelectorAll('select');
+    const todasLasMaterias = Array.from(todosLosSelects).map(todosLosSelects => todosLosSelects.value);
+    try {
+        const response = await fetch('http://localhost:3000/endpoint/regProf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias })
+        });
+        if (response.ok) {
+            console.log('Se registro el profesor');
+        } else {
+            console.error('No se pudo registrar al profesor');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
 //Para cuando cambias de carrera
 document.getElementById("carrera").addEventListener("change", function(){
     const carreraSelect = document.getElementById("carrera").value;
     limpiarSelect();
-    //document.getElementById("materia").innerHTML = "";
+    document.getElementById("selectsDeMateria").innerHTML = "";
     getIdForMaterias(carreraSelect);
+});
+//Para cuando pongas una materia
+document.getElementById("agregarMateria").addEventListener("click", function(){
+    const selectMateria = document.getElementById("materia");
+    const divParaSelects = document.getElementById("selectsDeMateria");
+    const newSelect = document.createElement("select");
+    /*if (selectMateria.options.length === 1) {
+        alert('Primero selecciona una carrera');
+        return;
+    }*/
+    Array.from(selectMateria.options).forEach(opcionOriginal => {
+        const opcionNueva = document.createElement('option');
+        opcionNueva.value = opcionOriginal.value;
+        opcionNueva.text = opcionOriginal.text;
+        newSelect.appendChild(opcionNueva);
+    });
+    divParaSelects.appendChild(newSelect);
 });
 
 async function cargarCarreras(){
@@ -88,11 +133,12 @@ async function getIdForMaterias(carrera){
         console.error('Error:', error);
     }
 }
+// Para limpiar los selects cada que se cambie de carrera
 function limpiarSelect(){
  document.getElementById("materia").length = 1;
 }
 
-
+// Para limpiar el formulario
 function limpiarInput(input){
     document.getElementById(input).reset();
 }
