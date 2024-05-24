@@ -20,7 +20,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     const contrasenia = document.getElementById('contrasena').value;
     
     try{
-        const response = await fetch('http://localhost:3000/regAlumno', {
+        const response = await fetch('http://localhost:3000/endpoint/regAlumno', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

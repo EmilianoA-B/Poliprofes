@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const connection = require('./db');
-// APi para GET carreras
-router.get('/carreras', (req, res) => {
+
+// API para obtener todas las carreras
+router.get('/getCarreras', (req, res) => {
     const query = "SELECT carrera FROM carreras";
     connection.query(query, (err, results) => {
         if(err){
@@ -15,9 +16,9 @@ router.get('/carreras', (req, res) => {
     });
 });
 
-//API para conseguir el ID y POST para insertar materia
-router.post('/getID', (req, res) => {
-    const {carrera} = req.body; 
+//API para obtener el id dependiendo de una carrera dada
+router.post('/getIdByCarrera', (req, res) => {
+    const carrera = req.body.carrera;
     const query = "SELECT id FROM carreras WHERE carrera = ?";
     connection.query(query, [carrera], (err, results) => {
         if(err){
