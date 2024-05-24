@@ -34,6 +34,32 @@ router.post('/getIdByCarrera', (req, res) => {
     });
 });
 
+//POST para desplegar las materias ligadas a una carrera
+router.post('/getMaterias', (req, res) => {
+    const carrera = req.body.carrera;
+    console.log('Carrera para buscar sus materias:',carrera);
+    const queryforID = "SELECT id FROM carreras WHERE carrera = ?"; 
+    connection.query(queryforID, [carrera], (err, results) => { //Se consigue el ID
+        if(err){
+            console.error('Error al buscar ID de carrera', err);
+            res.status(500).send('Error al buscar ID de carrera');
+            return;
+        }
+        console.log("Exito al buscar ID de carrera");
+        const idCarrera = results[0].id;
+        const queryforMaterias = 'SELECT materia FROM materias WHERE carrera_id = ?'
+            connection.query(queryforMaterias, [idCarrera], (err, resultado) => { //Usando el id se buscan todas las materias 
+            if(err){
+                console.error('Error al al regresar materias', err);
+                res.status(500).send('Error al al regresar materias');
+                return;
+            }
+            console.log("Exito al regresar materias");
+            res.json(resultado);
+        });
+    });
+});
+
 //API para obtener el id de un alumno dado su correo electronico
 router.post('/getIdAlumnoByCorreo', (req, res) => {
     const correo = req.body.correo;

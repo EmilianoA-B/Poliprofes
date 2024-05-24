@@ -70,8 +70,6 @@ router.post('/regProf', (req, res) => {
     });
 });
 
-//POST para desplegar las materias ligadas a una carrera
-
 //Eliminacion de comentario
 router.post('/eliminarComentario', (req, res) => {
     const id_comentario = req.body.id_comentario;

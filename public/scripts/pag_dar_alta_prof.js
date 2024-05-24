@@ -1,11 +1,14 @@
 
+window.onload = function alCargar (){
+    limpiarInput('altaProf');
+    cargarCarreras();
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     var adminButton = document.getElementById("admin-button");
     var adminDropdown = document.getElementById("admin-dropdown");
 
     //Carga carreras y materiasdesde la base de datos
-    cargarCarreras();
-
     // Ocultar el menú de cuenta al cargar la página
     hideAccountMenu();
 
@@ -37,14 +40,16 @@ document.addEventListener("DOMContentLoaded", function() {
     userEmailElement.textContent = "john@example.com"; // Email simulado del usuario*/
 });
 
-
-
-document.getElementById("materia").addEventListener("toggle", function(){
-    console.log("HOLA CARA BOLA");
+//Para cuando cambias de carrera
+document.getElementById("carrera").addEventListener("change", function(){
+    const carreraSelect = document.getElementById("carrera").value;
+    limpiarSelect();
+    //document.getElementById("materia").innerHTML = "";
+    getIdForMaterias(carreraSelect);
 });
 
 async function cargarCarreras(){
-        fetch('http://localhost:3000/api/carreras')
+        fetch('http://localhost:3000/api/getCarreras')
             .then(response => response.json())
             .then(data => {
                 const carreraList = document.getElementById('carrera');
@@ -57,6 +62,37 @@ async function cargarCarreras(){
             .catch(error => console.error('Error al cargar carreras:', error));
 }
 
-async function cargarMaterias(){
+async function getIdForMaterias(carrera){
+    console.log('Carrera Seleccionada:', carrera);
+    try {
+        const response = await fetch('http://localhost:3000/api/getMaterias', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ carrera })
+        });
 
+        if (response.ok) { 
+            const selectMaterias = document.getElementById('materia'); 
+            const listaMaterias = await response.json();
+            listaMaterias.forEach(materia => {
+                const newMateria = document.createElement('option');
+                newMateria.textContent = `${materia.materia}`;
+                selectMaterias.appendChild(newMateria);
+            });
+        } else {
+            console.error('Error fetching ID:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+function limpiarSelect(){
+ document.getElementById("materia").length = 1;
+}
+
+
+function limpiarInput(input){
+    document.getElementById(input).reset();
 }
