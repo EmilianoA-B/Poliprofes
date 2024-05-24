@@ -11,41 +11,74 @@
 
 <body>
     <header>
-        <div class="logo">LOGO</div>
-        <div class="search-bar">
-            <input type="text">
-            <button>Buscar</button>
+        <div class="logo" ><a href="index.html">LOGO</a></div>
+        <form class="search-bar" id="barraBusqueda">
+            <input type="text" id="inputBusqueda">
+            <button type="submit" id="buscarProf"><a href="busqueda-visualizacion.html">Buscar</a></button>
+        </form>
+        <div class="auth-buttons">
+            <button>Registro</button>
+            <button>Inicio de sesión</button>
         </div>
-        <div class="user-info" >
-            <span id="user-name"></span>
-            <span id="user-email"></span>
-        </div>
-
-        <div class="account-menu" id="account-menu">
-            <button id="account-button">Mi cuenta</button>
-            <div id="account-dropdown" class="dropdown-content">
+        <div class="user-menu">
+            <div id="user-info" class="info"></div>
+             <div class="micuenta">
+                <details>
+                    <summary>Mi cuenta</summary>
+                    <ul>
+                      <li><a href="">Cambiar contraseña</a></li>
+                      <li><a href="#">Mis opiniones</a></li>
+                      <li><a href="#">Borrar mi cuenta</a></li>
+                      <li><a href="#">Cerrar sesión</a></li>
+                    </ul>
+                </details>
+             </div>
+        </div>  
+        <div class="menu-admin">
+            <details>
+                <summary>Administrar</summary>
                 <ul>
-                    <li><a href="#">Cambiar Contraseña</a></li>
-                    <li><a href="#">Mis opiniones</a></li>
-                    <li><a href="#">Borrar mi cuenta</a></li>
-                    <li><a href="#">Cerrar Sesión</a></li>
+                    <li><a href="pag_dar_alta_prof.html">Alta</a></li>
+                    <li><a href="confirmacion_alta.html">Solicitudes</a></li>
+                    <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
+                    <li><a href="#">Modificar profesores</a></li>
+                    <li><a href="baja_opinion.html">Dar de baja opiniones</a></li>
+                    <li><a href="alta_carreras_materias.html">Dar de alta carreras y materias</a></li>
                 </ul>
-            </div>
-        </div>
+            </details>
+        </div>    
     </header>
-
     <nav>
         <div class="menu-button-container">
             <details class="menu-button">
                 <summary>Menu</summary>
-                <ul>
-                    <li><a href="#">Añade tu profesor</a></li>
-                    <li><a href="#">Evaluaciones</a></li>
-                    <li><a href="#">Carrera</a></li>
+                <ul id="menu-list">
+                    <li>
+                        <details>
+                            <summary>Evaluaciones</summary>
+                            <ul>
+                                <li><a href="busqueda-visualizacion.html">Mejores evaluaciones</a></li>
+                                <li><a href="busqueda-visualizacion.html">Peores evaluaciones</a></li>
+                                <li><a href="busqueda-visualizacion.html">Mas recientes</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                     <details>
+                        <summary>Carrera</summary>
+                        <ul>
+                            <li><a href="busqueda-visualizacion.html">Ing. en computación</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. Mecánica</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. en Sistemas Automotrices</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. en comunicaciones y en electronica</a></li>
+                        </ul>
+                    </details>
+                </li>
                 </ul>
             </details>
         </div>
     </nav>
+    <!--Aqui acaba el encabezado y menu-->
     <div class="solicitarProf">
         <form id="professorForm">
             <label for="nombre">Nombre del profesor:</label>

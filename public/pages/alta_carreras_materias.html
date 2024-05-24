@@ -9,11 +9,11 @@
 </head>
 <body>
     <header>
-        <div class="logo">LOGO</div>
-        <div class="search-bar">
-            <input type="text">
-            <button>Buscar</button>
-        </div>
+        <div class="logo" ><a href="index.html">LOGO</a></div>
+        <form class="search-bar" id="barraBusqueda">
+            <input type="text" id="inputBusqueda">
+            <button type="submit" id="buscarProf"><a href="busqueda-visualizacion.html">Buscar</a></button>
+        </form>
         <div class="auth-buttons">
             <button>Registro</button>
             <button>Inicio de sesión</button>
@@ -36,11 +36,11 @@
             <details>
                 <summary>Administrar</summary>
                 <ul>
-                    <li><a href="#">Alta</a></li>
-                    <li><a href="#">Solicitudes</a></li>
-                    <li><a href="#">Eliminar profesor</a></li>
+                    <li><a href="pag_dar_alta_prof.html">Alta</a></li>
+                    <li><a href="confirmacion_alta.html">Solicitudes</a></li>
+                    <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
                     <li><a href="#">Modificar profesores</a></li>
-                    <li><a href="#">Dar de baja opiniones</a></li>
+                    <li><a href="baja_opinion.html">Dar de baja opiniones</a></li>
                     <li><a href="alta_carreras_materias.html">Dar de alta carreras y materias</a></li>
                 </ul>
             </details>
@@ -55,9 +55,9 @@
                         <details>
                             <summary>Evaluaciones</summary>
                             <ul>
-                                <li><a href="#">Mejores evaluaciones</a></li>
-                                <li><a href="#">Peores evaluaciones</a></li>
-                                <li><a href="#">Mas recientes</a></li>
+                                <li><a href="busqueda-visualizacion.html">Mejores evaluaciones</a></li>
+                                <li><a href="busqueda-visualizacion.html">Peores evaluaciones</a></li>
+                                <li><a href="busqueda-visualizacion.html">Mas recientes</a></li>
                             </ul>
                         </details>
                     </li>
@@ -65,10 +65,10 @@
                      <details>
                         <summary>Carrera</summary>
                         <ul>
-                            <li><a href="#">Ing. en computación</a></li>
-                            <li><a href="#">Ing. Mecánica</a></li>
-                            <li><a href="#">Ing. en Sistemas Automotrices</a></li>
-                            <li><a href="#">Ing. en comunicaciones y en electronica</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. en computación</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. Mecánica</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. en Sistemas Automotrices</a></li>
+                            <li><a href="busqueda-visualizacion.html">Ing. en comunicaciones y en electronica</a></li>
                         </ul>
                     </details>
                 </li>
@@ -76,6 +76,8 @@
             </details>
         </div>
     </nav>
+
+
     <main class="container-alta">
         <form id="altaCarreraForm" class= "form-Altas">
             <label for="carrera" class="label-1">Carrera:</label>

@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function agregarAlMenu() {
       const liElement = document.createElement("li");
       const aElement = document.createElement("a");
-      aElement.href = "#";
+      aElement.href = "solicitar_prof.html";
       aElement.textContent = "Añade a tu profesor";
       liElement.appendChild(aElement);
       menuList.insertBefore(liElement, menuList.firstChild);
