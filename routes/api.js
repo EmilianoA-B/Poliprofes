@@ -34,4 +34,40 @@ router.post('/getIdByCarrera', (req, res) => {
     });
 });
 
+//API para obtener el id de un alumno dado su correo electronico
+router.post('/getIdAlumnoByCorreo', (req, res) => {
+    const correo = req.body.correo;
+    const query = "SELECT id FROM alumnos WHERE correo = ?";
+    connection.query(query, [correo], (err, results) => {
+        if(err){
+            console.error('Error al buscar ID del alumno', err);
+            res.status(500).send('Error al buscar ID del alumno');
+            return;
+        }
+        if (results.length > 0) {
+            res.json({ id: results[0].id }); //Regresa un array, si hay elementos repetidos en la lista, puede ser un problema
+        } else {
+            res.status(404).send('No se encontro el id del alumno');
+        }
+    });
+});
+
+//API para obtener el id de un profesor dados sus apellidos
+router.post('/getIdProfesorByApellidos', (req, res) => {
+    const apellidos = req.body.apellidos;
+    const query = "SELECT id FROM profesores WHERE apellidos = ?";
+    connection.query(query, [apellidos], (err, results) => {
+        if(err){
+            console.error('Error al buscar ID del profesor', err);
+            res.status(500).send('Error al buscar ID del profesor');
+            return;
+        }
+        if (results.length > 0) {
+            res.json({ id: results[0].id }); //Regresa un array, si hay elementos repetidos en la lista, puede ser un problema
+        } else {
+            res.status(404).send('No se encontro el id del profesor');
+        }
+    });
+});
+
 module.exports = router;

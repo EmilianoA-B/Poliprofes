@@ -72,4 +72,20 @@ router.post('/regProf', (req, res) => {
 
 //POST para desplegar las materias ligadas a una carrera
 
+//Eliminacion de comentario
+router.post('/eliminarComentario', (req, res) => {
+    const id_comentario = req.body.id_comentario;
+    const query = "DELETE from COMENTARIOS where ID = ?";
+    connection.query(query, [id_comentario], (err, results) => {
+        if (err) {
+            console.error('Error eliminando el comentario', err);
+            return res.status(500).json({ error: 'Error eliminando el comentario', details: err });
+        }
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ message: 'No se encontró el comentario' });
+        }
+        res.status(200).json({ message: 'Comentario eliminado con éxito' });
+    });
+});
+
 module.exports = router;
