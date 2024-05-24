@@ -74,8 +74,8 @@ function renderizarProfesores() {
         const nombreElement = document.createElement("a");
         nombreElement.classList.add("verTextoProf");
         nombreElement.textContent = profesor.nombre;
-        nombreElement.href = 'profesor.html?nombre=${profesor.nombre}'; // Enlace a la página del profesor
-
+        //nombreElement.href = 'profesor.html?nombre=${profesor.nombre}'; // Enlace a la página del profesor
+        nombreElement.href = 'pag_prof.html';//Cambiar por el query para mostar cada uno
         const materiasElement = document.createElement("div");
         materiasElement.textContent = `Materias: ${profesor.materias.join(", ")}`;
 
@@ -89,7 +89,8 @@ function renderizarProfesores() {
         // Evento de clic para el nombre del profesor (redirige a la página del profesor)
         nombreElement.addEventListener("click", (event) => {
             event.preventDefault(); // Evita la acción por defecto (navegar a otra página)
-            window.location.href = `profesor.html?nombre=${profesor.nombre}`;
+            //window.location.href = `profesor.html?nombre=${profesor.nombre}`;
+            window.location.href = 'pag_prof.html';//Cambiar por el query para mostar cada uno
         });
     });
 }

@@ -2,28 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const accountButton = document.getElementById("account-button");
     const accountDropdown = document.getElementById("account-dropdown");
 
-    // Ocultar el menú de cuenta al cargar la página
-    hideAccountMenu();
+   
 
-    // Manejar clic en el botón de cuenta para mostrar/ocultar el menú desplegable
-    accountButton.addEventListener("click", function(event) {
-        event.stopPropagation(); // Detener la propagación para evitar que se cierre inmediatamente
-        if (accountDropdown.style.display === "none" || accountDropdown.style.display === "") {
-            showAccountMenu();
-        } else {
-            hideAccountMenu();
-        }
-    });
 
-    // Función para mostrar el menú de cuenta
-    function showAccountMenu() {
-        accountDropdown.style.display = "block";
-    }
 
-    // Función para ocultar el menú de cuenta
-    function hideAccountMenu() {
-        accountDropdown.style.display = "none";
-    }
+   
 
     // Obtener el elemento contenedor de comentarios
     const comentariosContainer = document.getElementById('comentarios');
