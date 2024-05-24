@@ -70,6 +70,4 @@ router.post('/regProf', (req, res) => {
     });
 });
 
-//POST para desplegar las materias ligadas a una carrera
-
 module.exports = router;
