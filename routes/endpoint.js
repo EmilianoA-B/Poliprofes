@@ -36,7 +36,7 @@ router.post('/regCarrera', (req, res) => {
     });
 });
 
-//registro de materia
+//Registro de materia
 router.post('/regMateria', (req, res) => {
     const materia = req.body.materia;
     const carrera = req.body.ID_Carrera;
@@ -52,5 +52,24 @@ router.post('/regMateria', (req, res) => {
         res.status(200).send('Registro de materia exitoso');
     });
 });
+
+//Alta de profesores desde ADMIN 
+router.post('/regProf', (req, res) => {
+    const carrera = req.body.ID_Carrera;
+    const nombreProf = req.body.
+    console.log('ID:',carrera);
+    const query = "INSERT INTO profesores (nombreProf, carrera) VALUES (?, ?)";
+    connection.query(query, [nombreProf, carrera], (err, results) => {
+        if(err){
+            console.error('Error agregando al profesor', err);
+            res.status(500).send('Error agregando al profesor');
+            return;
+        }
+        console.log("Registro de materia existoso");
+        res.status(200).send('Registro de materia exitoso');
+    });
+});
+
+//POST para desplegar las materias ligadas a una carrera
 
 module.exports = router;

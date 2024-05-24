@@ -44,29 +44,24 @@
         </div>
     </nav>
 
-    
     <main class="container-AltaProf">
         <form id="" class="form-AltaProf">
             <label class="label-1" for="nombre">Nombre del profesor:</label>
             <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
 
-            <select id="materia" name="materia">
-                <option value="" disabled selected>Materia</option>
-                <option value="matematicas">Matemáticas</option>
-                <option value="fisica">Física</option>
-                <option value="quimica">Química</option>
-                <option value="informatica">Informática</option>
-                <!-- Agrega más opciones según tus necesidades -->
-            </select><br><br>
+            <label class="label-1" for="apellidos">Apellidos:</label>
+            <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
 
             <select id="carrera" name="carrera">
                 <option value="" disabled selected>Carrera</option>
-                <option value="ingenieria">Ingeniería</option>
-                <option value="medicina">Medicina</option>
-                <option value="derecho">Derecho</option>
-                <option value="economia">Economía</option>
-                <!-- Agrega más opciones según tus necesidades -->
+                <!--Aqui se cargan dinámicamente las carreras de la base de datos-->
             </select><br><br>
+
+            <select id="materia" name="materia">
+                <option value="" disabled selected>Materia</option>
+                <!--Aqui se cargan dinámicamente las materias de la base de datos-->
+            </select><br><br>
+
             <button class="Botones-General" type="submit">Dar de Alta</button>
         </form>
     </main>

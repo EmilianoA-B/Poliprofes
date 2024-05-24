@@ -1,5 +1,10 @@
+//Limpia input
+limpiarInput('altaCarreraForm');
+limpiarInput('altaMateriaForm');
+
 //Desplegar carreras existentes
 document.addEventListener('DOMContentLoaded', function() {
+    //Para desplegar 
     fetch('http://localhost:3000/api/carreras')
         .then(response => response.json())
         .then(data => {
@@ -31,6 +36,7 @@ document.getElementById('altaCarreraForm').addEventListener('submit', async func
         if (response.ok) {
             mostrarPopup();
             console.error('Se anadio la carrera');
+            limpiarInput('altaCarreraForm');
         } else {
             console.error('Error al anadir carrera');
         }
@@ -68,7 +74,7 @@ document.getElementById('altaMateriaForm').addEventListener('submit', async func
     }
 });
 
-//Funcion POST para ingresar materia
+//Funcion POST para ingresar materia    
 async function addMateria (ID_Carrera){
     const materia = document.getElementById("materia").value;
     try {
@@ -82,6 +88,8 @@ async function addMateria (ID_Carrera){
 
         if (response.ok) {    
             console.log('Se registro la materia correctamente');
+            mostrarPopup();
+            limpiarInput('altaMateriaForm');
         } else {
             console.error('Error al registrar:', response.statusText);
         }
@@ -98,4 +106,8 @@ function mostrarPopup() {
 function cerrarPopup() {
     document.getElementById("popup").style.display = "none";
     document.getElementById("overlay").style.display = "none";
+}
+
+function limpiarInput(input){
+    document.getElementById(input).reset();
 }
