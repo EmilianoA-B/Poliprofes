@@ -1,3 +1,8 @@
+window.onload = function alCargar (){
+    limpiarInput('professorForm');
+    cargarCarreras();
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     var accountButton = document.getElementById("account-button");
     var accountDropdown = document.getElementById("account-dropdown");
@@ -42,21 +47,35 @@ document.addEventListener("DOMContentLoaded", function() {
         // Resetear el formulario
         form.reset();
     });
-
-    // Función para mostrar un mensaje temporal en la página
-    function mostrarMensaje(mensaje) {
-        const mensajeBox = document.createElement('div');
-        mensajeBox.classList.add('mensaje-box');
-        mensajeBox.textContent = mensaje;
-
-        document.body.appendChild(mensajeBox);
-
-        // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
-        setTimeout(function () {
-            mensajeBox.remove();
-        }, 3000);
-    }
 });
+
+async function cargarCarreras(){
+        fetch('http://localhost:3000/api/getCarreras')
+            .then(response => response.json())
+            .then(data => {
+                const carreraList = document.getElementById('carrera');
+                data.forEach(carrera => {
+                    const newCarrera = document.createElement('option');
+                    newCarrera.textContent = `${carrera.carrera}`;
+                    carreraList.appendChild(newCarrera);
+                });
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+}
+
+// Función para mostrar un mensaje temporal en la página
+function mostrarMensaje(mensaje) {
+    const mensajeBox = document.createElement('div');
+    mensajeBox.classList.add('mensaje-box');
+    mensajeBox.textContent = mensaje;
+
+    document.body.appendChild(mensajeBox);
+
+    // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
+    setTimeout(function () {
+        mensajeBox.remove();
+    }, 3000);
+}
 
 
 // Obtener referencias a los elementos del DOM
@@ -73,3 +92,7 @@ const userInfo = {
 userNameElement.textContent = userInfo.name;
 userEmailElement.textContent = userInfo.email;
 
+// Para limpiar el formulario
+function limpiarInput(input){
+    document.getElementById(input).reset();
+}

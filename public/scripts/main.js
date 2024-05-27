@@ -1,3 +1,19 @@
+//Profesores aleatorios
+document.addEventListener('DOMContentLoaded', async function(){
+    try{
+        const response = await fetch('http://localhost:3000/api/getProfesAleatorios');
+        if(!response.ok){
+            throw new Error('Fallo al recibir profesores');
+        }
+        const profesoresRand = await response.json();
+        verProfesoresRand(profesoresRand);
+    }catch(error){
+        console.error("Fallo al recibir profesores");
+    }
+});
+
+
+
 // Busqueda de profs. Redireccion ===> Esto se tiene que añadir a todas las páginas
 document.getElementById('barraBusqueda').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -7,6 +23,7 @@ document.getElementById('barraBusqueda').addEventListener('submit', function(eve
 });
 
 
+/*
 //Los valores de los comentarios
 const dataFromBackend = [
     { nombre: "Profesor 1", calificacion: 4.5, indiceaprobacion: 80 },
@@ -23,5 +40,24 @@ dataFromBackend.forEach((item, index) => {
     spansNombre[index].textContent = item.nombre;
     spansCalificacion[index].textContent = item.calificacion;
     spansIndiceAprobacion[index].textContent = item.indiceaprobacion;
-});
+}); */
 
+async function verProfesoresRand(profRand){
+    const contenedor = document.getElementById('container-comentarios');
+    contenedor.innerHTML = ''; // Clear the container
+
+    profRand.forEach(profesor => {
+        const link = document.createElement('a');
+        const contenedorNombre = document.createElement('div');
+        const nombreCompleto = `${profesor.nombre} ${profesor.apellido_paterno} ${profesor.apellido_materno}`;
+        link.href = `./pag_prof.html?query=${encodeURIComponent(nombreCompleto)}`
+        contenedorNombre.classList.add('comentarios');
+
+        const elementoNombre = document.createElement('h3');
+        elementoNombre.textContent = `Nombre del profesor: ${nombreCompleto}`;
+
+        contenedorNombre.appendChild(elementoNombre);
+        contenedor.appendChild(contenedorNombre);
+        elementoNombre.appendChild(link);
+    });
+}

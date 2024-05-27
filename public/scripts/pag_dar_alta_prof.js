@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
     userNameElement.textContent = "John Doe"; // Nombre simulado del usuario
     userEmailElement.textContent = "john@example.com"; // Email simulado del usuario*/
 });
-
+//En submit de formulario
 document.getElementById("altaProf").addEventListener("submit", async function(event){
     event.preventDefault();
 

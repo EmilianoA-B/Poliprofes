@@ -96,4 +96,31 @@ router.post('/getIdProfesorByApellidos', (req, res) => {
     });
 });
 
+//API para get solicitudes de profesores
+router.get('/getSolProf', (req, res) => {
+    const query = "SELECT * FROM profesores WHERE verificado = ?";
+    connection.query(query, [0], (err, results) =>{
+        if(err){
+            console.error('Error al desplegar solicitudes de profesor', err);
+            res.status(500).send('Error al desplegar solicitured de profesor');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+//API para index, 3 profes aleatorios
+router.get('/getProfesAleatorios', (req, res) => {
+    
+    const query = `SELECT nombre, apellido_paterno, apellido_materno FROM profesores WHERE verificado = true ORDER BY RAND() LIMIT ?`
+    connection.query(query, [3], (err , results)=>{
+        if(err){
+            console.error('Error al desplegar solicitudes de profesor', err);
+            res.status(500).send('Error al desplegar solicitudes de profesor');
+            return;
+        }
+        res.json(results);
+    });
+});
+
 module.exports = router;
