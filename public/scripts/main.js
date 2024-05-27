@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
 
 // Busqueda de profs. Redireccion ===> Esto se tiene que añadir a todas las páginas
-document.getElementById('barraBusqueda').addEventListener('submit', function(event) {
+document.getElementById('buscarProf').addEventListener('click', function(event) {
     event.preventDefault();
 
     const inputBusqueda = document.getElementById('inputBusqueda').value;
