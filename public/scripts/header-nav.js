@@ -33,12 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para agregar el elemento al menú
     function agregarAlMenu() {
-      const liElement = document.createElement("li");
+      const subDiv = document.createElement("div");
       const aElement = document.createElement("a");
       aElement.href = "solicitar_prof.html";
       aElement.textContent = "Añade a tu profesor";
-      liElement.appendChild(aElement);
-      menuList.insertBefore(liElement, menuList.firstChild);
+      subDiv.appendChild(aElement);
+      subDiv.classList.add('submenu-flex')
+      menuList.insertBefore(subDiv, menuList.firstChild);
     }
 
     if (admin) {
