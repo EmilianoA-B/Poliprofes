@@ -2,82 +2,107 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PoliProfesores</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/header-nav.css">
-</head>
-
-<body>
+    <link rel="stylesheet" href="../styles/header-nav.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/search-bar.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <div class="logo" ><a href="index.html">LOGO</a></div>
-        <form class="search-bar" id="barraBusqueda">
-            <input type="text" id="inputBusqueda">
-            <button type="submit" id="buscarProf"><a href="busqueda-visualizacion.html">Buscar</a></button>
-        </form>
-        <div class="auth-buttons">
-            <button>Registro</button>
-            <button>Inicio de sesión</button>
+      <div class="logo"><a href="index.html">LOGO</a></div>
+      <div class="search-bar-container" id="barraBusqueda">
+        <div class="search-box">
+          <input
+            type="text"
+            id="inputBusqueda"
+            class="search-input"
+            placeholder="Search.."
+          />
+          <button type="submit" id="buscarProf" class="search-button">
+            <span class="las la-search"></span>
+          </button>
         </div>
-        <div class="user-menu">
-            <div id="user-info" class="info"></div>
-             <div class="micuenta">
-                <details>
-                    <summary>Mi cuenta</summary>
-                    <ul>
-                      <li><a href="">Cambiar contraseña</a></li>
-                      <li><a href="#">Mis opiniones</a></li>
-                      <li><a href="#">Borrar mi cuenta</a></li>
-                      <li><a href="#">Cerrar sesión</a></li>
-                    </ul>
-                </details>
-             </div>
-        </div>  
-        <div class="menu-admin">
-            <details>
-                <summary>Administrar</summary>
-                <ul>
-                    <li><a href="pag_dar_alta_prof.html">Alta</a></li>
-                    <li><a href="confirmacion_alta.html">Solicitudes</a></li>
-                    <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
-                    <li><a href="#">Modificar profesores</a></li>
-                    <li><a href="baja_opinion.html">Dar de baja opiniones</a></li>
-                    <li><a href="alta_carreras_materias.html">Dar de alta carreras y materias</a></li>
-                </ul>
-            </details>
-        </div>    
+      </div>
+      <div class="auth-buttons">
+        <button>Registro</button>
+        <button>Inicio de sesión</button>
+      </div>
+      <div class="user-menu">
+        <div id="user-info" class="info"></div>
+        <div class="micuenta">
+          <details>
+            <summary>Mi cuenta</summary>
+            <ul>
+              <li><a href="">Cambiar contraseña</a></li>
+              <li><a href="#">Mis opiniones</a></li>
+              <li><a href="#">Borrar mi cuenta</a></li>
+              <li><a href="#">Cerrar sesión</a></li>
+            </ul>
+          </details>
+        </div>
+      </div>
+      <div class="menu-admin">
+        <details>
+          <summary>Administrar</summary>
+          <ul>
+            <li><a href="pag_dar_alta_prof.html">Alta</a></li>
+            <li><a href="confirmacion_alta.html">Solicitudes</a></li>
+            <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
+            <li><a href="#">Modificar profesores</a></li>
+            <li><a href="baja_opinion.html">Dar de baja opiniones</a></li>
+            <li>
+              <a href="alta_carreras_materias.html"
+                >Dar de alta carreras y materias</a
+              >
+            </li>
+          </ul>
+        </details>
+      </div>
     </header>
-    <nav>
-        <div class="menu-button-container">
-            <details class="menu-button">
-                <summary>Menu</summary>
-                <ul id="menu-list">
-                    <li>
-                        <details>
-                            <summary>Evaluaciones</summary>
-                            <ul>
-                                <li><a href="busqueda-visualizacion.html">Mejores evaluaciones</a></li>
-                                <li><a href="busqueda-visualizacion.html">Peores evaluaciones</a></li>
-                                <li><a href="busqueda-visualizacion.html">Mas recientes</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                     <details>
-                        <summary>Carrera</summary>
-                        <ul>
-                            <li><a href="busqueda-visualizacion.html">Ing. en computación</a></li>
-                            <li><a href="busqueda-visualizacion.html">Ing. Mecánica</a></li>
-                            <li><a href="busqueda-visualizacion.html">Ing. en Sistemas Automotrices</a></li>
-                            <li><a href="busqueda-visualizacion.html">Ing. en comunicaciones y en electronica</a></li>
-                        </ul>
-                    </details>
-                </li>
-                </ul>
-            </details>
-        </div>
-    </nav>
+    <div class="submenu-container" id="menu-list">
+      <div class="submenu-flex">
+        <details class="submenu">
+          <summary>Evaluaciones</summary>
+          <ul class="subfiltros">
+            <li><a href="busqueda-visualizacion.html">Mas recientes</a></li>
+            <li>
+              <a href="busqueda-visualizacion.html">Mejores evaluaciones</a>
+            </li>
+            <li>
+              <a href="busqueda-visualizacion.html">Peores evaluaciones</a>
+            </li>
+          </ul>
+        </details>
+      </div>
+      <div class="submenu-flex">
+        <details class="submenu">
+          <summary>Carreras</summary>
+          <ul class="subfiltros">
+            <li>
+              <a href="busqueda-visualizacion.html">Ing. en Computación</a>
+            </li>
+            <li><a href="busqueda-visualizacion.html">Ing. Mecánica</a></li>
+            <li>
+              <a href="busqueda-visualizacion.html"
+                >Ing. en Sistemas Automotrices</a
+              >
+            </li>
+            <li>
+              <a href="busqueda-visualizacion.html"
+                >Ing. en comunicaciones y en electronica</a
+              >
+            </li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
     <!--Aqui acaba el encabezado y menu-->
     <div class="solicitarProf">
         <form id="professorForm">
