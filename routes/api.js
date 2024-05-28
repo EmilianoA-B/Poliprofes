@@ -111,7 +111,6 @@ router.get('/getSolProf', (req, res) => {
 
 //API para index, 3 profes aleatorios
 router.get('/getProfesAleatorios', (req, res) => {
-    
     const query = `SELECT nombre, apellido_paterno, apellido_materno FROM profesores WHERE verificado = true ORDER BY RAND() LIMIT ?`
     connection.query(query, [3], (err , results)=>{
         if(err){
@@ -120,6 +119,39 @@ router.get('/getProfesAleatorios', (req, res) => {
             return;
         }
         res.json(results);
+    });
+});
+
+//API para obtener profes por nombre, calificacion y materias
+router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
+    const query = `SELECT 
+    CONCAT(PROFESORES.NOMBRE, ' ',PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
+    COMENTS.PROMEDIO AS CALIFICACION,
+    GROUP_CONCAT(MATERIAS.MATERIA SEPARATOR ', ') AS MATERIAS
+    FROM PROFESOR_MATERIAS
+    INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    INNER JOIN
+	    (SELECT 
+	        PROFESORES_ID,
+            AVG(CALIFICACION) AS PROMEDIO
+	        FROM COMENTARIOS
+            GROUP BY PROFESORES_ID) AS COMENTS
+    ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTS.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE
+    GROUP BY PROFESORES.ID`
+    connection.query(query, (err , results)=>{
+        if(err){
+            console.error('Error al desplegar solicitudes de profesor', err);
+            res.status(500).send('Error al desplegar solicitudes de profesor');
+            return;
+        }
+        res.json(results.map(row=>({
+            nombre: row.nombre,
+            calificacion: row.calificacion,
+            materias: row.materias.split(', ')
+            }))
+        );
     });
 });
 
