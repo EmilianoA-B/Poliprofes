@@ -55,8 +55,14 @@ async function verProfesoresRand(profRand){
 
         const elementoNombre = document.createElement('h3');
         elementoNombre.textContent = `Nombre del profesor: ${nombreCompleto}`;
+        const elementoIndiceAprob = document.createElement('p');
+        elementoIndiceAprob.textContent = `Indice de aprobación: ${profesor.indice_aprobacion}`;
+        const elementoCalificacion = document.createElement('p');
+        elementoCalificacion.textContent = `Calificación: ${profesor.calificacion}`;
 
         contenedorNombre.appendChild(elementoNombre);
+        contenedorNombre.appendChild(elementoCalificacion);
+        contenedorNombre.appendChild(elementoIndiceAprob);
         contenedor.appendChild(contenedorNombre);
         elementoNombre.appendChild(link);
     });

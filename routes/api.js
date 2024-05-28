@@ -112,7 +112,7 @@ router.get('/getSolProf', (req, res) => {
 //API para index, 3 profes aleatorios
 router.get('/getProfesAleatorios', (req, res) => {
     
-    const query = `SELECT nombre, apellido_paterno, apellido_materno FROM profesores WHERE verificado = true ORDER BY RAND() LIMIT ?`
+    const query = `SELECT nombre, apellido_paterno, apellido_materno, calificacion, indice_aprobacion FROM profesores WHERE verificado = true ORDER BY RAND() LIMIT ?`
     connection.query(query, [3], (err , results)=>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
