@@ -75,7 +75,54 @@ header {
     
 }
 
+.submenu-flex > a {
+  border: 2px solid #800000;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #800000;
+  color: white;
+}
 
+.submenu{
+    display: flex;
+    background-color: #800000;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+}
+
+.submenu > summary{
+    list-style-type: none;
+}
+
+.subfiltros {
+    list-style-type: none;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 4px; 
+}
+
+.subfiltros a{
+    display: block;
+    padding: 10px 20px;
+    color: #333; 
+    text-decoration: none; 
+    text-align: left;
+    box-sizing: border-box;
+}
 
 
 .user-menu{
