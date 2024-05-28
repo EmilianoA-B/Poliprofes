@@ -139,7 +139,7 @@ router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
             GROUP BY PROFESORES_ID) AS COMENTS
     ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTS.PROFESORES_ID
     WHERE PROFESORES.VERIFICADO = TRUE
-    GROUP BY PROFESORES.ID`
+    GROUP BY PROFESORES.ID`;
     connection.query(query, (err , results)=>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
@@ -147,9 +147,9 @@ router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
             return;
         }
         res.json(results.map(row=>({
-            nombre: row.nombre,
-            calificacion: row.calificacion,
-            materias: row.materias.split(', ')
+            nombre: row.NOMBRE,
+            calificacion: row.CALIFICACION,
+            materias: row.MATERIAS ? row.MATERIAS.split(', ') : []
             }))
         );
     });
