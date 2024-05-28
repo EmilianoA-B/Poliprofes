@@ -1,3 +1,7 @@
+window.onload = function alCargar (){
+    limpiarInput('registroForm');
+}
+
 // Mostrar o Ocultar passwd
 document.addEventListener('DOMContentLoaded', function () {
     const togglePasswordButton = document.getElementById('toggle-password');
@@ -30,6 +34,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
 
         if (response.ok) {
             console.log('Se anadio al usuario');
+            limpiarInput('registroForm');
         } else {
             console.error('Error adding user');
         }
@@ -37,15 +42,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         console.error('Error:', error);
     }
 });
-//Funcion para mostrar un mensaje 
-function mostrarMensaje(mensaje) {
-    const mensajeBox = document.createElement('div');
-    mensajeBox.classList.add('mensaje-box');
-    mensajeBox.textContent = mensaje;
-    
-    document.body.appendChild(mensajeBox);
-    // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
-    setTimeout(function () {
-        mensajeBox.remove();
-    }, 3000);
+
+function limpiarInput(input){
+    document.getElementById(input).reset();
 }

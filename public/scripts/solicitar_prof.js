@@ -3,7 +3,7 @@ window.onload = function alCargar (){
     cargarCarreras();
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
     var accountButton = document.getElementById("account-button");
     var accountDropdown = document.getElementById("account-dropdown");
 
@@ -47,6 +47,37 @@ document.addEventListener("DOMContentLoaded", function() {
         // Resetear el formulario
         form.reset();
     });
+});*/
+
+document.getElementById("professorForm").addEventListener("submit", async function(event){
+    event.preventDefault();
+    const nombreProf = document.getElementById("nombre").value;
+    const apellidoP = document.getElementById("apellidoP").value;
+    const apellidoM = document.getElementById("apellidoM").value;
+    const carrera = document.getElementById("carrera").value;
+    console.log("Carrera:",carrera)
+    
+    const id_carrera = await getIDCarrera(carrera);
+    console.log("ID:",null)
+    try {
+        const response = await fetch('http://localhost:3000/endpoint/solcitarProf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, id_carrera })
+        });
+        if (response.ok) {
+            console.log('Se registro el profesor');
+            mostrarPopup(); //Mostrar confirmacion de alta
+            limpiarInput('professorForm');
+        } else {
+            console.error('No se pudo registrar al profesor');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
 });
 
 async function cargarCarreras(){
@@ -63,36 +94,45 @@ async function cargarCarreras(){
             .catch(error => console.error('Error fetching user data:', error));
 }
 
-// Función para mostrar un mensaje temporal en la página
-function mostrarMensaje(mensaje) {
-    const mensajeBox = document.createElement('div');
-    mensajeBox.classList.add('mensaje-box');
-    mensajeBox.textContent = mensaje;
-
-    document.body.appendChild(mensajeBox);
-
-    // Desaparecer el mensaje después de 3 segundos (3000 milisegundos)
-    setTimeout(function () {
-        mensajeBox.remove();
-    }, 3000);
+//Para conseguir ID de la carrera
+async function getIDCarrera(carrera){
+    try {
+        const response = await fetch('http://localhost:3000/api/getIdByCarrera', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ carrera })
+        });
+        if (response.ok) {
+            console.log('Exito al conseguir el ID');
+            const id_carrera = await response.json();
+            return id_carrera.id;
+        } else {
+            console.error('No se pudo conseguir el ID');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }  
 }
-
-
-// Obtener referencias a los elementos del DOM
-const userNameElement = document.getElementById('user-name');
-const userEmailElement = document.getElementById('user-email');
-
-// Simular datos de usuario (esto puede venir de una fuente dinámica en tu aplicación)
-const userInfo = {
-    name: 'Juan Pérez   ' ,
-    email: ' juan@example.com'
-};
-
-// Actualizar el contenido del DOM con los datos del usuario
-userNameElement.textContent = userInfo.name;
-userEmailElement.textContent = userInfo.email;
 
 // Para limpiar el formulario
 function limpiarInput(input){
     document.getElementById(input).reset();
 }
+
+function mostrarPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+
+    setTimeout(function () {
+        cerrarPopup();
+        window.location.href = "./index.html";
+    }, 3000);
+}
+
+function cerrarPopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+

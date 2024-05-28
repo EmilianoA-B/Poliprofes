@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Carga carreras y materiasdesde la base de datos
     // Ocultar el menú de cuenta al cargar la página
-    hideAccountMenu();
-
+   // hideAccountMenu();
+    
     // Manejar clic en el botón de cuenta para mostrar/ocultar el menú desplegable
-
+    /*
     adminButton.addEventListener("click", function() {
         if (adminDropdown.style.display === "none" || adminDropdown.style.display === "") {
             showAccountMenu();
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function hideAccountMenu() {
         adminDropdown.style.display = "none";
     }
-
+    */
     // Mostrar el nombre y email del usuario simulado
     /*const userNameElement = document.getElementById('user-name');
     const userEmailElement = document.getElementById('user-email');
@@ -47,7 +47,10 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
     const apellidoP = document.getElementById("apellidoP").value;
     const apellidoM = document.getElementById("apellidoM").value;
     const divtodasLasMaterias = document.getElementById("contieneTodasMaterias");
-    
+    const carrera = document.getElementById("carrera").value;
+
+    const id_carrera = await getIDCarrera(carrera);
+
     const todosLosSelects = divtodasLasMaterias.querySelectorAll('select');
     const todasLasMaterias = Array.from(todosLosSelects).map(todosLosSelects => todosLosSelects.value);
     try {
@@ -56,10 +59,12 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias })
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera })
         });
         if (response.ok) {
             console.log('Se registro el profesor');
+            mostrarPopup(); //Mostrar confirmacion de alta
+            limpiarInput('altaProf');
         } else {
             console.error('No se pudo registrar al profesor');
         }
@@ -75,15 +80,12 @@ document.getElementById("carrera").addEventListener("change", function(){
     document.getElementById("selectsDeMateria").innerHTML = "";
     getIdForMaterias(carreraSelect);
 });
-//Para cuando pongas una materia
+//Para cuando quieras poner una materia
 document.getElementById("agregarMateria").addEventListener("click", function(){
     const selectMateria = document.getElementById("materia");
     const divParaSelects = document.getElementById("selectsDeMateria");
     const newSelect = document.createElement("select");
-    /*if (selectMateria.options.length === 1) {
-        alert('Primero selecciona una carrera');
-        return;
-    }*/
+
     Array.from(selectMateria.options).forEach(opcionOriginal => {
         const opcionNueva = document.createElement('option');
         opcionNueva.value = opcionOriginal.value;
@@ -92,7 +94,7 @@ document.getElementById("agregarMateria").addEventListener("click", function(){
     });
     divParaSelects.appendChild(newSelect);
 });
-
+//Para cargar todas las carreras
 async function cargarCarreras(){
         fetch('http://localhost:3000/api/getCarreras')
             .then(response => response.json())
@@ -106,7 +108,7 @@ async function cargarCarreras(){
             })
             .catch(error => console.error('Error al cargar carreras:', error));
 }
-
+//Para conseguir todas las materias de la carrera seleccionada
 async function getIdForMaterias(carrera){
     console.log('Carrera Seleccionada:', carrera);
     try {
@@ -133,6 +135,28 @@ async function getIdForMaterias(carrera){
         console.error('Error:', error);
     }
 }
+//Para conseguir ID de la carrera
+async function getIDCarrera(carrera){
+    try {
+        const response = await fetch('http://localhost:3000/api/getIdByCarrera', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ carrera })
+        });
+        if (response.ok) {
+            console.log('Exito al conseguir el ID');
+            const id_carrera = await response.json();
+            return id_carrera.id;
+        } else {
+            console.error('No se pudo conseguir el ID');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }  
+}
+
 // Para limpiar los selects cada que se cambie de carrera
 function limpiarSelect(){
  document.getElementById("materia").length = 1;
@@ -141,4 +165,14 @@ function limpiarSelect(){
 // Para limpiar el formulario
 function limpiarInput(input){
     document.getElementById(input).reset();
+}
+
+function mostrarPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function cerrarPopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }

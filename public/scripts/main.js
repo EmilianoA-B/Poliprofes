@@ -47,10 +47,12 @@ async function verProfesoresRand(profRand){
     contenedor.innerHTML = ''; // Clear the container
 
     profRand.forEach(profesor => {
-        const link = document.createElement('a');
+
+         //link.href = `./pag_prof.html?query=${encodeURIComponent(nombreCompleto)}` ==> Era para linkear a las paginas de los profesores aleatorios, pero no viene en los requerimientos
+        //const link = document.createElement('a');
+
         const contenedorNombre = document.createElement('div');
         const nombreCompleto = `${profesor.nombre} ${profesor.apellido_paterno} ${profesor.apellido_materno}`;
-        link.href = `./pag_prof.html?query=${encodeURIComponent(nombreCompleto)}`
         contenedorNombre.classList.add('comentarios');
 
         const elementoNombre = document.createElement('h3');
@@ -64,6 +66,6 @@ async function verProfesoresRand(profRand){
         contenedorNombre.appendChild(elementoCalificacion);
         contenedorNombre.appendChild(elementoIndiceAprob);
         contenedor.appendChild(contenedorNombre);
-        elementoNombre.appendChild(link);
+        
     });
 }
