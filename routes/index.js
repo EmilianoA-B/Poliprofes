@@ -13,4 +13,15 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/*.html', (req, res) => {
+    const requestedPage = req.path;
+    const indexPath = path.join(__dirname, '..','public', 'pages', requestedPage);
+    res.sendFile(indexPath, (err) => {
+        if (err) {
+            console.error('Error sending ${requestedPage}', err);
+            res.status(err.status || 500).send('Error loading page');
+        }
+    });
+});
+
 module.exports = router;
