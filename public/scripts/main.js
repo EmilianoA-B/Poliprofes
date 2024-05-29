@@ -44,7 +44,7 @@ dataFromBackend.forEach((item, index) => {
 
 async function verProfesoresRand(profRand){
     const contenedor = document.getElementById('container-comentarios');
-    contenedor.innerHTML = ''; // Clear the container
+    contenedor.innerHTML = ''; // limpia el container
 
     profRand.forEach(profesor => {
 
@@ -52,15 +52,15 @@ async function verProfesoresRand(profRand){
         //const link = document.createElement('a');
 
         const contenedorNombre = document.createElement('div');
-        const nombreCompleto = `${profesor.nombre} ${profesor.apellido_paterno} ${profesor.apellido_materno}`;
+        const nombreCompleto = `${profesor.NOMBRE}`; 
         contenedorNombre.classList.add('comentarios');
 
         const elementoNombre = document.createElement('h3');
         elementoNombre.textContent = `Nombre del profesor: ${nombreCompleto}`;
         const elementoIndiceAprob = document.createElement('p');
-        elementoIndiceAprob.textContent = `Indice de aprobación: ${profesor.indice_aprobacion}`;
+        elementoIndiceAprob.textContent = `Indice de aprobación: ${profesor.INDICE_APROBACION}%`;
         const elementoCalificacion = document.createElement('p');
-        elementoCalificacion.textContent = `Calificación: ${profesor.calificacion}`;
+        elementoCalificacion.textContent = `Calificación: ${profesor.CALIFICACION}`;
 
         contenedorNombre.appendChild(elementoNombre);
         contenedorNombre.appendChild(elementoCalificacion);

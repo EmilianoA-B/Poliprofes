@@ -98,7 +98,7 @@ router.post('/getIdProfesorByApellidos', (req, res) => {
 
 //API para get solicitudes de profesores
 router.get('/getSolProf', (req, res) => {
-    const query = "SELECT * FROM profesores WHERE verificado = ?";
+    const query = "SELECT nombre, apellido_paterno, apellido_materno, carrera_id FROM profesores WHERE verificado = ?";
     connection.query(query, [0], (err, results) =>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
@@ -111,8 +111,31 @@ router.get('/getSolProf', (req, res) => {
 
 //API para index, 3 profes aleatorios
 router.get('/getProfesAleatorios', (req, res) => {
-    const query = `SELECT nombre, apellido_paterno, apellido_materno, calificacion, indice_aprobacion FROM profesores WHERE verificado = true ORDER BY RAND() LIMIT ?`
-    connection.query(query, [3], (err , results)=>{
+    const query = `SELECT 
+    CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
+    ROUND(COMENTS.PROMEDIO, 1) AS CALIFICACION,
+    ROUND(APROBADO.INDICE * 100) AS INDICE_APROBACION
+    FROM PROFESOR_MATERIAS
+    INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    INNER JOIN (
+    SELECT 
+        PROFESORES_ID,
+        AVG(CALIFICACION) AS PROMEDIO
+        FROM COMENTARIOS
+        GROUP BY PROFESORES_ID
+    ) AS COMENTS ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTS.PROFESORES_ID
+    INNER JOIN (
+    SELECT 
+        PROFESORES_ID,
+        AVG(APROBO) AS INDICE
+        FROM COMENTARIOS
+        GROUP BY PROFESORES_ID
+    ) AS APROBADO ON PROFESOR_MATERIAS.PROFESOR_ID = APROBADO.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE
+    ORDER BY RAND()
+    LIMIT 3`;
+    connection.query(query, (err , results)=>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
             res.status(500).send('Error al desplegar solicitudes de profesor');
