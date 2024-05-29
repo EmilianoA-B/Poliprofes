@@ -147,23 +147,25 @@ router.get('/getProfesAleatorios', (req, res) => {
 
 //API para obtener profes por nombre, calificacion y materias
 router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
+    const carrera = req.query.carrera ? `%${req.query.carrera}%` : '%';
     const query = `SELECT 
     CONCAT(PROFESORES.NOMBRE, ' ',PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
     COMENTS.PROMEDIO AS CALIFICACION,
     GROUP_CONCAT(MATERIAS.MATERIA SEPARATOR ', ') AS MATERIAS
     FROM PROFESOR_MATERIAS
     INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
     INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
     INNER JOIN
-	    (SELECT 
-	        PROFESORES_ID,
-            AVG(CALIFICACION) AS PROMEDIO
-	        FROM COMENTARIOS
-            GROUP BY PROFESORES_ID) AS COMENTS
+        (SELECT 
+        PROFESORES_ID,
+        AVG(CALIFICACION) AS PROMEDIO
+        FROM COMENTARIOS
+        GROUP BY PROFESORES_ID) AS COMENTS
     ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTS.PROFESORES_ID
-    WHERE PROFESORES.VERIFICADO = TRUE
+    WHERE PROFESORES.VERIFICADO = TRUE AND CARRERAS.CARRERA LIKE ?
     GROUP BY PROFESORES.ID`;
-    connection.query(query, (err , results)=>{
+    connection.query(query, [carrera], (err , results)=>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
             res.status(500).send('Error al desplegar solicitudes de profesor');
