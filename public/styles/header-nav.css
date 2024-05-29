@@ -4,6 +4,7 @@ body {
     padding: 0;
     height: 110vh;
     box-sizing: border-box;
+    background-color: #ffffff;
 }
 
 header {
@@ -12,7 +13,7 @@ header {
     align-items: center;
     padding: 1rem 20px;
     background-color: #800040;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #76767665;
     color: #fff;
 }
 
@@ -40,6 +41,8 @@ header {
     background-color: #ffffff;
     color: #000000;
     flex-direction: row;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .subfiltros {
     list-style-type: none;
