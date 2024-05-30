@@ -117,16 +117,27 @@
 
             <label for="carrera">Carrera:</label>
             <select id="carrera" name="carrera">
-                <!--Aqui se insertan las carreras-->
-            </select><br><br>
-
-            <button class="Botones-General" type="submit">Solicitar</button>
-          </form>
-          <div class="popup" id="popup">
-            <p>Enviado</p>
+              <option value="" disabled selected>Elige la carrera</option>
+              <!--Aqui se cargan dinámicamente las carreras de la base de datos-->
+          </select><br><br>
+          <div id="contieneTodasMaterias">
+            <label for="materia">Materias:</label>
+              <select id="materia" name="materia">
+                  <option value="" disabled selected>Elige la materia</option>
+                  <!--Aqui se cargan dinámicamente las materias de la base de datos-->
+              </select>
+              <div id="selectsDeMateria" class="selectsMateria">
+                  <!--Aqui se duplican las materias-->
+              </div>
           </div>
-          <div class="overlay" id="overlay"></div>
+          <button class="Botones-General" id="agregarMateria" type="button">Agregar Materia</button><br><br>
+          <button class="Botones-General" type="submit">Dar de Alta</button>
+          </form>    
     </div>
+    <div class="popup" id="popup">
+      <p>Enviado</p>
+    </div>
+    <div class="overlay" id="overlay"></div>
     <script src="../scripts/solicitar_prof.js"></script>
 </body>
 

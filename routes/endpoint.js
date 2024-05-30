@@ -59,10 +59,10 @@ router.post('/regProf', (req, res) => {
     const apellido_p = req.body.apellidoP;
     const apellido_m = req.body.apellidoM;
     const todasLasMaterias = req.body.selections;
-    const id_carrera = req.body.id_carrera;
+    const verificado = req.body.verificado;
     console.log(req.body.selections);
-    const query1 = "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado, carrera_id) VALUES (?, ?, ?, ?, ?)";
-    connection.query(query1, [nombreProf, apellido_p, apellido_m, 1, id_carrera], (err, results) => {
+    const query1 = "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado) VALUES (?, ?, ?, ?)";
+    connection.query(query1, [nombreProf, apellido_p, apellido_m, verificado], (err, results) => {
         if(err){
             console.error('Error agregando al profesor', err);
             res.status(500).send('Error agregando al profesor');
@@ -144,7 +144,7 @@ router.post('/solcitarProf', (req, res) => {
     const apellidoP = req.body.apellidoP;
     const apellidoM = req.body.apellidoM;
     const id_carrera = req.body.id_carrera;
-    const query1 = "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado, carrera_id ) VALUES (?, ?, ?, ?, ?)";
+    const query1 = "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado) VALUES (?, ?, ?, ?, ?)";
     connection.query(query1, [nombreProf, apellidoP, apellidoM, 0, id_carrera], (err, results) => {
         if (err) {
             console.error('Error al subir solicitud de profesor', err);

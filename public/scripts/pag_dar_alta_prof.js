@@ -48,7 +48,6 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
     const apellidoM = document.getElementById("apellidoM").value;
     const divtodasLasMaterias = document.getElementById("contieneTodasMaterias");
     const carrera = document.getElementById("carrera").value;
-
     const id_carrera = await getIDCarrera(carrera);
 
     const todosLosSelects = divtodasLasMaterias.querySelectorAll('select');
@@ -59,12 +58,13 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera })
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera , verificado:1 })
         });
         if (response.ok) {
             console.log('Se registro el profesor');
             mostrarPopup(); //Mostrar confirmacion de alta
             limpiarInput('altaProf');
+            document.getElementById("selectsDeMateria").innerHTML = "";
         } else {
             console.error('No se pudo registrar al profesor');
         }

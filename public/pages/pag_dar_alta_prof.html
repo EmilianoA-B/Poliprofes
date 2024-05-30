@@ -97,17 +97,19 @@
 
             <label class="label-1" for="apellidos">Apellido Materno:</label>
             <input class="Input-General" type="text" id="apellidoM" name="apellidoM" required><br><br>
-
+            
+            <label class="label-1" for="carrera">Carrera:</label>
             <select id="carrera" name="carrera">
                 <option value="" disabled selected>Elige la carrera</option>
                 <!--Aqui se cargan dinámicamente las carreras de la base de datos-->
             </select><br><br>
             <div id="contieneTodasMaterias">
+              <label  class="label-1" for="materia">Materias:</label>
                 <select id="materia" name="materia">
                     <option value="" disabled selected>Elige la materia</option>
                     <!--Aqui se cargan dinámicamente las materias de la base de datos-->
-                </select><br><br>
-                <div id="selectsDeMateria" class="selectsMateria"></div>
+                </select>
+                <div id="selectsDeMateria" class="selectsMateria">
                     <!--Aqui se duplican las materias-->
                 </div>
             </div>
@@ -118,6 +120,7 @@
           <p>Registro realizado con éxito.</p>
           <button onclick="cerrarPopup()">Cerrar</button>
         </div>
+        <div class="overlay" id="overlay"></div>
     </main>
     
     <script src="../scripts/pag_dar_alta_prof.js"></script>
