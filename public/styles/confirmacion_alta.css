@@ -42,3 +42,21 @@
 .accept-button:hover {
     background-color: #45a049;
 }
+
+.paginacion {
+    padding:1.2rem;
+    max-width: 800px;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.link {
+    padding-left: 4px;
+    padding-right: 4px;
+}

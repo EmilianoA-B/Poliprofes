@@ -98,14 +98,34 @@ router.post('/getIdProfesorByApellidos', (req, res) => {
 
 //API para get solicitudes de profesores
 router.get('/getSolProf', (req, res) => {
-    const query = "SELECT nombre, apellido_paterno, apellido_materno, carrera_id FROM profesores WHERE verificado = ?";
-    connection.query(query, [0], (err, results) =>{
-        if(err){
-            console.error('Error al desplegar solicitudes de profesor', err);
-            res.status(500).send('Error al desplegar solicitured de profesor');
-            return;
-        }
-        res.json(results);
+    const limit = 10;
+    const page = parseInt(req.query.page) || 1;
+    const start = (page - 1) * limit;
+
+    connection.query('SELECT COUNT(ID) AS total FROM PROFESORES WHERE verificado = 0', (err, result) => {
+        if (err) throw err;
+        const totalRows = result[0].total;
+        const totalPages = Math.ceil(totalRows / limit);
+
+        connection.query(`SELECT 
+            CONCAT(P.NOMBRE, ' ', P.APELLIDO_PATERNO, ' ', P.APELLIDO_MATERNO) AS NOMBRE,
+            C.CARRERA,
+            GROUP_CONCAT(M.MATERIA SEPARATOR ', ') AS MATERIAS
+        FROM PROFESOR_MATERIAS AS PM
+        INNER JOIN MATERIAS AS M ON PM.MATERIA_ID = M.ID
+        INNER JOIN PROFESORES AS P ON PM.PROFESOR_ID = P.ID
+        INNER JOIN CARRERAS AS C ON M.CARRERA_ID = C.ID
+        WHERE P.VERIFICADO = FALSE
+        GROUP BY P.ID, P.NOMBRE, P.APELLIDO_PATERNO, P.APELLIDO_MATERNO, C.CARRERA
+        ORDER BY P.ID ASC
+        LIMIT ?, ?`, [start, limit], (err, results) => {
+            if (err) throw err;
+            res.json({
+                profesores: results,
+                totalPages: totalPages,
+                currentPage: page
+            });
+        });
     });
 });
 

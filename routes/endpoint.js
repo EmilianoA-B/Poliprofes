@@ -69,7 +69,6 @@ router.post('/regProf', (req, res) => {
             return;
         }
         console.log("Exito agregando al profesor");
-        //res.status(200).send('Exito agregando al profesor');
 
     });
     //Segundo query para sacar ID de profesor
@@ -151,6 +150,29 @@ router.post('/solcitarProf', (req, res) => {
             return res.status(500).json({ error: 'Error al subir solicitud de profesor', details: err });
         }
         res.status(200).json({ message: 'Exito al subir solicitud de profesor' });
+    });
+});
+
+//Aceptar solicitud de profesor
+router.post('/aceptarProf', (req, res) =>{
+    const nombreProf = req.body.nombre;
+    const query = `UPDATE PROFESORES
+    SET VERIFICADO = TRUE
+    WHERE ID = (
+        SELECT ID
+        FROM (
+            SELECT ID
+            FROM PROFESORES
+            WHERE CONCAT(NOMBRE, ' ', APELLIDO_PATERNO, ' ', APELLIDO_MATERNO) = ?
+            LIMIT 1
+        ) AS subquery
+    )`;
+    connection.query(query, [nombreProf], (err,results) => {
+        if (err) {
+            console.error('Error al aceptar prof', err);
+            return res.status(500).json({ error: 'Error al saceptar prof', details: err });
+        }
+        res.status(200).json({ message: 'Exito al aceptar prof' });
     });
 });
 
