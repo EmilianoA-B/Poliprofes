@@ -36,7 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const subDiv = document.createElement("div");
       const aElement = document.createElement("a");
       aElement.href = "solicitar_prof.html";
-      aElement.textContent = "Añade a tu profesor";
+      var spanTrash = document.createElement("i");
+      spanTrash.classList.add("las", "la-user-plus"); // Separo las clases con comas
+      aElement.appendChild(spanTrash);
+      aElement.appendChild(document.createTextNode(" Añade a tu profesor"));
       subDiv.appendChild(aElement);
       subDiv.classList.add('submenu-flex')
       menuList.insertBefore(subDiv, menuList.firstChild);
