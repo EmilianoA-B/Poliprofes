@@ -413,3 +413,70 @@ input[type="radio"] {
     font-weight: bold;
     text-decoration: none;
 }
+
+/* Estilo de las tarjetas de dar de baja */
+
+
+.profesor-container {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    
+}
+
+.profesor-container .nombre {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.profesor-container .carrera {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.profesor-container .materias {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.container-button{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profesor-container .baja-btn {
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profesor-container .baja-btn:hover {
+    background-color: #e60000;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-buttons {
+    text-align: right;
+}

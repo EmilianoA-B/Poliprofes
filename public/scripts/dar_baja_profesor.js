@@ -1,23 +1,6 @@
 // Variable global para almacenar una referencia al divProfesor que se debe eliminar
 var divProfesorToRemove;
 
-//Get de parametros para profes
-function getQueryParams() {
-    const params = {};
-    const queryString = window.location.search.slice(1);
-    const pairs = queryString.split('&');
-
-    for (const pair of pairs) {
-        const [key, value] = pair.split('=');
-        params[decodeURIComponent(key)] = decodeURIComponent(value);
-    }
-
-    return params;
-}
-const queryParams = getQueryParams();
-const carrera = queryParams['nombre'];
-
-
 // Función para dar de baja al profesor
 function darDeBaja() {
   // Verificar si divProfesorToRemove está definido y no es null
@@ -47,44 +30,21 @@ function cerrarModal() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // Función para obtener los resultados desde el servidor
-  async function obtenerResultados(carrera) {
-    try {
-      let url = "/api/getProfesByCalificacionAndMaterias";
-      if (carrera) {
-        url += `?carrera=${encodeURIComponent(carrera)}`;
-      }
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Error en la solicitud");
-      }
-      const resultados = await response.json();
-      mostrarResultados(resultados);
-    } catch (error) {
-      console.error("Error al obtener los resultados:", error);
-    }
-  }
-
-  obtenerResultados(carrera);
-
-  //Funcion para desplegar los resultados en un contenedor
+  // Función para mostrar los resultados en la página
   function mostrarResultados(resultados) {
     var resultadosDiv = document.getElementById("resultados");
     resultadosDiv.innerHTML = ""; // Limpiar resultados anteriores
 
     resultados.forEach(function (profesor) {
       var divProfesor = document.createElement("div");
-      divProfesor.classList.add("resultado-profesor"); //elemento div class=profesor
+      divProfesor.classList.add("profesor-container"); //elemento div class=profesor
 
       var enlaceNombre = document.createElement("a");
-      enlaceNombre.href = "pagina_profesor.html"; // Enlace a la página del profesor
+      enlaceNombre.href = `pag_prof.html?profesor=${encodeURIComponent(
+        profesor.nombre
+      )}`; // Enlace a la página del profesor
       enlaceNombre.classList.add("resultado-nombre"); //elemento a class="nombre"
       enlaceNombre.innerText = profesor.nombre;
-
-      var calificacionSpan = document.createElement("span");
-      calificacionSpan.classList.add("resultado-calificacion"); //span class="calificacion"
-      calificacionSpan.innerText = profesor.calificacion;
 
       var materiasParrafo = document.createElement("p");
       materiasParrafo.classList.add("resultado-materias"); // p class="materias"
@@ -96,64 +56,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      var containerButton = document.createElement("div");
+      containerButton.classList.add("container-button");
+
+      var button = document.createElement("button");
+      button.classList.add("baja-btn");
+      var spanTrash = document.createElement("i");
+      spanTrash.classList.add("lar", "la-trash-alt"); // Separo las clases con comas
+      button.appendChild(spanTrash);
+      button.innerHTML += " Dar de baja"; // Agrego espacio antes de "Dar de baja"
+      button.onclick = function () {
+        mostrarModal();
+        // Almacenar una referencia al divProfesor asociado con este botón
+        divProfesorToRemove = divProfesor;
+      };
+      containerButton.appendChild(button);
       divProfesor.appendChild(enlaceNombre);
-      divProfesor.appendChild(calificacionSpan);
       divProfesor.appendChild(materiasParrafo);
       resultadosDiv.appendChild(divProfesor);
+      divProfesor.appendChild(containerButton);
     });
   }
 
-  // Función para crear un contenedor de profesor
-  function crearContenedor(profesor) {
-    var divProfesor = document.createElement("div");
-    divProfesor.classList.add("profesor-container");
-
-    var nombre = document.createElement("div");
-    nombre.classList.add("nombre");
-    nombre.textContent = profesor.nombre;
-
-    var carrera = document.createElement("div");
-    carrera.classList.add("carrera");
-    carrera.textContent = profesor.carrera;
-
-    var materias = document.createElement("div");
-    materias.classList.add("materias");
-    materias.textContent = profesor.materias.join(", ");
-
-    var containerButton = document.createElement("div");
-    containerButton.classList.add("container-button");
-
-    var button = document.createElement("button");
-    button.classList.add("baja-btn");
-    button.textContent = "Dar de baja";
-    button.onclick = mostrarModal;
-
-    // Asociar el divProfesor al botón "Dar de baja"
-    button.onclick = function () {
-      mostrarModal();
-      // Almacenar una referencia al divProfesor asociado con este botón
-      divProfesorToRemove = divProfesor;
-    };
-
-    containerButton.appendChild(button);
-
-    divProfesor.appendChild(nombre);
-    divProfesor.appendChild(carrera);
-    divProfesor.appendChild(materias);
-    divProfesor.appendChild(containerButton);
-
-    return divProfesor;
+  // Función para obtener los resultados desde el servidor
+  async function obtenerResultados() {
+    try {
+      let url = "/api/getProfesByCalificacionAndMaterias";
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Error en la solicitud");
+      }
+      const resultados = await response.json();
+      mostrarResultados(resultados);
+    } catch (error) {
+      console.error("Error al obtener los resultados:", error);
+    }
   }
 
-  // Función para agregar los profesores al contenedor principal
-  function agregarProfesores() {
-    var container = document.querySelector(".list_container");
-    profesores.forEach(function (profesor) {
-      var contenedor = crearContenedor(profesor);
-      container.appendChild(contenedor);
-    });
-  }
-
-  // Llamar a la función para agregar los profesores cuando el DOM se haya cargado completamente
-  agregarProfesores();
+  // Llamada a la función para obtener y mostrar los resultados
+  obtenerResultados();
 });

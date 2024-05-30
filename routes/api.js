@@ -233,4 +233,38 @@ router.get('/getProfesorWithMateriasCalificacionAndProbabilidad', (req, res) => 
     });
 });
 
+// API para obtener profes por nombre, calificación y materias sin filtrado por carrera
+router.get('/getProfesByCalificacionAndMateriasV2', (req, res) => {
+    const query = `SELECT 
+    CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
+    ROUND(COMENTS.PROMEDIO, 1) AS CALIFICACION,
+    GROUP_CONCAT(MATERIAS.MATERIA SEPARATOR ', ') AS MATERIAS
+    FROM PROFESOR_MATERIAS
+    INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    INNER JOIN
+        (SELECT 
+        PROFESORES_ID,
+        AVG(CALIFICACION) AS PROMEDIO
+        FROM COMENTARIOS
+        GROUP BY PROFESORES_ID) AS COMENTS
+    ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTS.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE
+    GROUP BY PROFESORES.ID`;
+    
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al desplegar solicitudes de profesor', err);
+            res.status(500).send('Error al desplegar solicitudes de profesor');
+            return;
+        }
+        res.json(results.map(row => ({
+            nombre: row.NOMBRE,
+            calificacion: row.CALIFICACION,
+            materias: row.MATERIAS ? row.MATERIAS.split(', ') : []
+        })));
+    });
+});
+
+
 module.exports = router;
