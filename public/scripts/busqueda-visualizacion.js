@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             divProfesor.classList.add("resultado-profesor"); //elemento div class=profesor
     
             var enlaceNombre = document.createElement("a");
-            enlaceNombre.href = "pagina_profesor.html"; // Enlace a la página del profesor
+            enlaceNombre.href = `pag_prof.html?profesor=${encodeURIComponent(profesor.nombre)}`; // Enlace a la página del profesor
             enlaceNombre.classList.add("resultado-nombre");  //elemento a class="nombre"
             enlaceNombre.innerText = profesor.nombre;  
     
