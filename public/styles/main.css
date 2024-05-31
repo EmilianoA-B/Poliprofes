@@ -181,14 +181,19 @@ a {
 
 .container-resultados{
     width:90%;
+
 }
-.resultado-profesor {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
+
+.container-resultados .calificar-btn {
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
 
 .resultado-nombre {
     font-weight: bold;
@@ -264,13 +269,36 @@ input[type="radio"] {
 /*Pag prof y Pag eliminar coment desde pag prof*/
 
 .infoProfesor {
+    border: 1px solid #cccccc;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    max-width: 100%;
+    max-width: 50%;
     margin-top: 2rem;
-    margin-right: 2rem;
-    margin-left: 2rem;
+    margin-right: 11%;
+    margin-left: 11%;
+}
+
+.infoProfesor2 {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 2rem;
+    margin-right: 20%;
+    margin-left: 5rem;
+    float: right;
+}
+
+.infoProfesor2 .calificar-btn {
+    position: absolute;
+    float: right;
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    transform: translateY(-50%);
 }
 
 .comentarioAlumno {
@@ -458,6 +486,8 @@ input[type="radio"] {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+
 
 .profesor-container .baja-btn:hover {
     background-color: #e60000;
