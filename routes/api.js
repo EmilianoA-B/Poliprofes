@@ -170,6 +170,7 @@ router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
     const carrera = req.query.carrera ? `%${req.query.carrera}%` : '%';
     const profesor = req.query.profesor ? `%${req.query.profesor}%` : '%';
     const evaluacion = req.query.evaluacion;
+    const queryParams = [];
     let query = `SELECT 
         CONCAT(NOMBRE, ' ', APELLIDO_PATERNO, ' ',APELLIDO_MATERNO) AS NOMBRE, 
         IFNULL(ROUND(AVG(CALIFICACION), 1), 0) AS CALIFICACION,
@@ -183,15 +184,23 @@ router.get('/getProfesByCalificacionAndMaterias', (req, res) => {
         AS CALIFICACIONES ON PROFESORES.ID = CALIFICACIONES.PROFESORES_ID
         WHERE VERIFICADO = TRUE`;
     if(evaluacion!=='mas_recientes'){
-        query += ` AND CARRERA LIKE ?
-            GROUP BY PROFESORES.ID
-            HAVING NOMBRE LIKE ?`;
-        if(evaluacion==='mejores') query += ` ORDER BY CALIFICACION DESC`;
-        else if(evaluacion==='peores') query += ` ORDER BY CALIFICACION ASC`;
+        if(carrera != '%'){ 
+            query += ` AND CARRERA LIKE ? GROUP BY PROFESORES.ID`;
+            queryParams.push(carrera);
+        }
+        else if(profesor !='%'){
+            query += ` GROUP BY PROFESORES.ID HAVING NOMBRE LIKE ?`;
+            queryParams.push(profesor);
+        }
+           else{
+                query += ` GROUP BY PROFESORES.ID`;
+                if(evaluacion==='mejores') query += ` ORDER BY CALIFICACION DESC`;
+                else if(evaluacion==='peores') query += ` ORDER BY CALIFICACION ASC`;
+            }
     }else{
         query += ` GROUP BY PROFESORES.ID ORDER BY CALIFICACION`;
     }
-    connection.query(query, [carrera, profesor], (err , results)=>{
+    connection.query(query, [queryParams], (err , results)=>{
         if(err){
             console.error('Error al desplegar solicitudes de profesor', err);
             res.status(500).send('Error al desplegar solicitudes de profesor');

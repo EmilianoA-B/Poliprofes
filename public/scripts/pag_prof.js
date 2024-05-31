@@ -72,3 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Llamada a la función para obtener y mostrar los resultados
     obtenerDatosDelProfesor(nombreProfesor);
 });
+
+document.getElementById('buscarProf').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const inputBusqueda = document.getElementById('inputBusqueda').value;
+    window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
+});
