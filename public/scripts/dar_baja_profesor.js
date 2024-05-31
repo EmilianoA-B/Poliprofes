@@ -91,6 +91,7 @@ async function darDeBajaProfesor(nombreProf) {
       divProfesorToRemove.remove();
       divProfesorToRemove = null;
     }
+    
     cerrarModal(); // Cerrar el modal después de eliminar al profesor
   } catch (error) {
     console.error('Error al dar de baja al profesor:', error);
@@ -114,4 +115,11 @@ async function darDeBajaProfesor(nombreProf) {
 
   // Llamada a la función para obtener y mostrar los resultados
   obtenerResultados();
+});
+
+document.getElementById('buscarProf').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  const inputBusqueda = document.getElementById('inputBusqueda').value;
+  window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
 });

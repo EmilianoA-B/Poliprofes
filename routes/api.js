@@ -250,4 +250,40 @@ router.get('/getProfesorWithMateriasCalificacionAndProbabilidad', (req, res) => 
     });
 });
 
+//API para el despliegue de comentarios
+router.get('/getComentariosV2', (req, res) => {
+    const profesor = req.query.profesor ? `%${req.query.profesor}%` : '%';
+    const query = `SELECT DISTINCT
+        CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
+        COMENTARIOS.CALIFICACION,
+        COMENTARIOS.DIFICULTAD,
+        COMENTARIOS.COMENTARIO,
+        COMENTARIOS.APROBO,
+        COMENTARIOS.RECOMIENDA,
+        COMENTARIOS.ID AS ID_COMENTARIO
+    FROM PROFESOR_MATERIAS
+    INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    INNER JOIN COMENTARIOS ON PROFESOR_MATERIAS.PROFESOR_ID = COMENTARIOS.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE`;
+
+    connection.query(query, [profesor], (err, results) => {
+        if (err) {
+            console.error('Error al desplegar los comentarios', err);
+            res.status(500).send('Error al desplegar los comentarios');
+            return;
+        }
+        res.json(results.map(row => ({
+            nombre: row.NOMBRE,
+            calificacion: row.CALIFICACION,
+            dificultad: row.DIFICULTAD,
+            comentario: row.COMENTARIO,
+            aprobo: row.APROBO,
+            recomienda: row.RECOMIENDA,
+            id_comentario: row.ID_COMENTARIO
+        })));
+    });
+});
+
+
 module.exports = router;
