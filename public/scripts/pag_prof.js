@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para mostrar los resultados en la página
     function mostrarDatosDelProfesor(profesores) {
         var profesorDiv = document.getElementById("infoProfesor");
+        var profesorCalificar = document.getElementById("Calificar");
         profesorDiv.classList.add("infoProfesor")
         profesorDiv.innerHTML = ""; // Limpiar resultados anteriores
 
@@ -69,8 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
             pProbabilidad.appendChild(strongProbabilidad);
             pProbabilidad.appendChild(spanProbabilidad);
             profesorDiv.appendChild(pProbabilidad);
-
             profesorDiv.appendChild(document.createElement("br")); // Añadir un <br> entre profesores
+
+            profesorCalificar.onclick = function(){
+                var nameProf = nombreProfesor;
+                window.location.href = `/calprofesor.html?profesor=${encodeURIComponent(
+                    nameProf
+                  )}`   
+            }
         });
     }
     
