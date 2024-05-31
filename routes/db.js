@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const connectionJSON = {
     host: 'localhost',
     user: 'root',
-    password: 'Pix3l.if071102',
+    password: 'pandora',
     database: 'poliprofes'
 };
 

@@ -42,12 +42,14 @@ CREATE TABLE IF NOT EXISTS COMENTARIOS(
 	ID INT AUTO_INCREMENT PRIMARY KEY,
     ALUMNOS_ID INT,
     PROFESORES_ID INT,
+    MATERIA_ID INT,
     CALIFICACION INT NOT NULL,
     DIFICULTAD ENUM('Muy Facil', 'Facil', 'Intermedio', 'Dificil', 'Muy Dificil') NOT NULL,
     COMENTARIO VARCHAR(350) NOT NULL,
     RECOMIENDA BOOL NOT NULL,
     APROBO BOOL NOT NULL,
     FECHA DATETIME NOT NULL,
+    FOREIGN KEY (MATERIA_ID) REFERENCES MATERIAS(ID),
     FOREIGN KEY (ALUMNOS_ID) REFERENCES ALUMNOS(ID),
     FOREIGN KEY (PROFESORES_ID) REFERENCES PROFESORES(ID)
 );
@@ -152,99 +154,6 @@ INSERT INTO PROFESORES (NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, VERIFICADO)
 VALUES ('Sofia', 'Ortega', 'Rios', 1);
 INSERT INTO PROFESORES (NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, VERIFICADO)
 VALUES ('Alberto', 'Chavez', 'Reyes', 1);
- 
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (1, 2, 9, 'Facil', 'Excelente profesor, explica de manera clara y concisa. Sus clases son muy interesantes y motivadoras.', 1, 1, '2024-05-23 12:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (2, 5, 10, 'Muy Facil', 'El profesor es increíblemente bueno. Su forma de enseñar hace que los temas difíciles sean fáciles de entender. ¡Lo recomiendo completamente!', 1, 1, '2024-05-20 10:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (3, 8, 9, 'Facil', 'El profesor tiene un gran dominio del tema y lo explica de manera clara y dinámica. Sin duda alguna, uno de los mejores profesores que he tenido.', 1, 1, '2024-05-17 14:45:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (4, 12, 8, 'Intermedio', 'A pesar de que el tema era complicado, el profesor logró explicarlo de manera comprensible. Sin embargo, creo que podría mejorar en su método de evaluación.', 0, 1, '2024-05-15 09:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (5, 3, 7, 'Dificil', 'El profesor tiene conocimientos sólidos, pero su forma de enseñar puede ser confusa a veces. Considero que necesita mejorar su claridad en la explicación de los temas.', 0, 0, '2024-05-25 11:20:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (6, 10, 9, 'Facil', 'El profesor tiene un estilo de enseñanza muy ameno y se preocupa por el aprendizaje de sus alumnos. Me gustaría seguir teniéndolo como profesor en futuras asignaturas.', 1, 1, '2024-05-28 16:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (7, 6, 8, 'Intermedio', 'Aunque el profesor tiene buenas intenciones, a veces su explicación puede ser un poco confusa. Sugiero que sea más claro en sus ejemplos y enfoque más en los conceptos clave.', 0, 1, '2024-05-13 10:15:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (8, 14, 10, 'Muy Facil', 'El profesor es simplemente brillante. Su pasión por el tema se refleja en sus clases y hace que incluso los conceptos más difíciles sean fáciles de entender.', 1, 1, '2024-05-30 09:45:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (9, 1, 9, 'Facil', 'El profesor tiene una gran habilidad para explicar los temas difíciles de manera sencilla. Además, siempre está dispuesto a ayudar a sus alumnos.', 1, 1, '2024-05-19 13:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (10, 11, 8, 'Intermedio', 'El profesor tiene un buen manejo del tema, pero a veces sus clases pueden ser un poco monótonas. Sugiero que incorpore actividades más interactivas para mantener la atención de los alumnos.', 0, 1, '2024-05-21 15:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (11, 9, 7, 'Dificil', 'El profesor tiene un enfoque único en la enseñanza, pero a veces su estilo puede ser abrumador. Considero que podría proporcionar más material de apoyo para ayudar a los estudiantes.', 0, 0, '2024-05-24 10:10:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (12, 7, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por el progreso de sus alumnos. Sin embargo, creo que podría ser un poco más claro en la explicación de ciertos conceptos.', 1, 1, '2024-05-16 14:20:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (13, 4, 8, 'Intermedio', 'El profesor tiene un buen manejo del tema, pero su método de enseñanza puede ser un poco repetitivo. Sugiero que incorpore más variedad en sus clases para mantener el interés de los alumnos.', 0, 1, '2024-05-22 11:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (14, 16, 10, 'Muy Facil', 'El profesor es excelente en todos los sentidos. Tiene una pasión contagiosa por el tema y hace que aprender sea divertido y emocionante. Lo recomendaría sin dudarlo.', 1, 1, '2024-05-29 08:50:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (15, 13, 8, 'Facil', 'El profesor tiene un buen manejo del tema, pero su método de enseñanza puede ser un poco repetitivo. Sugiero que incorpore más variedad en sus clases para mantener el interés de los alumnos.', 0, 1, '2024-05-18 12:40:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (16, 15, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por el progreso de sus alumnos. Sin embargo, creo que podría ser un poco más claro en la explicación de ciertos conceptos.', 1, 1, '2024-05-26 10:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (17, 2, 7, 'Dificil', 'El profesor tiene conocimientos sólidos, pero su forma de enseñar puede ser un poco aburrida. Sugiero que incorpore ejemplos prácticos y actividades más interactivas.', 0, 0, '2024-05-14 09:15:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (18, 5, 9, 'Facil', 'El profesor es excepcional en su forma de enseñar. Siempre está dispuesto a ayudar y se asegura de que todos los alumnos comprendan completamente el material.', 1, 1, '2024-05-27 15:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (19, 8, 8, 'Intermedio', 'El profesor tiene un buen conocimiento del tema, pero su método de enseñanza puede ser un poco repetitivo. Sugiero que incorpore más variedad en sus clases para mantener el interés de los alumnos.', 0, 1, '2024-05-16 11:45:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (20, 12, 10, 'Muy Facil', 'El profesor es simplemente excepcional. Su pasión por el tema se refleja en sus clases y hace que aprender sea un placer. Lo recomendaría sin reservas.', 1, 1, '2024-05-30 10:20:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (21, 3, 8, 'Facil', 'El profesor tiene un buen conocimiento del tema, pero su explicación puede ser un poco desorganizada a veces. Sugiero que organice mejor sus clases para una mejor comprensión.', 0, 1, '2024-05-19 14:50:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (22, 10, 9, 'Facil', 'El profesor es muy apasionado por el tema y esto se refleja en sus clases. Siempre está disponible para responder preguntas y ayudar a los estudiantes.', 1, 1, '2024-05-18 08:40:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (23, 6, 7, 'Dificil', 'El profesor tiene un buen conocimiento del tema, pero su estilo de enseñanza puede ser un poco aburrido. Sugiero que incorpore más ejemplos prácticos y actividades dinámicas.', 0, 0, '2024-05-14 11:15:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (24, 14, 10, 'Muy Facil', 'El profesor es excepcional en todos los aspectos. Sus clases son dinámicas, interesantes y fáciles de seguir. Lo recomendaría sin dudarlo.', 1, 1, '2024-05-29 09:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (25, 1, 8, 'Facil', 'El profesor tiene un buen conocimiento del tema, pero a veces su explicación puede ser un poco confusa. Sugiero que proporcione más ejemplos prácticos para ayudar a los estudiantes a comprender mejor.', 0, 1, '2024-05-20 12:50:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (26, 11, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por el progreso de sus alumnos. Sus explicaciones son claras y siempre está dispuesto a ayudar.', 1, 1, '2024-05-17 10:40:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (27, 9, 7, 'Intermedio', 'El profesor tiene un buen dominio del tema, pero a veces su explicación puede ser un poco confusa. Sugiero que organice mejor sus clases para una mejor comprensión.', 0, 1, '2024-05-16 13:20:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (28, 7, 9, 'Facil', 'El profesor es excelente en su forma de enseñar. Siempre está disponible para responder preguntas y explicar conceptos difíciles de manera clara.', 1, 1, '2024-05-15 15:00:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (29, 16, 10, 'Muy Facil', 'El profesor es simplemente excepcional. Su pasión por el tema se refleja en sus clases y hace que aprender sea un placer. Lo recomendaría sin reservas.', 1, 1, '2024-05-14 11:30:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (30, 2, 8, 'Facil', 'El profesor tiene un buen manejo del tema, pero su explicación puede ser un poco confusa a veces. Sugiero que proporcione más ejemplos prácticos para ayudar a los estudiantes a comprender mejor.', 0, 1, '2024-05-13 14:20:00');
-
-INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
-VALUES (31, 4, 9, 'Facil', 'El profesor es excepcional en su forma de enseñar. Siempre está disponible para ayudar a los estudiantes y proporcionarles el apoyo que necesitan.', 1, 1, '2024-05-12 16:45:00');
 
 INSERT INTO MATERIAS(MATERIA, CARRERA_ID) VALUES ('Programacion orientada a objetos', 1);
 INSERT INTO MATERIAS(MATERIA, CARRERA_ID) VALUES ('Estructuras de Datos', 1);
@@ -425,3 +334,54 @@ INSERT INTO PROFESOR_MATERIAS (PROFESOR_ID, MATERIA_ID) VALUES
 (16, 78),
 (16, 75),
 (16, 70);
+ 
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (1, 2, 21, 9, 'Facil', 'Excelente profesor, explica de manera clara y concisa. Sus clases son muy interesantes y motivadoras.', 1, 1, '2024-05-23 12:00:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (2, 5, 4, 10, 'Muy Facil', 'El profesor es increíblemente bueno. Su forma de enseñar hace que los temas difíciles sean fáciles de entender. ¡Lo recomiendo completamente!', 1, 1, '2024-05-20 10:30:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (3, 8, 67, 9, 'Facil', 'El profesor tiene un gran dominio del tema y lo explica de manera clara y dinámica. Sin duda alguna, uno de los mejores profesores que he tenido.', 1, 1, '2024-05-17 14:45:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (4, 12, 75, 8, 'Intermedio', 'A pesar de que el tema era complicado, el profesor logró explicarlo de manera comprensible. Sin embargo, creo que podría mejorar en su método de evaluación.', 0, 1, '2024-05-15 09:00:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (5, 3, 45, 7, 'Dificil', 'El profesor tiene conocimientos sólidos, pero su forma de enseñar puede ser confusa a veces. Considero que necesita mejorar su claridad en la explicación de los temas.', 0, 0, '2024-05-25 11:20:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (6, 10, 21, 9, 'Facil', 'El profesor tiene un estilo de enseñanza muy ameno y se preocupa por el aprendizaje de sus alumnos. Me gustaría seguir teniéndolo como profesor en futuras asignaturas.', 1, 1, '2024-05-28 16:00:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (7, 6, 22, 8, 'Intermedio', 'Aunque el profesor tiene buenas intenciones, a veces su explicación puede ser un poco confusa. Sugiero que sea más claro en sus ejemplos y enfoque más en los conceptos clave.', 0, 1, '2024-05-13 10:15:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (8, 14, 22, 10, 'Muy Facil', 'El profesor es simplemente brillante. Su pasión por el tema se refleja en sus clases y hace que incluso los conceptos más difíciles sean fáciles de entender.', 1, 1, '2024-05-30 09:45:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (9, 1, 3, 9, 'Facil', 'El profesor tiene una gran habilidad para explicar los temas difíciles de manera sencilla. Además, siempre está dispuesto a ayudar a sus alumnos.', 1, 1, '2024-05-19 13:30:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (10, 11, 60, 8, 'Intermedio', 'El profesor tiene un buen manejo del tema, pero a veces sus clases pueden ser un poco monótonas. Sugiero que incorpore actividades más interactivas para mantener la atención de los alumnos.', 0, 1, '2024-05-21 15:00:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (11, 9, 1, 7, 'Dificil', 'El profesor tiene un enfoque único en la enseñanza, pero a veces su estilo puede ser abrumador. Considero que podría proporcionar más material de apoyo para ayudar a los estudiantes.', 0, 0, '2024-05-24 10:10:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (12, 7, 41, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por el progreso de sus alumnos. Sin embargo, creo que podría ser un poco más claro en la explicación de ciertos conceptos.', 1, 1, '2024-05-16 14:20:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (13, 4, 65, 8, 'Intermedio', 'El profesor tiene un buen manejo del tema, pero su método de enseñanza puede ser un poco repetitivo. Sugiero que incorpore más variedad en sus clases para mantener el interés de los alumnos.', 0, 1, '2024-05-22 11:30:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (14, 16, 63, 10, 'Muy Facil', 'El profesor es excelente en todos los sentidos. Tiene una pasión contagiosa por el tema y hace que aprender sea divertido y emocionante. Lo recomendaría sin dudarlo.', 1, 1, '2024-05-29 08:50:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (15, 13, 3, 8, 'Facil', 'El profesor tiene un buen manejo del tema, pero su método de enseñanza puede ser un poco repetitivo. Sugiero que incorpore más variedad en sus clases para mantener el interés de los alumnos.', 0, 1, '2024-05-18 12:40:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (16, 15, 47, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por el progreso de sus alumnos. Sin embargo, creo que podría ser un poco más claro en la explicación de ciertos conceptos.', 1, 1, '2024-05-26 10:00:00');
+
+INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
+VALUES (17, 2, 11, 7, 'Dificil', 'El profesor tiene un enfoque único en la enseñanza, pero a veces su estilo puede ser abrumador. Considero que podría proporcionar más material de apoyo para ayudar a los estudiantes.', 0, 0, '2024-05-27 14:15:00');
