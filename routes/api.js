@@ -63,6 +63,49 @@ router.post("/getMaterias", (req, res) => {
   });
 });
 
+//POST para desplegar las materias ligadas a un profesor
+router.get("/getMateriasV2", (req, res) => {
+    const profesor = req.query.profesor ? `${req.query.profesor}` : "%";
+    console.log("Nombre desde la API:", profesor);
+    const findProfessorIdQuery = `
+      SELECT ID
+      FROM PROFESORES
+      WHERE CONCAT(NOMBRE, ' ', APELLIDO_PATERNO, ' ', APELLIDO_MATERNO) = ?
+      LIMIT 1`;
+    connection.query(findProfessorIdQuery, [profesor], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Error al buscar el profesor");
+      }
+  
+      if (result.length === 0) {
+        return res.status(404).send("Profesor no encontrado");
+      }
+  
+      const professorId = result[0].ID;
+      console.log("ID prof:", professorId);
+      const query = `
+        SELECT MATERIAS.MATERIA 
+        FROM MATERIAS
+        INNER JOIN PROFESOR_MATERIAS ON MATERIAS.ID = PROFESOR_MATERIAS.MATERIA_ID
+        WHERE PROFESOR_MATERIAS.PROFESOR_ID = ?;`;
+        
+      connection.query(query, [professorId], (err, results) => {
+        if (err) {
+          console.error("Error al desplegar los comentarios", err);
+          res.status(500).send("Error al desplegar los comentarios");
+          return;
+        }
+        console.log(results);
+        res.json(
+          results.map((row) => ({
+            materias: row.MATERIA
+          }))
+        );
+      });
+    });
+  });
+
 //API para obtener el id de un alumno dado su correo electronico
 router.post("/getIdAlumnoByCorreo", (req, res) => {
   const correo = req.body.correo;
