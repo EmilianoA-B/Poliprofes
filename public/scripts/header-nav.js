@@ -1,4 +1,7 @@
+import { usuarioModule } from "./modulov.js";
+
 document.addEventListener("DOMContentLoaded", function () {
+  
   // Función para simular la respuesta del backend
   function getUserInfo() {
     return new Promise((resolve) => {
@@ -11,22 +14,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Verifica si el usuario está registrado
-  function usuarioRegistrado() {
-    return true;
-  }
-  // Verifica si el usuario es administrador
-  function esAdmin() {
-    return false;
-  }
-
+  console.log(usuarioModule.usuarioRegistrado())
+  console.log(usuarioModule.esAdmin())
   // Agregar un event listener para el botón de registro
   //  document.getElementById('registroBtn').addEventListener('click', manejarRegistro);
 
   // Muestra la interfaz basada en el estado del usuario
   function mostrarInterfaz() {
-    const registrado = usuarioRegistrado();
-    const admin = esAdmin();
+    const registrado = usuarioModule.usuarioRegistrado();
+    const admin = usuarioModule.esAdmin();
 
     // Obtener el elemento UL del menú
     const menuList = document.getElementById("menu-list");
@@ -44,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
       subDiv.classList.add('submenu-flex')
       menuList.insertBefore(subDiv, menuList.firstChild);
     }
+
+
 
     if (admin) {
       // Si es admin, mostrar solo el menú de administrador y ocultar el resto.
