@@ -333,7 +333,7 @@ router.get("/getComentariosV3", (req, res) => {
     COMENTARIOS.APROBO,
     COMENTARIOS.RECOMIENDA,
     COMENTARIOS.ID AS ID_COMENTARIO,
-    COMENTARIOS.FECHA
+    DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA
     FROM COMENTARIOS
     INNER JOIN ALUMNOS ON COMENTARIOS.ALUMNOS_ID = ALUMNOS.ID
     WHERE COMENTARIOS.PROFESORES_ID = ?;`;
@@ -353,7 +353,7 @@ router.get("/getComentariosV3", (req, res) => {
           aprobo: row.APROBO,
           recomienda: row.RECOMIENDA,
           id_comentario: row.ID_COMENTARIO,
-          fecha: row.FECHA,
+          fecha: row.FECHA
         }))
       );
     });
