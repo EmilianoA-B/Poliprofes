@@ -194,7 +194,6 @@ function cerrarPopup() {
 
 document.getElementById('buscarProf').addEventListener('click', function(event) {
     event.preventDefault();
-
     const inputBusqueda = document.getElementById('inputBusqueda').value;
     window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
 });

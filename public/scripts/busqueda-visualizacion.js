@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const queryParams = getQueryParams();
     const carrera = queryParams['carrera'];
     const profesor = queryParams['profesor'];
+    const evaluacion = queryParams['evaluacion']
     
     // Función para mostrar los resultados en la página
     function mostrarResultados(resultados) {
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // Función para obtener los resultados desde el servidor
-    async function obtenerResultados(carrera, profesor) {
+    async function obtenerResultados(carrera, profesor, evaluacion) {
         try {
             //Cuidado porque falla cuando recibe carrera y profesor
             let url = '/api/getProfesByCalificacionAndMaterias';
@@ -63,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             if(profesor){
                 url += `?profesor=${encodeURIComponent(profesor)}`;
+            }
+            if(evaluacion){
+                url += `?evaluacion=${encodeURIComponent(evaluacion)}`;
             }
             const response = await fetch(url);
             if (!response.ok) {
@@ -76,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // Llamada a la función para obtener y mostrar los resultados
-    obtenerResultados(carrera, profesor);
+    obtenerResultados(carrera, profesor, evaluacion);
 });
 
 document.getElementById('buscarProf').addEventListener('click', function(event) {
