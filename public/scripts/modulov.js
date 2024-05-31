@@ -30,11 +30,7 @@ const usuarioModule = (() => {
                 break;
         }
       localStorage.setItem('userType', userType);
-<<<<<<< HEAD
       window.location.href = `index.html`;
-=======
-      window.location.href = `../index.html`;
->>>>>>> 6a7daa5aa7726d188f478cb2e90bf476d68f1b3a
     }
 
     // Devuelve las funciones y variables que deseas exponer
