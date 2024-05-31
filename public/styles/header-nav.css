@@ -26,11 +26,38 @@ header {
 
 
 .auth-buttons {
-    margin-left: 1rem;
+    margin-left: 5px;
     display: flex;
     flex-direction: column; 
+    gap:6px;
 }
 
+.auth-buttons button {
+    padding:3px 4px; 
+    font-size: 1rem; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    background-color: #fff;
+    transition: transform 0.3s ease; 
+}
+
+.auth-buttons .registro-btn {
+    color: black; 
+}
+
+
+.auth-buttons .inicio-sesion-btn {
+    color: black; 
+}
+
+.auth-buttons button:hover {
+    transform: scale(1.1); /* Hacer crecer el botón en hover */
+}
+
+.auth-buttons button:active {
+    transform: scale(1); /* Hacer crecer el botón en hover */
+}
 /*Second Container*/
 
 .submenu-container{
