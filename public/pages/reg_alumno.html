@@ -2,130 +2,119 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PoliProfesores</title>
-    <link rel="stylesheet" href="../styles/header-nav.css" />
-    <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/search-bar.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
-    />
-  </head>
-  <body>
-    <header>
-      <div class="logo"><a href="index.html">LOGO</a></div>
-      <div class="search-bar-container" id="barraBusqueda">
-        <div class="search-box">
-          <input
-            type="text"
-            id="inputBusqueda"
-            class="search-input"
-            placeholder="Search.."
-          />
-          <button type="submit" id="buscarProf" class="search-button">
-            <span class="las la-search"></span>
-          </button>
-        </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PoliProfesores</title>
+  <link rel="stylesheet" href="../styles/header-nav.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/search-bar.css" />
+  <link rel="stylesheet"
+    href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+</head>
+
+<body>
+  <header>
+    <div class="logo"><a href="index.html">LOGO</a></div>
+    <div class="search-bar-container" id="barraBusqueda">
+      <div class="search-box">
+        <input type="text" id="inputBusqueda" class="search-input" placeholder="Search.." />
+        <button type="submit" id="buscarProf" class="search-button">
+          <span class="las la-search"></span>
+        </button>
       </div>
-      <div class="auth-buttons">
-        <button>Registro</button>
-        <button  onclick="window.location.href='visualizador.html'">Inicio de sesión</button>
-      </div>
-      <div class="user-menu">
-        <div id="user-info" class="info"></div>
-        <div class="micuenta">
-          <details>
-            <summary> <span class="lar la-user"></span>Mi cuenta</summary>
-            <ul>
-              <li><a href="">Cambiar contraseña</a></li>
-              <li><a href="baja_opinion.html">Mis opiniones</a></li>
-              <li><a href="#">Borrar mi cuenta</a></li>
-              <li><a href="visualizador.html">Cerrar sesión</a></li>
-            </ul>
-          </details>
-        </div>
-      </div>
-      <div class="menu-admin">
+    </div>
+    <div class="auth-buttons">
+      <button>Registro</button>
+      <button onclick="window.location.href='visualizador.html'">Inicio de sesión</button>
+    </div>
+    <div class="user-menu">
+      <div id="user-info" class="info"></div>
+      <div class="micuenta">
         <details>
-          <summary> <span class="lar la-user"></span>Administrar</summary>
+          <summary> <span class="lar la-user"></span>Mi cuenta</summary>
           <ul>
-            <li><a href="pag_dar_alta_prof.html">Alta</a></li>
-            <li><a href="confirmacion_alta.html">Solicitudes</a></li>
-            <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
-            <li><a href="#">Modificar profesores</a></li>
-            <li><a href="ver_profes_eliminar_coment.html">Dar de baja opiniones</a></li>
-            <li>
-              <a href="alta_carreras_materias.html"
-                >Dar de alta carreras y materias</a
-              >
-            </li>
-          </ul>
-        </details>
-      </div>
-    </header>
-    <div class="submenu-container" id="menu-list">
-      <div class="submenu-flex">
-        <details class="submenu">
-          <summary> <span class="lar la-chart-bar"></span>Evaluaciones</summary>
-          <ul class="subfiltros">
-            <li><a href="busqueda-visualizacion.html?evaluacion=mas_recientes">Mas recientes</a></li>
-            <li>
-              <a href="busqueda-visualizacion.html?evaluacion=mejores">Mejores evaluaciones</a>
-            </li>
-            <li>
-              <a href="busqueda-visualizacion.html?evaluacion=peores">Peores evaluaciones</a>
-            </li>
-          </ul>
-        </details>
-      </div>
-      <div class="submenu-flex">
-        <details class="submenu">
-          <summary> <span class="las la-school"></span>Carreras</summary>
-          <ul class="subfiltros">
-            <li>
-              <a href="busqueda-visualizacion.html?carrera=computacion">Ing. en Computación</a>
-            </li>
-            <li><a href="busqueda-visualizacion.html?carrera=mecanica">Ing. Mecánica</a></li>
-            <li>
-              <a href="busqueda-visualizacion.html?carrera=sistemas"
-                >Ing. en Sistemas Automotrices</a
-              >
-            </li>
-            <li>
-              <a href="busqueda-visualizacion.html?carrera=electronica"
-                >Ing. en comunicaciones y en electronica</a
-              >
-            </li>
+            <li><a href="">Cambiar contraseña</a></li>
+            <li><a href="baja_opinion.html">Mis opiniones</a></li>
+            <li><a href="#">Borrar mi cuenta</a></li>
+            <li><a href="visualizador.html">Cerrar sesión</a></li>
           </ul>
         </details>
       </div>
     </div>
+    <div class="menu-admin">
+      <details>
+        <summary> <span class="lar la-user"></span>Administrar</summary>
+        <ul>
+          <li><a href="pag_dar_alta_prof.html">Alta</a></li>
+          <li><a href="confirmacion_alta.html">Solicitudes</a></li>
+          <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
+          <li><a href="#">Modificar profesores</a></li>
+          <li><a href="ver_profes_eliminar_coment.html">Dar de baja opiniones</a></li>
+          <li>
+            <a href="alta_carreras_materias.html">Dar de alta carreras y materias</a>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </header>
+  <div class="submenu-container" id="menu-list">
+    <div class="submenu-flex">
+      <details class="submenu">
+        <summary> <span class="lar la-chart-bar"></span>Evaluaciones</summary>
+        <ul class="subfiltros">
+          <li><a href="busqueda-visualizacion.html?evaluacion=mas_recientes">Mas recientes</a></li>
+          <li>
+            <a href="busqueda-visualizacion.html?evaluacion=mejores">Mejores evaluaciones</a>
+          </li>
+          <li>
+            <a href="busqueda-visualizacion.html?evaluacion=peores">Peores evaluaciones</a>
+          </li>
+        </ul>
+      </details>
+    </div>
+    <div class="submenu-flex">
+      <details class="submenu">
+        <summary> <span class="las la-school"></span>Carreras</summary>
+        <ul class="subfiltros">
+          <li>
+            <a href="busqueda-visualizacion.html?carrera=computacion">Ing. en Computación</a>
+          </li>
+          <li><a href="busqueda-visualizacion.html?carrera=mecanica">Ing. Mecánica</a></li>
+          <li>
+            <a href="busqueda-visualizacion.html?carrera=sistemas">Ing. en Sistemas Automotrices</a>
+          </li>
+          <li>
+            <a href="busqueda-visualizacion.html?carrera=electronica">Ing. en comunicaciones y en electronica</a>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </div>
 
-    <!--Aqui acaba el encabezado y menu-->
+  <!--Aqui acaba el encabezado y menu-->
 
-    <main class="regAlumno">
-        <form class="registroForm" id="registroForm">
-            <label class="label-1" for="nombre">Nombre:</label>
-            <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
+  <main class="regAlumno">
+    <form class="registroForm" id="registroForm" autocomplete="on">
+      <label class="label-1" for="nombre">Nombre:</label>
+      <input class="Input-General" type="text" id="nombre" name="nombre" required><br><br>
 
-            <label class="label-1" for="apellidos">Apellidos:</label>
-            <input class="Input-General" type="text" id="apellidos" name="apellidos" required><br><br>
+      <label class="label-1" for="apellidos">Apellidos:</label>
+      <input class="Input-General" type="text" id="apellidos" name="apellidos" required><br><br>
 
-            <label class="label-1" for="correo">Correo:</label>
-            <input class="Input-General" type="text" id="correo" name="correo" required><br><br>
+      <label class="label-1" for="correo">Correo:</label>
+      <input class="Input-General" type="text" id="correo" name="correo" required><br><br>
 
-            <div class="regContra">
-                <label class="label-1" for="contrasena">Contraseña:</label>
-                <input class="Input-General" type="password" id="contrasena" required>
-                <button class="Botones-General" type="button" id="toggle-password">Mostrar</button>
-            </div>
-            <br>
-            <button id="finalReg" class="BotonFinReg" type="submit">Finalizar registro</button>
-        </form>
-    </main>
-    <script src="../scripts/reg_alumno.js"></script>
-    <script src="../scripts/header-nav.js" type="module"></script>
+      <div class="regContra">
+        <label class="label-1" for="contrasena">Contraseña:</label>
+        <input class="Input-General" type="password" id="contrasena" required>
+        <button class="Botones-General" type="button" id="toggle-password">Mostrar</button>
+      </div>
+      <br>
+      <button id="finalReg" class="BotonFinReg" type="submit">Finalizar registro</button>
+    </form>
+  </main>
+  <script src="../scripts/reg_alumno.js"></script>
+  <script src="../scripts/header-nav.js" type="module"></script>
 </body>
+
 </html>
