@@ -143,6 +143,7 @@ router.post("/getIdProfesorByApellidos", (req, res) => {
   });
 });
 
+
 //API para get solicitudes de profesores
 router.get("/getSolProf", (req, res) => {
   const limit = 10;
