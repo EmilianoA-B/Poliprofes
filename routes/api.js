@@ -99,7 +99,8 @@ router.get("/getMateriasV2", (req, res) => {
         console.log(results);
         res.json(
           results.map((row) => ({
-            materias: row.MATERIA
+            materias: row.MATERIA,
+            idprof: professorId
           }))
         );
       });

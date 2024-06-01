@@ -86,7 +86,7 @@
     
         <!--Aqui acaba el encabezado y menu-->
     <main class="container-califProf">
-        <form action="#" method="post"" class="form-califProf">
+        <form action="#" method="post" class="form-califProf" id="form-califProf">
             <label for="materia" class="label-1">Seleccionar materia:</label>
             <select id="materia" name="materia" required class="select-califProf">
                 <option value="">--Seleccione una materia--</option>
@@ -109,11 +109,11 @@
             <label for="dificultad" class="label-1">Dificultad del profesor:</label>
             <select id="dificultad" name="dificultad" class="select-califProf" required>
                 <option value="">--Seleccione una opción--</option>
-                <option value="muy_facil">Muy fácil</option>
-                <option value="facil">Fácil</option>
-                <option value="intermedio">Intermedio</option>
-                <option value="dificil">Difícil</option>
-                <option value="muy_dificil">Muy difícil</option>
+                <option value="Muy fácil">Muy fácil</option>
+                <option value="Fácil">Fácil</option>
+                <option value="Intermedio">Intermedio</option>
+                <option value="Difícil">Difícil</option>
+                <option value="Muy difícil">Muy difícil</option>
             </select>
             <br><br>
             <label for="comentario" class="label-1">Comentario:</label>
@@ -122,14 +122,14 @@
     
             <label class="label-1">¿Recomiendas?</label>
             <div>
-                <input type="radio" id="recomienda_si" name="recomienda" value="si" required><label for="recomienda_si">Sí</label>
-                <input type="radio" id="recomienda_no" name="recomienda" value="no"><label for="recomienda_no">No</label>
+                <input type="radio" id="recomienda_si" name="recomienda" value="1" required><label for="recomienda_si">Sí</label>
+                <input type="radio" id="recomienda_no" name="recomienda" value="0"><label for="recomienda_no">No</label>
             </div>
             <br><br>
             <label class="label-1">¿Aprobaste?</label>
             <div>
-                <input type="radio" id="aprobo_si" name="aprobo" value="si" required><label for="aprobo_si">Sí</label>
-                <input type="radio" id="aprobo_no" name="aprobo" value="no"><label for="aprobo_no">No</label>
+                <input type="radio" id="aprobo_si" name="aprobo" value="1" required><label for="aprobo_si">Sí</label>
+                <input type="radio" id="aprobo_no" name="aprobo" value="0"><label for="aprobo_no">No</label>
             </div>
             <br><br>
             <button type="submit" class="Botones-General">Calificar</button>

@@ -281,6 +281,43 @@ router.post("/aceptarProf", (req, res) => {
   });
 });
 
+//Calificar profesor
+router.post("/calProfesor", (req, res) => {
+  const nombreMateria = req.body.materia;
+  query1 = `
+    SELECT 
+    id FROM materias 
+    WHERE materia = ?
+    LIMIT 1`
+  connection.query(query1, [nombreMateria], (err, results) => {
+    if (err) {
+      console.error("Error al conseguir id de materia", err);
+      return res
+        .status(500)
+        .json({ error: "Error al conseguir id de materia", details: err });
+    }
 
+    const idMateria = results[0].id;
+
+    const idAlumno = req.body.idAlumno;
+    const idProfesor = req.body.idProfesor;
+    const calificacion = req.body.calif;
+    const dificultad = req.body.dificultad;
+    const comentario = req.body.comentario;
+    const recomienda = req.body.recomienda;
+    const aprobo = req.body.aprobo;
+    const query2 = `INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    connection.query(query2, [idAlumno, idProfesor, idMateria, calificacion, dificultad, comentario, recomienda, aprobo], (err, results) => {
+      if (err) {
+        console.error("Error al calificar profesor", err);
+        return res
+          .status(500)
+          .json({ error: "Error al calificar profesor", details: err });
+      }
+      res.status(200).json({ message: "Exito al calificar profesor" });
+    });
+  });
+});
 
 module.exports = router;
