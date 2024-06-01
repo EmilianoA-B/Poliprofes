@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (response.ok) {
                 console.log('Exito al calificar profesor');
-    
+                window.location.href = `./pag_prof.html?profesor=${encodeURIComponent(nombreProfesor)}`;
             } else {
                 console.error('Error al calificar profesor');
             }
