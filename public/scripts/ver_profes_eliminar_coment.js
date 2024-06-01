@@ -29,14 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
             divProfesor.classList.add("resultado-profesor"); //elemento div class=profesor
     
             var enlaceNombre = document.createElement("a");
-            enlaceNombre.href = `baja_opinion.html?profesor=${encodeURIComponent(profesor.nombre)}`; // Enlace a la página del profesor
+            enlaceNombre.href = `pag_eliminar_coment_desde_prof.html?profesor=${encodeURIComponent(profesor.nombre)}`; // Enlace a la página del profesor
             enlaceNombre.classList.add("resultado-nombre");  //elemento a class="nombre"
             enlaceNombre.innerText = profesor.nombre;  
     
-            var calificacionSpan = document.createElement("span");
-            calificacionSpan.classList.add("resultado-calificacion");  //span class="calificacion"
-            calificacionSpan.innerText = profesor.calificacion; 
-    
+
             var materiasParrafo = document.createElement("p");
             materiasParrafo.classList.add("resultado-materias");  // p class="materias"
             // Agregar cada materia al párrafo en una línea separada
@@ -48,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     
             divProfesor.appendChild(enlaceNombre);
-            divProfesor.appendChild(calificacionSpan);
             divProfesor.appendChild(materiasParrafo);
             resultadosDiv.appendChild(divProfesor);
         });

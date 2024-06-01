@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PoliProfesores</title>
@@ -12,7 +11,7 @@
       rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
     />
-</head>
+  </head>
   <body>
     <header>
       <div class="logo"><a href="index.html">LOGO</a></div>
@@ -55,12 +54,13 @@
             <li><a href="confirmacion_alta.html">Solicitudes</a></li>
             <li><a href="dar_baja_profe.html">Eliminar profesor</a></li>
             <li><a href="#">Modificar profesores</a></li>
-            <li><a href="baja_opinion.html">Dar de baja opiniones</a></li>
+            <li><a href="ver_profes_eliminar_coment.html">Dar de baja opiniones</a></li>
             <li>
               <a href="alta_carreras_materias.html"
                 >Dar de alta carreras y materias</a
               >
             </li>
+            <li><a href="visualizador.html">Cerrar sesión</a></li>
           </ul>
         </details>
       </div>
@@ -69,7 +69,7 @@
         <div class="submenu-flex"><details class="submenu">
           <summary> <span class="lar la-chart-bar"></span>Evaluaciones</summary>
             <ul class="subfiltros" >
-              <li><a href="busqueda-visualizacion.html?evaluacion=mas_recientes">Mas recientes</a></li>
+            <li><a href="busqueda-visualizacion.html?evaluacion=mas_recientes">Mas recientes</a></li>
               <li><a href="busqueda-visualizacion.html?evaluacion=mejores">Mejores evaluaciones</a></li>
               <li><a href="busqueda-visualizacion.html?evaluacion=peores">Peores evaluaciones</a></li>
             </ul>
@@ -87,33 +87,19 @@
 
     <!--Aqui acaba el encabezado y menu-->
 
-    <main>
-        <section class="info-pagprofe">
-            <section>
-            <div class="infoProfesor">   
-                <h2 class="nombreDelProfesor">Nombre completo del profesor</h2> <br>
-                <p><strong>Carrera 1, Carrera 2</p></strong> <br>
-                <p><strong>Calificación general del profesor:</strong> <span>8.5</span> </p><br>
-                <p><strong>Probabilidad de pasar la materia con el profesor:</strong> <span>75%</span></p> <br>
-            </div>
-        </section>
-        <section class="comentarioAlumno">
-            <div class="infoAl">
-                <strong><p>Nombre del Alumno</p></strong>
-                <strong><p>Carrera:</strong> Carrera</p> 
-                <strong><p>Calificación:</strong> 9 </p>
-                <strong><p>Dificultad: </strong>Intermedio</p>
-            </div>
-            <div class="comentarioAl" id="comentarios-container"> <!--Comentario a la derecha-->
-                <strong>Comentario</strong>
-                <button class="Boton-Eliminar-Opinion"><span class="las la-trash-alt"></span></button>
-            </div>
-        </section>
+    <main class="container-busqueda">
+      <div id="resultados" class="container-resultados"></div>
+      <!-- Modal -->
+      <div class="overlay" id="overlay"></div>
+      <div class="modal" id="modal">
+        <p>¿Está seguro de dar a este profesor de baja?</p>
+        <div class="modal-buttons">
+          <button onclick="darDeBajaProfesor()" id= "confirmarBaja">Aceptar</button>
+          <button onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </div>
     </main>
-    
-
-    <script src="../scripts/pag_eliminar_coment_desde_prof.js"></script>
     <script src="../scripts/header-nav.js" type="module"></script>
-</body>
-
+    <script src="../scripts/pag_eliminar_coment_desde_prof.js".js"></script>
+  </body>
 </html>

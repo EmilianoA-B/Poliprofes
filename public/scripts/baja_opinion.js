@@ -28,10 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       var divProfesor = document.createElement("div");
       divProfesor.classList.add("profesor-container");
 
-      var enlaceNombre = document.createElement("a");
-      enlaceNombre.href = `pag_prof.html?profesor=${encodeURIComponent(
-        profesor.nombre
-      )}`; // Enlace a la página del profesor
+      var enlaceNombre = document.createElement("h3");
       enlaceNombre.classList.add("resultado-nombre");
       enlaceNombre.innerText = profesor.nombre;
 
@@ -129,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Función para obtener los resultados desde el servidor
   async function obtenerResultados() {
     try {
-      const url = "/api/getComentariosV2";
+      const url = "/api/getComentariosV4";
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Error en la solicitud");

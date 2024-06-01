@@ -1,193 +1,173 @@
 
-document.addEventListener("DOMContentLoaded", function() {
-    var adminButton = document.getElementById("admin-button");
-    var adminDropdown = document.getElementById("admin-dropdown");
+// Variable global para almacenar una referencia al divProfesor que se debe eliminar
+var divCommentToRemove;
 
-    // Ocultar el menú de cuenta al cargar la página
-    hideAccountMenu();
-
-    // Manejar clic en el botón de cuenta para mostrar/ocultar el menú desplegable
-    adminButton.addEventListener("click", function() {
-        if (adminDropdown.style.display === "none" || adminDropdown.style.display === "") {
-            showAccountMenu();
-        } else {
-            hideAccountMenu();
-        }
-    });
-
-    // Función para mostrar el menú de cuenta
-    function showAccountMenu() {
-        adminDropdown.style.display = "block";
-    }
-
-    // Función para ocultar el menú de cuenta
-    function hideAccountMenu() {
-        adminDropdown.style.display = "none";
-    }
-
-    // Manejar envío de formulario
-    const professorForm = document.getElementById('professorForm');
-
-    professorForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que se envíe el formulario por defecto
-
-        const nombre = document.getElementById('nombre').value;
-        const materia = document.getElementById('materia').value;
-        const carrera = document.getElementById('carrera').value;
-
-        // Mostrar los valores en la consola (puedes realizar otra acción aquí)
-        console.log('Nombre del profesor:', nombre);
-        console.log('Materia:', materia);
-        console.log('Carrera:', carrera);
-
-        // Puedes realizar acciones adicionales, como enviar los datos a través de AJAX
-    });
-
-    // Mostrar el nombre y email del usuario simulado
-    const userNameElement = document.getElementById('user-name');
-    const userEmailElement = document.getElementById('user-email');
-
-    userNameElement.textContent = "John Doe"; // Nombre simulado del usuario
-    userEmailElement.textContent = "john@example.com"; // Email simulado del usuario
-});
-
-let currentPage = 1;
-
-function loadComments(page) {
-    fetch(`/get-comments?page=${page}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.comments.length > 0) {
-                const commentsList = document.getElementById('comentarios-list');
-                data.comments.forEach(comment => {
-                    const commentItem = document.createElement('li');
-                    commentItem.className = 'comentario';
-                    commentItem.innerHTML = `
-                        <div class="info-item"><strong>Nombre completo del alumno:</strong> ${comment.nombreAlumno}</div>
-                        <div class="info-item"><strong>Materia:</strong> ${comment.materia}</div>
-                        <div class="info-item"><strong>Carrera:</strong> ${comment.carrera}</div>
-                        <div class="info-item"><strong>Calificación:</strong> ${comment.calificacion}</div>
-                        <div class="info-item"><strong>Dificultad:</strong> ${comment.dificultad}</div>
-                    `;
-                    commentsList.appendChild(commentItem);
-                });
-
-                // Actualiza la página actual
-                currentPage = page;
-                updatePagination(data.totalPages);
-            } else {
-                // Oculta la paginación si no hay más comentarios
-                document.getElementById('pagination').style.display = 'none';
-            }
-        });
+// Función para mostrar el modal de confirmación
+function mostrarModal() {
+  var modal = document.getElementById("modal");
+  var overlay = document.getElementById("overlay");
+  modal.style.display = "block";
+  overlay.style.display = "block";
 }
 
-function updatePagination(totalPages) {
-    const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; // Limpia la paginación anterior
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageLink = document.createElement('a');
-        pageLink.textContent = i;
-        pageLink.href = '#';
-        pageLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (i !== currentPage) {
-                loadComments(i);
-            }
-        });
-        paginationContainer.appendChild(pageLink);
-
-        // Añadir espacio entre enlaces
-        if (i < totalPages) {
-            const spacer = document.createTextNode(' ');
-            paginationContainer.appendChild(spacer);
-        }
-    }
-
-    // Oculta la paginación si no hay más páginas
-    if (totalPages <= 1) {
-        paginationContainer.style.display = 'none';
-    } else {
-        paginationContainer.style.display = 'block';
-    }
+// Función para cerrar el modal
+function cerrarModal() {
+  var modal = document.getElementById("modal");
+  var overlay = document.getElementById("overlay");
+  modal.style.display = "none";
+  overlay.style.display = "none";
 }
 
-// Inicialmente cargar la primera página de comentarios
-loadComments(currentPage);
 
+document.addEventListener("DOMContentLoaded", () => {
 
+   //Para agarrar params
+   const queryParams = getQueryParams();
+   const nombreProfesor = queryParams['profesor']; 
 
+  // Función para mostrar los resultados en la página
+  function mostrarResultados(resultados) {
+    var resultadosDiv = document.getElementById("resultados");
+    resultadosDiv.innerHTML = ""; // Limpiar resultados anteriores
 
+    resultados.forEach(function (profesor) {
+      var divProfesor = document.createElement("div");
+      divProfesor.classList.add("profesor-container");
 
-//INICIO DE SESION PRUEBA
-document.addEventListener("DOMContentLoaded", function() {
-    var loggedIn = false; // Simulación del estado de inicio de sesión
+      var enlaceNombre = document.createElement("h3");
+      enlaceNombre.classList.add("resultado-nombre");
+      enlaceNombre.innerText = profesor.nombre;
 
-    var authButtons = document.getElementById("auth-buttons");
-    var accountMenu = document.getElementById("account-menu");
-    var accountButton = document.getElementById("account-button");
-    var accountDropdown = document.getElementById("account-dropdown");
-    var userNameElement = document.getElementById('user-name');
-    var userEmailElement = document.getElementById('user-email');
-    var userInfoContainer = document.querySelector('.user-info');
+      var calificacionSpan = document.createElement("span");
+      calificacionSpan.classList.add("resultado-calificacion"); //span class="calificacion"
+      calificacionSpan.innerText = profesor.calificacion;
 
-    if (loggedIn) {
-        authButtons.style.display = "none";
-        accountMenu.style.display = "flex"; // Mostrar el contenedor del menú de cuenta
+      var comentarioParrafo = document.createElement("p");
+      comentarioParrafo.classList.add("resultado-materias"); // p class="materias"
+      // Agregar cada materia al párrafo en una línea separada
+      var comentarioParrafoIDMat = document.createElement("p");
+      comentarioParrafoIDMat.classList.add("resultado-materias");
+      comentarioParrafoIDMat.innerText = profesor.materia;
+      comentarioParrafoIDMat.innerHTML += "<br>";
+      comentarioParrafo.innerText = profesor.comentario;
+      comentarioParrafo.innerHTML += "<br>";
+      comentarioParrafo.innerHTML += "<br>";
+      if (profesor.aprobo == 1) {
+        comentarioParrafo.innerHTML += 'Aprobado <i class="lar la-smile"></i>';
+        comentarioParrafo.innerHTML += "<br>";
+      }
+      else if(profesor.aprobo == 0) {
+        comentarioParrafo.innerHTML += 'No aprobado <i class="lar la-frown"></i>';
+        comentarioParrafo.innerHTML += "<br>";
+      }
+      if (profesor.recomienda == 1) {
+        comentarioParrafo.innerHTML += 'Recomendado <i class="lar la-thumbs-up"></i>';
+        comentarioParrafo.innerHTML += "<br>";
+      }
+      else if(profesor.recomienda == 0) {
+        comentarioParrafo.innerHTML += 'No recomendado <i class="lar la-thumbs-down"></i>';
+        comentarioParrafo.innerHTML += "<br>";
+      }
 
-        // Simular datos del usuario (debes reemplazar con datos reales)
-        var userName = "Nombre del Usuario";
-        var userEmail = "correo@example.com";
+      var comentarioParrafoFecha = document.createElement("p");
+      comentarioParrafoFecha.classList.add("resultado-materias");
+      comentarioParrafoFecha.innerText = profesor.fecha;
+      comentarioParrafoFecha.innerHTML += "<br>";
 
-        // Mostrar la información del usuario en la barra de navegación
-        userNameElement.textContent = userName;
-        userEmailElement.textContent = userEmail;
-        userInfoContainer.style.display = 'flex'; // Mostrar la información del usuario
-    } else {
-        authButtons.style.display = "flex";
-        accountMenu.style.display = "none";
+      var containerButton = document.createElement("div");
+      containerButton.classList.add("container-button");
+
+      var button = document.createElement("button");
+      button.classList.add("baja-btn");
+      var spanTrash = document.createElement("i");
+      spanTrash.classList.add("lar", "la-trash-alt");
+      button.appendChild(spanTrash);
+      button.innerHTML += " Eliminar Comentario";
+      button.onclick = function () {
+        mostrarModal();
+        divCommentToRemove = divProfesor;
+        var idComment = profesor.id_comentario;
+        document.getElementById("confirmarBaja").onclick = async function () {
+          await deleteComentario(idComment);
+        };
+      };
+      containerButton.appendChild(button);
+      divProfesor.appendChild(enlaceNombre);
+      divProfesor.appendChild(calificacionSpan);
+      divProfesor.appendChild(comentarioParrafoIDMat);
+      divProfesor.appendChild(comentarioParrafo);
+      divProfesor.appendChild(comentarioParrafoFecha);
+      resultadosDiv.appendChild(divProfesor);
+      divProfesor.appendChild(containerButton);
+    });
+  }
+
+  function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.slice(1);
+    const pairs = queryString.split('&');
+
+    for (const pair of pairs) {
+        const [key, value] = pair.split('=');
+        params[decodeURIComponent(key)] = decodeURIComponent(value);
     }
 
-    accountButton.addEventListener("click", function() {
-        if (accountDropdown.style.display === "none") {
-            accountDropdown.style.display = "block";
-        } else {
-            accountDropdown.style.display = "none";
-        }
-    });
+    return params;
+}
 
-    document.addEventListener("click", function(event) {
-        if (!accountButton.contains(event.target) && !accountDropdown.contains(event.target)) {
-            accountDropdown.style.display = "none";
-        }
-    });
+  // Función para dar de baja al profesor
+  async function deleteComentario(idComment) {
+    console.log(idComment);
+    try {
+      const url = "/endpoint/eliminarComentario";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id_comentario: idComment }),
+      });
+      if (!response.ok) {
+        throw new Error("Error al eliminar el comentario desde front");
+      }
+      // Remover el divProfesor localmente después de eliminarlo en la base de datos
+      if (divCommentToRemove) {
+        divCommentToRemove.remove();
+        divCommentToRemove = null;
+      }
+
+      cerrarModal(); // Cerrar el modal después de eliminar al profesor
+    } catch (error) {
+      console.error("Error al eliminar el comentario desde front:", error);
+    }
+  }
+
+  // Función para obtener los resultados desde el servidor
+  async function obtenerResultados(profesor) {
+    try {
+      const url = `/api/getComentariosV3?profesor=${encodeURIComponent(profesor)}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Error en la solicitud");
+      }
+      const resultados = await response.json();
+      mostrarResultados(resultados);
+    } catch (error) {
+      console.error("Error al obtener los resultados:", error);
+    }
+  }
+
+  // Llamada a la función para obtener y mostrar los resultados
+  obtenerResultados(nombreProfesor);
 });
 
+document
+  .getElementById("buscarProf")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtén todos los botones "Eliminar"
-    const eliminarButtons = document.querySelectorAll(".eliminar-btn");
-
-    // Agrega un evento de clic a cada botón "Eliminar"
-    eliminarButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // Mostrar mensaje de confirmación
-            const confirmacion = confirm("¿Está seguro de eliminar el comentario?");
-
-            if (confirmacion) {
-                // Lógica de eliminación (simulada aquí)
-                // Aquí debes realizar la lógica para eliminar el comentario de la base de datos
-                // Supongamos que aquí realizamos una acción de eliminación simulada
-                console.log("Comentario eliminado");
-
-                // Eliminar visualmente el comentario (puedes adaptar según tu lógica)
-                const comentario = btn.closest(".comentario");
-                comentario.remove(); // Elimina el comentario del DOM
-            } else {
-                // No hacer nada si el usuario cancela
-                console.log("Cancelado");
-            }
-        });
-    });
-});
+    const inputBusqueda = document.getElementById("inputBusqueda").value;
+    window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(
+      inputBusqueda
+    )}`;
+  });

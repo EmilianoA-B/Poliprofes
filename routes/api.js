@@ -411,4 +411,49 @@ router.get("/getComentariosV3", (req, res) => {
   });
 });
 
+//API para el despliegue de comentarios
+router.get("/getComentariosV4", (req, res) => {
+  const profesor = req.query.profesor ? `%${req.query.profesor}%` : "%";
+  const query = `SELECT DISTINCT
+  CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE,
+  COMENTARIOS.CALIFICACION,
+  COMENTARIOS.DIFICULTAD,
+  COMENTARIOS.COMENTARIO,
+  COMENTARIOS.APROBO,
+  COMENTARIOS.RECOMIENDA,
+  COMENTARIOS.ID AS ID_COMENTARIO,
+  DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA,
+  MATERIAS.MATERIA
+  FROM PROFESOR_MATERIAS
+  INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+  INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+  INNER JOIN COMENTARIOS ON (PROFESOR_MATERIAS.PROFESOR_ID = COMENTARIOS.PROFESORES_ID AND PROFESOR_MATERIAS.MATERIA_ID = COMENTARIOS.MATERIA_ID)
+  WHERE COMENTARIOS.ALUMNOS_ID = 1;
+`;
+
+  connection.query(query, [profesor], (err, results) => {
+    if (err) {
+      console.error("Error al desplegar los comentarios", err);
+      res.status(500).send("Error al desplegar los comentarios");
+      return;
+      
+    }
+    res.json(
+      results.map((row) => ({
+        nombre: row.NOMBRE,
+        calificacion: row.CALIFICACION,
+        dificultad: row.DIFICULTAD,
+        comentario: row.COMENTARIO,
+        aprobo: row.APROBO,
+        recomienda: row.RECOMIENDA,
+        id_comentario: row.ID_COMENTARIO,
+        fecha: row.FECHA,
+        materia: row.MATERIA
+      }))
+    );
+  });
+});
+
+
+
 module.exports = router;
