@@ -86,7 +86,7 @@ router.post("/regProf", (req, res) => {
   );
   //Segundo query para sacar ID de profesor
   const query2 =
-    "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?";
+    "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ? ORDER BY id DESC LIMIT 1";
   connection.query(
     query2,
     [nombreProf, apellido_p, apellido_m],
