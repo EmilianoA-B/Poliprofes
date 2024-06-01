@@ -317,7 +317,8 @@ router.get("/getComentariosV2", (req, res) => {
         COMENTARIOS.APROBO,
         COMENTARIOS.RECOMIENDA,
         COMENTARIOS.ID AS ID_COMENTARIO,
-        COMENTARIOS.FECHA
+        DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA,
+        MATERIA
     FROM PROFESOR_MATERIAS
     INNER JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
     INNER JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
@@ -341,6 +342,7 @@ router.get("/getComentariosV2", (req, res) => {
         recomienda: row.RECOMIENDA,
         id_comentario: row.ID_COMENTARIO,
         fecha: row.FECHA,
+        materia: row.MATERIA
       }))
     );
   });
@@ -376,10 +378,13 @@ router.get("/getComentariosV3", (req, res) => {
     COMENTARIOS.APROBO,
     COMENTARIOS.RECOMIENDA,
     COMENTARIOS.ID AS ID_COMENTARIO,
-    DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA
+    DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA,
+    MATERIAS.MATERIA
     FROM COMENTARIOS
     INNER JOIN ALUMNOS ON COMENTARIOS.ALUMNOS_ID = ALUMNOS.ID
-    WHERE COMENTARIOS.PROFESORES_ID = ?;`;
+    INNER JOIN MATERIAS ON COMENTARIOS.MATERIA_ID = MATERIAS.ID
+    WHERE COMENTARIOS.PROFESORES_ID = ?;
+`;
 
     connection.query(query, [professorId], (err, results) => {
       if (err) {
@@ -396,7 +401,8 @@ router.get("/getComentariosV3", (req, res) => {
           aprobo: row.APROBO,
           recomienda: row.RECOMIENDA,
           id_comentario: row.ID_COMENTARIO,
-          fecha: row.FECHA
+          fecha: row.FECHA,
+          materia: row.MATERIA
         }))
       );
     });
