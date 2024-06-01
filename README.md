@@ -8,7 +8,7 @@ Se necesitan 3 cosas instaladas para poder correr el sitio web localmente:
 - Express v4.19.2
 - Chrome v124.0.6367.60
 
-**PDF de instalacion y configuración de Node.js, MySQL y Express: ** 
+**PDF de instalacion y configuración de Node.js, MySQL y Express:https://drive.google.com/file/d/1SGnYyLhL5cmVVBvpEN_bpWj19xBNyNeU/view?usp=sharing** 
 
 ## Para inciar la página web
 1. Descarga el ZIP del repositorio.
@@ -35,6 +35,4 @@ Se necesitan 3 cosas instaladas para poder correr el sitio web localmente:
 Si quieres que la aplicación deje de correr, presiona la combinación de teclas `CTRL + C`
 Para hacer que el servidor corra de nuevo, dentro del camino de carpeta del repositorio, corre el siguiente comando:
 
-    ```
     node ./app.js
-    ```
