@@ -110,3 +110,10 @@ function cerrarPopup() {
 function limpiarInput(input){
     document.getElementById(input).reset();
 }
+
+document.getElementById('buscarProf').addEventListener('click', function(event) {
+    event.preventDefault();
+  
+    const inputBusqueda = document.getElementById('inputBusqueda').value;
+    window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
+  });
