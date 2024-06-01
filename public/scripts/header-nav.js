@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Función para simular la respuesta del backend
   function getUserInfo() {
+    
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          name: "Alejandro Magno",
-          email: "Ale7126@example.com",
+          name: "Roberto Martinez ",
+          email: "robertomartinez@alumno.ipn.mx",
         });
       }, 1000); // Simula un retraso de 1 segundo
     });

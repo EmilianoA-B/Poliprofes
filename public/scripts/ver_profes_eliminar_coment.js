@@ -1,99 +1,91 @@
-
-document.addEventListener("DOMContentLoaded", function() {
-    var adminButton = document.getElementById("admin-button");
-    var adminDropdown = document.getElementById("admin-dropdown");
-
-    // Ocultar el menú de cuenta al cargar la página
-    hideAccountMenu();
-
-    // Manejar clic en el botón de cuenta para mostrar/ocultar el menú desplegable
-    adminButton.addEventListener("click", function() {
-        if (adminDropdown.style.display === "none" || adminDropdown.style.display === "") {
-            showAccountMenu();
-        } else {
-            hideAccountMenu();
+document.addEventListener("DOMContentLoaded", () => {
+    // Función para obtener los parámetros de la URL
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.slice(1);
+        const pairs = queryString.split('&');
+    
+        for (const pair of pairs) {
+            const [key, value] = pair.split('=');
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
         }
-    });
-
-    // Función para mostrar el menú de cuenta
-    function showAccountMenu() {
-        adminDropdown.style.display = "block";
+    
+        return params;
     }
-
-    // Función para ocultar el menú de cuenta
-    function hideAccountMenu() {
-        adminDropdown.style.display = "none";
+    
+    // Obtener los parámetros de la URL
+    const queryParams = getQueryParams();
+    const carrera = queryParams['carrera'];
+    const profesor = queryParams['profesor'];
+    const evaluacion = queryParams['evaluacion']
+    
+    // Función para mostrar los resultados en la página
+    function mostrarResultados(resultados) {
+        var resultadosDiv = document.getElementById("resultados");
+        resultadosDiv.innerHTML = ""; // Limpiar resultados anteriores
+    
+        resultados.forEach(function(profesor) {
+            var divProfesor = document.createElement("div");
+            divProfesor.classList.add("resultado-profesor"); //elemento div class=profesor
+    
+            var enlaceNombre = document.createElement("a");
+            enlaceNombre.href = `baja_opinion.html?profesor=${encodeURIComponent(profesor.nombre)}`; // Enlace a la página del profesor
+            enlaceNombre.classList.add("resultado-nombre");  //elemento a class="nombre"
+            enlaceNombre.innerText = profesor.nombre;  
+    
+            var calificacionSpan = document.createElement("span");
+            calificacionSpan.classList.add("resultado-calificacion");  //span class="calificacion"
+            calificacionSpan.innerText = profesor.calificacion; 
+    
+            var materiasParrafo = document.createElement("p");
+            materiasParrafo.classList.add("resultado-materias");  // p class="materias"
+            // Agregar cada materia al párrafo en una línea separada
+            profesor.materias.forEach(function(materia, index) {
+                materiasParrafo.innerHTML += materia;
+                if (index < profesor.materias.length - 1) {
+                    materiasParrafo.innerHTML += "<br>"; // Agregar etiqueta <br> si no es la última materia
+                }
+            });
+    
+            divProfesor.appendChild(enlaceNombre);
+            divProfesor.appendChild(calificacionSpan);
+            divProfesor.appendChild(materiasParrafo);
+            resultadosDiv.appendChild(divProfesor);
+        });
     }
-
-    // Manejar envío de formulario
-    const professorForm = document.getElementById('professorForm');
-
-    professorForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que se envíe el formulario por defecto
-
-        const nombre = document.getElementById('nombre').value;
-        const materia = document.getElementById('materia').value;
-        const carrera = document.getElementById('carrera').value;
-
-        // Mostrar los valores en la consola (puedes realizar otra acción aquí)
-        console.log('Nombre del profesor:', nombre);
-        console.log('Materia:', materia);
-        console.log('Carrera:', carrera);
-
-        // Puedes realizar acciones adicionales, como enviar los datos a través de AJAX
-    });
-
-    // Mostrar el nombre y email del usuario simulado
-    const userNameElement = document.getElementById('user-name');
-    const userEmailElement = document.getElementById('user-email');
-
-    userNameElement.textContent = "John Doe"; // Nombre simulado del usuario
-    userEmailElement.textContent = "john@example.com"; // Email simulado del usuario
+    
+    // Función para obtener los resultados desde el servidor
+    async function obtenerResultados(carrera, profesor, evaluacion) {
+        try {
+            //Cuidado porque falla cuando recibe carrera y profesor
+            let url = '/api/getProfesByCalificacionAndMaterias';
+            if (carrera) {
+                url += `?carrera=${encodeURIComponent(carrera)}`;
+            }
+            if(profesor){
+                url += `?profesor=${encodeURIComponent(profesor)}`;
+            }
+            if(evaluacion){
+                url += `?evaluacion=${encodeURIComponent(evaluacion)}`;
+            }
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            const resultados = await response.json();
+            mostrarResultados(resultados);
+        } catch (error) {
+            console.error('Error al obtener los resultados:', error);
+        }
+    }
+    
+    // Llamada a la función para obtener y mostrar los resultados
+    obtenerResultados(carrera, profesor, evaluacion);
 });
 
-// Datos de ejemplo de profesores (simulación de una base de datos)
-const profesores = [
-    { nombre: "Profesor A", materias: ["Matemáticas", "Física"] },
-    { nombre: "Profesor B", materias: ["Historia", "Literatura"] },
-    { nombre: "Profesor C", materias: ["Biología", "Química"] }
-];
-
-// Función para renderizar la lista de profesores en la página
-function renderizarProfesores() {
-    const listaProfesores = document.getElementById("professors-list");
-
-    // Limpiamos el contenido anterior
-    listaProfesores.innerHTML = "";
-
-    // Iteramos sobre cada profesor y creamos un elemento para mostrarlo
-    profesores.forEach((profesor, index) => {
-        const profesorElement = document.createElement("div");
-        profesorElement.classList.add("verProfBorrarComment");
-
-        // Creamos elementos para mostrar el nombre y las materias
-        const nombreElement = document.createElement("a");
-        nombreElement.classList.add("verTextoProf");
-        nombreElement.textContent = profesor.nombre;
-        //nombreElement.href = 'profesor.html?nombre=${profesor.nombre}'; // Enlace a la página del profesor
-        nombreElement.href = 'pag_prof.html';//Cambiar por el query para mostar cada uno
-        const materiasElement = document.createElement("div");
-        materiasElement.textContent = `Materias: ${profesor.materias.join(", ")}`;
-
-        // Añadimos los elementos al contenedor del profesor
-        profesorElement.appendChild(nombreElement);
-        profesorElement.appendChild(materiasElement);
-
-        // Añadimos el profesor al contenedor principal
-        listaProfesores.appendChild(profesorElement);
-
-        // Evento de clic para el nombre del profesor (redirige a la página del profesor)
-        nombreElement.addEventListener("click", (event) => {
-            event.preventDefault(); // Evita la acción por defecto (navegar a otra página)
-            //window.location.href = `profesor.html?nombre=${profesor.nombre}`;
-            window.location.href = 'pag_prof.html';//Cambiar por el query para mostar cada uno
-        });
-    });
-}
-
-// Llamamos a la función para renderizar la lista de profesores al cargar la página
-document.addEventListener("DOMContentLoaded", renderizarProfesores);
+document.getElementById('buscarProf').addEventListener('click', function(event) {
+        event.preventDefault();
+    
+        const inputBusqueda = document.getElementById('inputBusqueda').value;
+        window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
+});
