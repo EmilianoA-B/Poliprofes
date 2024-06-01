@@ -15,15 +15,18 @@ Se necesitan 3 cosas instaladas para poder correr el sitio web localmente:
 2. Extrae el zip dónde quieras.
 3. Ingresa a la carpeta que se ha extraido.
 4. Copia el camino de la carpeta del respositorio (en la que te encuentres actualmente). El camino es por ejemplo:
+
     ```
     C:\Users\Emi\Documents\IngSW\Poliprofes
     ```
 5. Abre una consola powershell.
 6. Pega tu directorio seguido del siguiente comando (usa comillas):
+
     ```
     cd "C:\TU_DIRECTORIO"
     ```
 7. Después corre el siguiente comando:
+
     ```
     node ./app.js
     ```
@@ -31,6 +34,7 @@ Se necesitan 3 cosas instaladas para poder correr el sitio web localmente:
 
 Si quieres que la aplicación deje de correr, presiona la combinación de teclas `CTRL + C`
 Para hacer que el servidor corra de nuevo, dentro del camino de carpeta del repositorio, corre el siguiente comando:
+
     ```
     node ./app.js
     ```
