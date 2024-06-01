@@ -119,6 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
           var comentarioParrafo = document.createElement("p");
           comentarioParrafo.classList.add("resultado-materias"); // p class="materias"
           // Agregar cada materia al párrafo en una línea separada
+          var comentarioParrafoIDMat = document.createElement("p");
+        comentarioParrafoIDMat.classList.add("resultado-materias");
+        comentarioParrafoIDMat.innerText = profesor.materia;
+        comentarioParrafoIDMat.innerHTML += "<br>";
           comentarioParrafo.innerText = profesor.comentario;
           comentarioParrafo.innerHTML += "<br>";
           comentarioParrafo.innerHTML += "<br>";
@@ -164,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
           containerButton.appendChild(button);
           divProfesor.appendChild(enlaceNombre);
           divProfesor.appendChild(calificacionSpan);
+          divProfesor.appendChild(comentarioParrafoIDMat);
           divProfesor.appendChild(comentarioParrafo);
           divProfesor.appendChild(comentarioParrafoFecha);
           resultadosDiv.appendChild(divProfesor);
