@@ -17,7 +17,7 @@ import { usuarioModule } from './modulov.js';
 
     // Función para manejar el clic en el botón de registro
     function manejarRegistro() {
-        console.log("Redirigir al usuario a la página de registro...");
+        window.location.href = `../pages/reg_alumno.html`;
     }
     
     actualizarRegistro();

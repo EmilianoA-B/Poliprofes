@@ -4,7 +4,7 @@ const router = express.Router();
 
 //callback function
 router.get('/', (req, res) => {
-    const indexPath = path.join(__dirname, '..','public', 'pages', 'index.html');
+    const indexPath = path.join(__dirname, '..','public', 'pages', 'visualizador.html');
     res.sendFile(indexPath, (err) => {
         if (err) {
             console.error('Error sending index.html:', err);
