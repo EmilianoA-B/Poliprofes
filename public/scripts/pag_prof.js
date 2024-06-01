@@ -160,9 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       comentarioParrafoFecha.innerText = profesor.fecha;
       comentarioParrafoFecha.innerHTML += "<br>";
 
-      var containerButton = document.createElement("div");
-      containerButton.classList.add("container-button");
-
       var button = document.createElement("button");
       button.classList.add("baja-btn");
       var spanTrash = document.createElement("i");
@@ -177,14 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
           await deleteComentario(idComment);
         };
       };
-      containerButton.appendChild(button);
+     
       divProfesor.appendChild(enlaceNombre);
       divProfesor.appendChild(calificacionSpan);
       divProfesor.appendChild(comentarioParrafoIDMat);
       divProfesor.appendChild(comentarioParrafo);
       divProfesor.appendChild(comentarioParrafoFecha);
       resultadosDiv.appendChild(divProfesor);
-      divProfesor.appendChild(containerButton);
+      
     });
   }
 
