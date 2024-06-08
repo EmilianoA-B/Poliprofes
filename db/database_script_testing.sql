@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS POLIPROFES;
 CREATE DATABASE IF NOT EXISTS POLIPROFES;
 USE POLIPROFES;
 SET lc_time_names = 'es_ES';
@@ -384,3 +385,51 @@ VALUES (16, 15, 47, 9, 'Facil', 'El profesor es muy dedicado y se preocupa por e
 
 INSERT INTO COMENTARIOS (ALUMNOS_ID, PROFESORES_ID, MATERIA_ID, CALIFICACION, DIFICULTAD, COMENTARIO, RECOMIENDA, APROBO, FECHA)
 VALUES (17, 2, 11, 7, 'Dificil', 'El profesor tiene un enfoque único en la enseñanza, pero a veces su estilo puede ser abrumador. Considero que podría proporcionar más material de apoyo para ayudar a los estudiantes.', 0, 0, '2024-05-27 14:15:00');
+
+INSERT INTO PROFESORES (NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, VERIFICADO)
+VALUES ('Juan', 'Pérez', 'Gómez', 0),
+    ('María', 'Rodríguez', 'López', 0),
+    ('Carlos', 'González', 'Martínez', 0),
+    ('Ana', 'Fernández', 'García', 0),
+    ('Luis', 'López', 'Hernández', 0),
+    ('Carmen', 'Martínez', 'Morales', 0),
+    ('Manuel', 'García', 'Torres', 0),
+    ('Teresa', 'Hernández', 'Sánchez', 0),
+    ('Francisco', 'Torres', 'Ramírez', 0),
+    ('Isabel', 'Morales', 'Reyes', 0);
+
+INSERT INTO PROFESOR_MATERIAS (PROFESOR_ID, MATERIA_ID) VALUES 
+(17, 1), (17, 2), (17, 3), (17, 4),
+(18, 21), (18, 22), (18, 23), (18, 24),
+(19, 41), (19, 42), (19, 43), (19, 44),
+(20, 61), (20, 62), (20, 63), (20, 64),
+(21, 5), (21, 6), (21, 7), (21, 8),
+(22, 25), (22, 26), (22, 27), (22, 28),
+(23, 45), (23, 46), (23, 47), (23, 48),
+(24, 65), (24, 66), (24, 67), (24, 68),
+(25, 9), (25, 10), (25, 11), (25, 12),
+(26, 29), (26, 30), (26, 31), (26, 32);
+
+INSERT INTO PROFESORES (NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, VERIFICADO)
+VALUES ('Pedro', 'Ramírez', 'Guzmán', 0),
+       ('Laura', 'Reyes', 'Castillo', 0),
+       ('Javier', 'Guzmán', 'Pérez', 0),
+       ('Patricia', 'Castillo', 'Rodríguez', 0),
+       ('José', 'Pérez', 'González', 0),
+       ('Sofía', 'Rodríguez', 'Fernández', 0),
+       ('Antonio', 'González', 'López', 0),
+       ('Lucía', 'Fernández', 'Martínez', 0),
+       ('Jorge', 'López', 'Hernández', 0),
+       ('Sara', 'Martínez', 'Morales', 0);
+
+INSERT INTO PROFESOR_MATERIAS (PROFESOR_ID, MATERIA_ID) VALUES 
+(27, 13), (27, 14), (27, 15), (27, 16),
+(28, 33), (28, 34), (28, 35), (28, 36),
+(29, 53), (29, 54), (29, 55), (29, 56),
+(30, 73), (30, 74), (30, 75), (30, 76),
+(31, 17), (31, 18), (31, 19), (31, 20),
+(32, 37), (32, 38), (32, 39), (32, 40),
+(33, 57), (33, 58), (33, 59), (33, 60),
+(34, 77), (34, 78), (34, 79), (34, 80),
+(35, 21), (35, 22), (35, 23), (35, 24),
+(36, 41), (36, 42), (36, 43), (36, 44);
