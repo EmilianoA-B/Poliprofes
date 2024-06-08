@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       var spanTrash = document.createElement("i");
       spanTrash.classList.add("lar", "la-trash-alt");
       button.appendChild(spanTrash);
-      button.innerHTML += " Eliminar Comentario";
+      button.innerHTML += " Eliminar opinion";
       button.onclick = function () {
         mostrarModal();
         divCommentToRemove = divProfesor;
