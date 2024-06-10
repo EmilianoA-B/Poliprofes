@@ -67,13 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
         await deleteComentario(idComment);
       };
       containerButton.appendChild(button);
+      divProfesor.appendChild(containerButton);
       divProfesor.appendChild(enlaceNombre);
       divProfesor.appendChild(calificacionSpan);
       divProfesor.appendChild(comentarioParrafoIDMat);
       divProfesor.appendChild(comentarioParrafo);
       divProfesor.appendChild(comentarioParrafoFecha);
       resultadosDiv.appendChild(divProfesor);
-      divProfesor.appendChild(containerButton);
     });
   }
 
