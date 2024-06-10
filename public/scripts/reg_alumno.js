@@ -32,25 +32,45 @@ document.getElementById('registroForm').addEventListener('submit', async functio
 
     // Validación de nombre
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
-      alert('El nombre solo debe contener caracteres alfabéticos en español y espacios.');
+        swal({
+            text: "El nombre solo debe contener caracteres alfabéticos en español y espacios.",
+            button: "Vale",
+            dangerMode: true,
+            className: "alerta"
+        });
       return;
     }
 
     // Validación de apellidos
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidos)) {
-      alert('Los apellidos solo deben contener caracteres alfabéticos en español y espacios.');
+        swal({
+            text: "Los apellidos solo deben contener caracteres alfabéticos en español y espacios.",
+            button: "Vale",
+            dangerMode: true,
+            className: "alerta"
+        });
       return;
     }
 
     // Validación de correo
     if (!/^[a-zA-Z0-9._%+-]+@alumno\.ipn\.mx$/.test(correo)) {
-      alert('El correo debe pertenecer al dominio "alumno.ipn.mx".');
-      return;
+        swal({
+            text: "El correo debe pertenecer al dominio 'alumno.ipn.mx'.",
+            button: "Vale",
+            dangerMode: true,
+            className: "alerta"
+        });
+        return;
     }
 
     // Validación de contraseña
     if (contrasenia.length < 4 || contrasenia.length > 8 || !/^[a-zA-Z0-9!@#$%^&*]+$/.test(contrasenia)) {
-      alert('La contraseña debe tener entre 4 y 8 caracteres y puede incluir caracteres alfanuméricos y especiales.');
+        swal({
+            text: "La contraseña debe tener entre 4 y 8 caracteres y puede incluir caracteres alfanuméricos y especiales.",
+            button: "Vale",
+            dangerMode: true,
+            className: "alerta"
+        });
       return;
     }
     
@@ -66,9 +86,19 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         if (response.ok) {
             console.log('Se anadio al usuario');
             limpiarInput('registroForm');
-            alert('Registro exitoso');
+            swal({
+                text: "Registro exitoso.",
+                button: "Vale",
+                dangerMode: true,
+                className: "alerta"
+            });
         } else {
-            alert('Registro erróneo');
+            swal({
+                text: "Registro erroneo.",
+                button: "Vale",
+                dangerMode: true,
+                className: "alerta"
+            });
             console.error('Error adding user');
         }
     }catch (error) {

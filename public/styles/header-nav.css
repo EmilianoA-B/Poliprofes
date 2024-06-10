@@ -350,3 +350,7 @@ header {
     font-weight: bold;
     color: #333;
 }
+
+.alerta .swal-text{
+    color: red;
+}
