@@ -131,3 +131,26 @@ document
       inputBusqueda
     )}`;
   });
+
+  
+document.getElementById('borrar-cuenta').addEventListener('click', function(event) {
+  event.preventDefault();
+  swal({
+      title: "¿Estás seguro de que deseas borrar tu cuenta?",
+      text: "Una vez que la borres, no podrás recuperarla.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+  })
+  .then((willDelete) => {
+      if (willDelete) {
+          swal("Tu cuenta ha sido borrada.", {
+              icon: "success",
+          }).then(() => {
+              window.location.href = "/";
+          }); 
+      } else {
+          swal("Tu cuenta está a salvo.");
+      }
+  });
+});
