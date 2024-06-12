@@ -59,11 +59,18 @@ document.addEventListener("DOMContentLoaded", () => {
       h2Profesor.innerText = profesor.nombre;
       profesorDiv.appendChild(h2Profesor);
 
+      var carreraSpan = document.createElement("h3");
+      carreraSpan.classList.add("resultado-materias");
+      carreraSpan.innerText = profesor.carrera;
+      carreraSpan.innerHTML += "<br>";
+
       var pMaterias = document.createElement("p");
       var strongMaterias = document.createElement("strong");
       strongMaterias.innerText = profesor.materias.join(", ");
       pMaterias.appendChild(strongMaterias);
+      profesorDiv.appendChild(carreraSpan);
       profesorDiv.appendChild(pMaterias);
+      
 
       var pCalificacion = document.createElement("p");
       var strongCalificacion = document.createElement("strong");
@@ -131,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
       var comentarioParrafo = document.createElement("p");
       comentarioParrafo.classList.add("resultado-materias"); // p class="materias"
       // Agregar cada materia al párrafo en una línea separada
+
+      
+
       var comentarioParrafoIDMat = document.createElement("p");
       comentarioParrafoIDMat.classList.add("resultado-materias");
       comentarioParrafoIDMat.innerText = profesor.materia;

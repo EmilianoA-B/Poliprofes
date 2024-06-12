@@ -227,33 +227,40 @@ router.get("/getProfesByCalificacionAndMaterias", (req, res) => {
   const evaluacion = req.query.evaluacion;
   const queryParams = [];
   let query = `SELECT 
-        CONCAT(NOMBRE, ' ', APELLIDO_PATERNO, ' ',APELLIDO_MATERNO) AS NOMBRE, 
-        IFNULL(ROUND(AVG(CALIFICACION), 1), 0) AS CALIFICACION,
-        IFNULL(GROUP_CONCAT(MATERIA SEPARATOR ', '), '') AS MATERIAS FROM PROFESOR_MATERIAS
-        RIGHT JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
-        LEFT JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
-        LEFT JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
-        LEFT JOIN (
-            SELECT PROFESORES_ID, AVG(CALIFICACION) AS CALIFICACION 
-            FROM COMENTARIOS GROUP BY PROFESORES_ID)
-        AS CALIFICACIONES ON PROFESORES.ID = CALIFICACIONES.PROFESORES_ID
-        WHERE VERIFICADO = TRUE`;
+        CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE, 
+        IFNULL(ROUND(AVG(CALIFICACIONES.CALIFICACION), 1), 0) AS CALIFICACION,
+        IFNULL(GROUP_CONCAT(MATERIAS.MATERIA SEPARATOR ', '), '') AS MATERIAS,
+        CARRERAS.CARRERA
+    FROM PROFESOR_MATERIAS
+    RIGHT JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    LEFT JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    LEFT JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
+    LEFT JOIN (
+        SELECT PROFESORES_ID, AVG(CALIFICACION) AS CALIFICACION 
+        FROM COMENTARIOS GROUP BY PROFESORES_ID
+    ) AS CALIFICACIONES ON PROFESORES.ID = CALIFICACIONES.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE`;
+
   if (evaluacion !== "mas_recientes") {
     if (carrera != "%") {
-      query += ` AND CARRERA LIKE ? GROUP BY PROFESORES.ID`;
+      query += ` AND CARRERAS.CARRERA LIKE ?`;
       queryParams.push(carrera);
-    } else if (profesor != "%") {
-      query += ` GROUP BY PROFESORES.ID HAVING NOMBRE LIKE ?`;
+    } 
+    if (profesor != "%") {
+      query += ` AND CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) LIKE ?`;
       queryParams.push(profesor);
-    } else {
-      query += ` GROUP BY PROFESORES.ID`;
-      if (evaluacion === "mejores") query += ` ORDER BY CALIFICACION DESC`;
-      else if (evaluacion === "peores") query += ` ORDER BY CALIFICACION ASC`;
+    }
+    query += ` GROUP BY PROFESORES.ID, CARRERAS.CARRERA`;
+    if (evaluacion === "mejores") {
+      query += ` ORDER BY CALIFICACION DESC`;
+    } else if (evaluacion === "peores") {
+      query += ` ORDER BY CALIFICACION ASC`;
     }
   } else {
-    query += ` GROUP BY PROFESORES.ID ORDER BY CALIFICACION`;
+    query += ` GROUP BY PROFESORES.ID, CARRERAS.CARRERA ORDER BY CALIFICACION`;
   }
-  connection.query(query, [queryParams], (err, results) => {
+
+  connection.query(query, queryParams, (err, results) => {
     if (err) {
       console.error("Error al desplegar solicitudes de profesor", err);
       res.status(500).send("Error al desplegar solicitudes de profesor");
@@ -264,31 +271,34 @@ router.get("/getProfesByCalificacionAndMaterias", (req, res) => {
         nombre: row.NOMBRE,
         calificacion: row.CALIFICACION,
         materias: row.MATERIAS ? row.MATERIAS.split(", ") : [],
+        carrera: row.CARRERA
       }))
     );
   });
 });
+
 
 router.get(
   "/getProfesorWithMateriasCalificacionAndProbabilidad",
   (req, res) => {
     const profesor = req.query.profesor ? `%${req.query.profesor}%` : "%";
     const query = `SELECT 
-        CONCAT(NOMBRE, ' ', APELLIDO_PATERNO, ' ',APELLIDO_MATERNO) AS NOMBRE, 
-        IFNULL(GROUP_CONCAT(MATERIA SEPARATOR ', '), '') AS MATERIAS,
-        IFNULL(ROUND(AVG(CALIFICACION), 1), 0) AS CALIFICACION,
-        IFNULL(ROUND(AVG(PROBABILIDAD),0), 0) AS PROBABILIDAD
-        FROM PROFESOR_MATERIAS
-        RIGHT JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
-        LEFT JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
-        LEFT JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
-        LEFT JOIN (
-            SELECT PROFESORES_ID, AVG(CALIFICACION) AS CALIFICACION, ROUND(AVG(APROBO)*100,0) AS PROBABILIDAD
-            FROM COMENTARIOS GROUP BY PROFESORES_ID)
-        AS CALIFICACIONES ON PROFESORES.ID = CALIFICACIONES.PROFESORES_ID
-        WHERE VERIFICADO = TRUE
-        GROUP BY PROFESORES.ID
-        HAVING NOMBRE LIKE ?`;
+        CONCAT(PROFESORES.NOMBRE, ' ', PROFESORES.APELLIDO_PATERNO, ' ', PROFESORES.APELLIDO_MATERNO) AS NOMBRE, 
+        IFNULL(GROUP_CONCAT(MATERIAS.MATERIA SEPARATOR ', '), '') AS MATERIAS,
+        IFNULL(ROUND(AVG(CALIFICACIONES.CALIFICACION), 1), 0) AS CALIFICACION,
+        IFNULL(ROUND(AVG(CALIFICACIONES.PROBABILIDAD), 0), 0) AS PROBABILIDAD,
+        CARRERAS.CARRERA
+    FROM PROFESOR_MATERIAS
+    RIGHT JOIN PROFESORES ON PROFESOR_MATERIAS.PROFESOR_ID = PROFESORES.ID
+    LEFT JOIN MATERIAS ON PROFESOR_MATERIAS.MATERIA_ID = MATERIAS.ID
+    LEFT JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
+    LEFT JOIN (
+        SELECT PROFESORES_ID, AVG(CALIFICACION) AS CALIFICACION, ROUND(AVG(APROBO) * 100, 0) AS PROBABILIDAD
+        FROM COMENTARIOS GROUP BY PROFESORES_ID
+    ) AS CALIFICACIONES ON PROFESORES.ID = CALIFICACIONES.PROFESORES_ID
+    WHERE PROFESORES.VERIFICADO = TRUE
+    GROUP BY PROFESORES.ID, CARRERAS.CARRERA
+    HAVING NOMBRE LIKE ?`;
 
     connection.query(query, [profesor], (err, results) => {
       if (err) {
@@ -302,11 +312,13 @@ router.get(
           materias: row.MATERIAS ? row.MATERIAS.split(", ") : [],
           calificacion: row.CALIFICACION,
           probabilidad: row.PROBABILIDAD,
+          carrera: row.CARRERA,
         }))
       );
     });
   }
 );
+
 
 //API para el despliegue de comentarios
 router.get("/getComentariosV2", (req, res) => {
@@ -381,10 +393,12 @@ router.get("/getComentariosV3", (req, res) => {
     COMENTARIOS.RECOMIENDA,
     COMENTARIOS.ID AS ID_COMENTARIO,
     DATE_FORMAT(COMENTARIOS.FECHA, '%e de %M de %Y a la %l:%i%p') AS FECHA,
-    MATERIAS.MATERIA
+    MATERIAS.MATERIA,
+    CARRERAS.CARRERA
     FROM COMENTARIOS
     INNER JOIN ALUMNOS ON COMENTARIOS.ALUMNOS_ID = ALUMNOS.ID
     INNER JOIN MATERIAS ON COMENTARIOS.MATERIA_ID = MATERIAS.ID
+    INNER JOIN CARRERAS ON MATERIAS.CARRERA_ID = CARRERAS.ID
     WHERE COMENTARIOS.PROFESORES_ID = ?;
 `;
 
@@ -404,7 +418,8 @@ router.get("/getComentariosV3", (req, res) => {
           recomienda: row.RECOMIENDA,
           id_comentario: row.ID_COMENTARIO,
           fecha: row.FECHA,
-          materia: row.MATERIA
+          materia: row.MATERIA,
+          carrera: row.CARRERA
         }))
       );
     });
