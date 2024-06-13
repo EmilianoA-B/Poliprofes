@@ -565,3 +565,21 @@ input[type="radio"] {
 .modal-buttons {
     text-align: right;
 }
+
+.divContainer{
+    display: flex;
+    gap:10px;
+}
+
+.resultado-materias1{
+  font-size: 18px;
+  font-weight: normal;
+  word-wrap: break-word;
+  width: 70%;
+}
+
+.divContainerLeft{
+    min-width: 27%;
+    max-width: 30%;
+    width: 30%;
+}

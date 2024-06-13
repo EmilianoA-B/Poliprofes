@@ -131,40 +131,50 @@ document.addEventListener("DOMContentLoaded", () => {
       enlaceNombre.classList.add("resultado-nombre");
       enlaceNombre.innerText = profesor.nombre;
 
-      var calificacionSpan = document.createElement("span");
-      calificacionSpan.classList.add("resultado-calificacion"); //span class="calificacion"
-      calificacionSpan.innerText = profesor.calificacion;
-
-      var comentarioParrafo = document.createElement("p");
-      comentarioParrafo.classList.add("resultado-materias"); // p class="materias"
-      // Agregar cada materia al párrafo en una línea separada
-
-      
+     //Este es el div de Carrera y recomendacion
+      let divContainerLeft = document.createElement("div");
+      divContainerLeft.classList.add("divContainerLeft");
+      var carreraSpan = document.createElement("h3");
+      carreraSpan.innerText = profesor.carrera;
+      carreraSpan.innerHTML += "<br>";
 
       var comentarioParrafoIDMat = document.createElement("p");
       comentarioParrafoIDMat.classList.add("resultado-materias");
       comentarioParrafoIDMat.innerText = profesor.materia;
       comentarioParrafoIDMat.innerHTML += "<br>";
+
+    
+      if (profesor.aprobo == 1) {
+        comentarioParrafoIDMat.innerHTML += 'Aprobado <i class="lar la-smile"></i>';
+        comentarioParrafoIDMat.innerHTML += "<br>";
+      }
+      else if (profesor.aprobo == 0) {
+        comentarioParrafoIDMat.innerHTML += 'No aprobado <i class="lar la-frown"></i>';
+        comentarioParrafoIDMat.innerHTML += "<br>";
+      }
+      if (profesor.recomienda == 1) {
+        comentarioParrafoIDMat.innerHTML += 'Recomendado <i class="lar la-thumbs-up"></i>';
+        comentarioParrafoIDMat.innerHTML += "<br>";
+      }
+      else if (profesor.recomienda == 0) {
+        comentarioParrafoIDMat.innerHTML += 'No recomendado <i class="lar la-thumbs-down"></i>';
+        comentarioParrafoIDMat.innerHTML += "<br>";
+      }
+
+      var comentarioParrafo = document.createElement("h3"); // p class="materias"
+      comentarioParrafo.classList.add("resultado-materias1");
+      // Agregar cada materia al párrafo en una línea separada
+      //Este es el div de el puro comentario
+      var calificacionSpan = document.createElement("span");
+      calificacionSpan.classList.add("resultado-calificacion"); //span class="calificacion"
+      calificacionSpan.innerText = profesor.calificacion;
       comentarioParrafo.innerText = profesor.comentario;
       comentarioParrafo.innerHTML += "<br>";
       comentarioParrafo.innerHTML += "<br>";
-      if (profesor.aprobo == 1) {
-        comentarioParrafo.innerHTML += 'Aprobado <i class="lar la-smile"></i>';
-        comentarioParrafo.innerHTML += "<br>";
-      }
-      else if (profesor.aprobo == 0) {
-        comentarioParrafo.innerHTML += 'No aprobado <i class="lar la-frown"></i>';
-        comentarioParrafo.innerHTML += "<br>";
-      }
-      if (profesor.recomienda == 1) {
-        comentarioParrafo.innerHTML += 'Recomendado <i class="lar la-thumbs-up"></i>';
-        comentarioParrafo.innerHTML += "<br>";
-      }
-      else if (profesor.recomienda == 0) {
-        comentarioParrafo.innerHTML += 'No recomendado <i class="lar la-thumbs-down"></i>';
-        comentarioParrafo.innerHTML += "<br>";
-      }
+      var divContainer = document.createElement('div');
+      divContainer.classList.add("divContainer");
 
+      //Esta es la fecha
       var comentarioParrafoFecha = document.createElement("p");
       comentarioParrafoFecha.classList.add("resultado-materias");
       comentarioParrafoFecha.innerText = profesor.fecha;
@@ -187,9 +197,18 @@ document.addEventListener("DOMContentLoaded", () => {
      
       divProfesor.appendChild(enlaceNombre);
       divProfesor.appendChild(calificacionSpan);
-      divProfesor.appendChild(comentarioParrafoIDMat);
-      divProfesor.appendChild(comentarioParrafo);
+
+      divProfesor.appendChild(divContainerLeft);
+
+      divContainerLeft.appendChild(carreraSpan);
+      divContainerLeft.appendChild(comentarioParrafoIDMat);
+      divContainer.appendChild(divContainerLeft);
+      divContainer.appendChild(comentarioParrafo);
+      divProfesor.appendChild(divContainer);
+
+      
       divProfesor.appendChild(comentarioParrafoFecha);
+
       resultadosDiv.appendChild(divProfesor);
       
     });

@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const connectionJSON = {
     host: 'localhost',
     user: 'root',
-    password: 'hola123',
+    password: 'Pix3l.if071102',
     database: 'poliprofes'
 };
 
@@ -31,6 +31,7 @@ tryConnection(connectionJSON,
         tryConnection(connectionJSON, 
             (connection)=>{
                 console.log('Within the second attempt');
+                
             },
             (err)=>{
                 console.error('Error on the db connection: ', err.stack);
