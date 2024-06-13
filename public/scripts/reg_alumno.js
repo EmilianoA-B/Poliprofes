@@ -1,3 +1,7 @@
+function limpiarInput(formularioId){
+    document.getElementById(formularioId).reset();
+}
+
 window.onload = function alCargar (){
     limpiarInput('registroForm');
 }
@@ -25,55 +29,52 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     const contrasenia = document.getElementById('contrasena').value;
    */ 
 
+     // Limpiar mensajes de error anteriores
+
     const nombre = document.getElementById('nombre').value.trim();
     const apellidos = document.getElementById('apellidos').value.trim();
     const correo = document.getElementById('correo').value.trim();
     const contrasenia = document.getElementById('contrasena').value.trim();
 
+    let valid = true;
+
     // Validación de nombre
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
-        swal({
-            text: "El nombre solo debe contener caracteres alfabéticos en español y espacios.",
-            button: "Vale",
-            dangerMode: true,
-            className: "alerta"
-        });
-      return;
+      valid = false;
+      const errorNombre = document.getElementById('error-nombre');
+      errorNombre.innerText = 'El nombre solo debe contener caracteres alfabéticos en español y espacios.';
+      errorNombre.style.display = 'inline';
     }
 
     // Validación de apellidos
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidos)) {
-        swal({
-            text: "Los apellidos solo deben contener caracteres alfabéticos en español y espacios.",
-            button: "Vale",
-            dangerMode: true,
-            className: "alerta"
-        });
-      return;
+        valid = false;
+        const errorApellidos = document.getElementById('error-apellidos');
+        errorApellidos.innerText = 'Los apellidos solo deben contener caracteres alfabéticos en español y espacios.';
+        errorApellidos.style.display = 'inline';
     }
 
     // Validación de correo
     if (!/^[a-zA-Z0-9._%+-]+@alumno\.ipn\.mx$/.test(correo)) {
-        swal({
-            text: "El correo debe pertenecer al dominio 'alumno.ipn.mx'.",
-            button: "Vale",
-            dangerMode: true,
-            className: "alerta"
-        });
-        return;
+        valid = false;
+        const errorCorreo = document.getElementById('error-correo');
+        errorCorreo.innerText = 'El correo debe pertenecer al dominio "alumno.ipn.mx".';
+        errorCorreo.style.display = 'inline';
     }
 
     // Validación de contraseña
     if (contrasenia.length < 4 || contrasenia.length > 8 || !/^[a-zA-Z0-9!@#$%^&*]+$/.test(contrasenia)) {
-        swal({
-            text: "La contraseña debe tener entre 4 y 8 caracteres y puede incluir caracteres alfanuméricos y especiales.",
-            button: "Vale",
-            dangerMode: true,
-            className: "alerta"
-        });
-      return;
+        valid = false;
+        const errorContrasena = document.getElementById('error-contrasena');
+        errorContrasena.innerText = 'Contraseña debe tener entre 4 y 8 caracteres, puede incluir caracteres alfanuméricos y especiales.';
+        errorContrasena.style.display = 'inline';
     }
     
+    
+    if (!valid) {
+        return; // Detener la ejecución si hay errores de validación
+    }
+
     try{
         const response = await fetch('http://localhost:3000/endpoint/regAlumno', {
         method: 'POST',
