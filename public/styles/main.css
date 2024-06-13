@@ -392,8 +392,23 @@ input[type="radio"] {
     border-radius: 5px;
 }
 
+.botonMostrar{
+    max-height: 39px;
+    background-color: #800040;
+    color: white;
+    padding: 10px 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    align-content: center;
+}
+
 .regContra {
     border-bottom: 5px;
+    display: flex;
 }
 
 .BotonFinReg {
