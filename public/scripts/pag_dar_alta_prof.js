@@ -114,7 +114,13 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
             limpiarInput('altaProf');
             document.getElementById("selectsDeMateria").innerHTML = "";
         } else {
-            console.error('No se pudo registrar al profesor');
+            const errorData = await response.json(); // Parsear la respuesta de error del servidor
+            if (errorData.message === 'Nombre duplicado') {
+                console.error('El nombre del profesor ya existe.'); // Manejar error de nombre duplicado
+                alert('El nombre del profesor ya existe.');
+            } else {
+                console.error('No se pudo registrar al profesor:', errorData.message); // Manejar otros errores
+            }
         }
     } catch (error) {
         console.error('Error:', error);
