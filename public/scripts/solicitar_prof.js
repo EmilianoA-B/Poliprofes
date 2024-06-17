@@ -63,20 +63,41 @@ document.getElementById("professorForm").addEventListener("submit", async functi
     const todosLosSelects = divtodasLasMaterias.querySelectorAll('select');
     const todasLasMaterias = Array.from(todosLosSelects).map(todosLosSelects => todosLosSelects.value);
     try {
-        const response = await fetch('http://localhost:3000/endpoint/regProf', {
+        const response = await fetch('http://localhost:3000/api/checkRepetidosv2', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera , verificado: 0 })
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM})
         });
         if (response.ok) {
-            console.log('Se registro el profesor');
-            mostrarPopup(); //Mostrar confirmacion de alta
-            limpiarInput('altaProf');
-            document.getElementById("selectsDeMateria").innerHTML = "";
+            try {
+                const response = await fetch('http://localhost:3000/endpoint/regProf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera , verificado: 0 })
+                });
+                if (response.ok) {
+                    console.log('Se registro el profesor');
+                    mostrarPopup(); //Mostrar confirmacion de alta
+                    limpiarInput('altaProf');
+                    document.getElementById("selectsDeMateria").innerHTML = "";
+                } else {
+                    console.error('No se pudo registrar al profesor');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
-            console.error('No se pudo registrar al profesor');
+            const errorData = await response.json(); // Parsear la respuesta de error del servidor
+            if (!response.ok) {
+                console.error('El profesor ya se ha solicitado.'); // Manejar error de nombre duplicado
+                alert('El nombre del profesor ya se ha solicitado.');
+            } else {
+                console.error('Error ajeno a repeticion', errorData.message); // Manejar otros errores
+            }
         }
     } catch (error) {
         console.error('Error:', error);

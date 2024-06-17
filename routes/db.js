@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const connectionJSON = {
     host: 'localhost',
     user: 'root',
-    password: 'hola123',
+    password: 'Pix3l.if071102',
     database: 'poliprofes'
 };
 
