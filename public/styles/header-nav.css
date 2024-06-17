@@ -28,7 +28,7 @@ header {
 .auth-buttons {
     margin-left: 5px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: row-reverse; 
     gap:6px;
 }
 
