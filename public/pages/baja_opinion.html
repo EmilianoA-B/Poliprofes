@@ -89,6 +89,15 @@
 
     <main class="container-busqueda">
       <div id="resultados" class="container-resultados"></div>
+      <!-- Modal -->
+      <div class="overlay" id="overlay"></div>
+      <div class="modal" id="modal">
+        <p>¿Está seguro de dar a este profesor de baja?</p>
+        <div class="modal-buttons">
+          <button onclick="darDeBajaProfesor()" id= "confirmarBaja">Aceptar</button>
+          <button onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </div>
     </main>
     <script src="../scripts/header-nav.js" type="module"></script>
     <script src="../scripts/baja_opinion.js"></script>
