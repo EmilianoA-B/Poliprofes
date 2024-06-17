@@ -52,26 +52,26 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
 
     let valid = true;
     // Validación de nombre
-    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
+    if (nombreProf.value === "") {
         valid = false;
         const errorNombre = document.getElementById('error-nombre');
-        errorNombre.innerText = 'El nombre solo debe contener caracteres alfabéticos en español y espacios.';
+        errorNombre.innerText = 'Necesita ser llenado';
         errorNombre.style.display = 'inline';
     }
 
     // Validación de apellidos
-    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoP)) {
+    if (apellidoP.value === "") {
         valid = false;
         const errorApellidoP = document.getElementById('error-apellidoP');
-        errorApellidoP.innerText = 'Los apellidos solo deben contener caracteres alfabéticos en español y espacios.';
+        errorApellidoP.innerText = 'Necesita ser llenado';
         errorApellidoP.style.display = 'inline';
     }
 
     // Validación de apellidos
-    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoM)) {
+    if (apellidoM.value === "") {
         valid = false;
         const errorApellidoM = document.getElementById('error-apellidoM');
-        errorApellidoM.innerText = 'Los apellidos solo deben contener caracteres alfabéticos en español y espacios.';
+        errorApellidoM.innerText = 'Necesita ser llenado';
         errorApellidoM.style.display = 'inline';
     }
 
