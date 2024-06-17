@@ -1,17 +1,17 @@
 
-window.onload = function alCargar (){
+window.onload = function alCargar() {
     limpiarInput('altaProf');
     cargarCarreras();
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var adminButton = document.getElementById("admin-button");
     var adminDropdown = document.getElementById("admin-dropdown");
 
     //Carga carreras y materiasdesde la base de datos
     // Ocultar el menú de cuenta al cargar la página
-   // hideAccountMenu();
-    
+    // hideAccountMenu();
+
     // Manejar clic en el botón de cuenta para mostrar/ocultar el menú desplegable
     /*
     adminButton.addEventListener("click", function() {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     userEmailElement.textContent = "john@example.com"; // Email simulado del usuario*/
 });
 //En submit de formulario
-document.getElementById("altaProf").addEventListener("submit", async function(event){
+document.getElementById("altaProf").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const nombreProf = document.getElementById("nombre").value;
@@ -50,15 +50,61 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
     const carrera = document.getElementById("carrera").value;
     const id_carrera = await getIDCarrera(carrera);
 
+    let valid = true;
+    // Validación de nombre
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
+        valid = false;
+        const errorNombre = document.getElementById('error-nombre');
+        errorNombre.innerText = 'El nombre solo debe contener caracteres alfabéticos en español y espacios.';
+        errorNombre.style.display = 'inline';
+    }
+
+    // Validación de apellidos
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoP)) {
+        valid = false;
+        const errorApellidoP = document.getElementById('error-apellidoP');
+        errorApellidoP.innerText = 'Los apellidos solo deben contener caracteres alfabéticos en español y espacios.';
+        errorApellidoP.style.display = 'inline';
+    }
+
+    // Validación de apellidos
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellidoM)) {
+        valid = false;
+        const errorApellidoM = document.getElementById('error-apellidoM');
+        errorApellidoM.innerText = 'Los apellidos solo deben contener caracteres alfabéticos en español y espacios.';
+        errorApellidoM.style.display = 'inline';
+    }
+
+    const carreraSelect = document.getElementById("carrera");
+    const materiaSelect = document.getElementById("materia");
+
+    if (carreraSelect.value === "") {
+        valid = false;
+        const errorDato = document.getElementById('error-sindato');
+        errorDato.innerText = 'Sin seleccionar';
+        errorDato.style.display = 'inline';
+
+    } else if (materiaSelect.value === "") {
+        valid = false;
+        const errorD = document.getElementById('error-sindato2');
+        errorD.innerText = 'Sin seleccionar';
+        errorD.style.display = 'inline';
+    }
+
     const todosLosSelects = divtodasLasMaterias.querySelectorAll('select');
     const todasLasMaterias = Array.from(todosLosSelects).map(todosLosSelects => todosLosSelects.value);
+
+    if (!valid) {
+        return; // Detener la ejecución si hay errores de validación
+    }
+
     try {
         const response = await fetch('http://localhost:3000/endpoint/regProf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections:todasLasMaterias, id_carrera , verificado:1 })
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections: todasLasMaterias, id_carrera, verificado: 1 })
         });
         if (response.ok) {
             console.log('Se registro el profesor');
@@ -74,14 +120,14 @@ document.getElementById("altaProf").addEventListener("submit", async function(ev
 });
 
 //Para cuando cambias de carrera
-document.getElementById("carrera").addEventListener("change", function(){
+document.getElementById("carrera").addEventListener("change", function () {
     const carreraSelect = document.getElementById("carrera").value;
     limpiarSelect();
     document.getElementById("selectsDeMateria").innerHTML = "";
     getIdForMaterias(carreraSelect);
 });
 //Para cuando quieras poner una materia
-document.getElementById("agregarMateria").addEventListener("click", function(){
+document.getElementById("agregarMateria").addEventListener("click", function () {
     const selectMateria = document.getElementById("materia");
     const divParaSelects = document.getElementById("selectsDeMateria");
     const newSelect = document.createElement("select");
@@ -95,21 +141,21 @@ document.getElementById("agregarMateria").addEventListener("click", function(){
     divParaSelects.appendChild(newSelect);
 });
 //Para cargar todas las carreras
-async function cargarCarreras(){
-        fetch('http://localhost:3000/api/getCarreras')
-            .then(response => response.json())
-            .then(data => {
-                const carreraList = document.getElementById('carrera');
-                data.forEach(carrera => {
-                    const newCarrera = document.createElement('option');
-                    newCarrera.textContent = `${carrera.carrera}`;
-                    carreraList.appendChild(newCarrera);
-                });
-            })
-            .catch(error => console.error('Error al cargar carreras:', error));
+async function cargarCarreras() {
+    fetch('http://localhost:3000/api/getCarreras')
+        .then(response => response.json())
+        .then(data => {
+            const carreraList = document.getElementById('carrera');
+            data.forEach(carrera => {
+                const newCarrera = document.createElement('option');
+                newCarrera.textContent = `${carrera.carrera}`;
+                carreraList.appendChild(newCarrera);
+            });
+        })
+        .catch(error => console.error('Error al cargar carreras:', error));
 }
 //Para conseguir todas las materias de la carrera seleccionada
-async function getIdForMaterias(carrera){
+async function getIdForMaterias(carrera) {
     console.log('Carrera Seleccionada:', carrera);
     try {
         const response = await fetch('http://localhost:3000/api/getMaterias', {
@@ -120,8 +166,8 @@ async function getIdForMaterias(carrera){
             body: JSON.stringify({ carrera })
         });
 
-        if (response.ok) { 
-            const selectMaterias = document.getElementById('materia'); 
+        if (response.ok) {
+            const selectMaterias = document.getElementById('materia');
             const listaMaterias = await response.json();
             listaMaterias.forEach(materia => {
                 const newMateria = document.createElement('option');
@@ -136,7 +182,7 @@ async function getIdForMaterias(carrera){
     }
 }
 //Para conseguir ID de la carrera
-async function getIDCarrera(carrera){
+async function getIDCarrera(carrera) {
     try {
         const response = await fetch('http://localhost:3000/api/getIdByCarrera', {
             method: 'POST',
@@ -154,16 +200,16 @@ async function getIDCarrera(carrera){
         }
     } catch (error) {
         console.error('Error:', error);
-    }  
+    }
 }
 
 // Para limpiar los selects cada que se cambie de carrera
-function limpiarSelect(){
- document.getElementById("materia").length = 1;
+function limpiarSelect() {
+    document.getElementById("materia").length = 1;
 }
 
 // Para limpiar el formulario
-function limpiarInput(input){
+function limpiarInput(input) {
     document.getElementById(input).reset();
 }
 
@@ -176,9 +222,9 @@ function cerrarPopup() {
     document.getElementById("popup").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 }
-document.getElementById('buscarProf').addEventListener('click', function(event) {
+document.getElementById('buscarProf').addEventListener('click', function (event) {
     event.preventDefault();
-  
+
     const inputBusqueda = document.getElementById('inputBusqueda').value;
     window.location.href = `/busqueda-visualizacion.html?profesor=${encodeURIComponent(inputBusqueda)}`;
-  });
+});
