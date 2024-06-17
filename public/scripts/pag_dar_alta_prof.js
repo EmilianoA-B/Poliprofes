@@ -115,7 +115,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
             document.getElementById("selectsDeMateria").innerHTML = "";
         } else {
             const errorData = await response.json(); // Parsear la respuesta de error del servidor
-            if (errorData.message === 'Nombre duplicado') {
+            if (!response.ok) {
                 console.error('El nombre del profesor ya existe.'); // Manejar error de nombre duplicado
                 alert('El nombre del profesor ya existe.');
             } else {

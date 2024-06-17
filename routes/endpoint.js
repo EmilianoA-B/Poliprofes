@@ -78,7 +78,7 @@ router.post("/regProf", (req, res) => {
       res.status(500).send("Error al repetidos");
       return;
     }else if(results.length !== 0){
-      return res.status(400).send.json({error: "Se encontraron repetidos"});
+      return res.status(400).json({error: "Se encontraron repetidos"});
     }else{
       console.log("No se encontraron repetidos");
     }
