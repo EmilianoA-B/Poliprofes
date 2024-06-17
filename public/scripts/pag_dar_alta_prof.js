@@ -52,7 +52,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
 
     let valid = true;
     // Validación de nombre
-    if (nombreProf.value === "") {
+    if (nombreProf === "") {
         valid = false;
         const errorNombre = document.getElementById('error-nombre');
         errorNombre.innerText = 'Necesita ser llenado';
@@ -60,7 +60,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     }
 
     // Validación de apellidos
-    if (apellidoP.value === "") {
+    if (apellidoP === "") {
         valid = false;
         const errorApellidoP = document.getElementById('error-apellidoP');
         errorApellidoP.innerText = 'Necesita ser llenado';
@@ -68,7 +68,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     }
 
     // Validación de apellidos
-    if (apellidoM.value === "") {
+    if (apellidoM === "") {
         valid = false;
         const errorApellidoM = document.getElementById('error-apellidoM');
         errorApellidoM.innerText = 'Necesita ser llenado';
@@ -97,6 +97,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     if (!valid) {
         return; // Detener la ejecución si hay errores de validación
     }
+
     try {
         const response = await fetch('http://localhost:3000/endpoint/regProf', {
             method: 'POST',
