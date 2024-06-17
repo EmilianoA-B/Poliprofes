@@ -2,6 +2,22 @@
 // Variable global para almacenar una referencia al divProfesor que se debe eliminar
 var divCommentToRemove;
 
+// Función para mostrar el modal de confirmación
+function mostrarModal() {
+  var modal = document.getElementById("modal");
+  var overlay = document.getElementById("overlay");
+  modal.style.display = "block";
+  overlay.style.display = "block";
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+  var modal = document.getElementById("modal");
+  var overlay = document.getElementById("overlay");
+  modal.style.display = "none";
+  overlay.style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Función para mostrar los resultados en la página
   function mostrarResultados(resultados) {
@@ -61,10 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
       spanTrash.classList.add("lar", "la-trash-alt");
       button.appendChild(spanTrash);
       button.innerHTML += " Eliminar opinion";
-      button.onclick = async function () {
+      button.onclick = function () {
+        mostrarModal();
         divCommentToRemove = divProfesor;
         var idComment = profesor.id_comentario;
-        await deleteComentario(idComment);
+        document.getElementById("confirmarBaja").onclick = async function () {
+          await deleteComentario(idComment);
+        };
       };
       containerButton.appendChild(button);
       divProfesor.appendChild(containerButton);
@@ -97,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         divCommentToRemove.remove();
         divCommentToRemove = null;
       }
+      cerrarModal(); // Cerrar el modal después de eliminar al profesor
     } catch (error) {
       console.error("Error al eliminar el comentario desde front:", error);
     }
