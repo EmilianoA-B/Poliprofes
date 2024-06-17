@@ -70,12 +70,23 @@ router.post("/regProf", (req, res) => {
   const todasLasMaterias = req.body.selections;
   const verificado = req.body.verificado;
   console.log(req.body.selections);
+  //QUERY PARA BUSCAR REPETIDOS
+  const queryRepetido = "`SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?`"
+  connection.query(queryRepetido,[nombreProf, apellido_p, apellido_m], (err, results) => {
+    if (err) {
+      console.error("Error al buscar repetidos", err);
+      res.status(500).send("Error al repetidos");
+      return;
+    }else if(results.length !== 0){
+      return res.status(400).send("Se encontraron repetidos");
+    }else{
+      console.log("No se encontraron repetidos");
+    }
+  });
+  //QUERY PARA INSERTAR
   const query1 =
     "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado) VALUES (?, ?, ?, ?)";
-  connection.query(
-    query1,
-    [nombreProf, apellido_p, apellido_m, verificado],
-    (err, results) => {
+  connection.query(query1,[nombreProf, apellido_p, apellido_m, verificado], (err, results) => {
       if (err) {
         console.error("Error agregando al profesor", err);
         res.status(500).send("Error agregando al profesor");
@@ -87,10 +98,7 @@ router.post("/regProf", (req, res) => {
   //Segundo query para sacar ID de profesor
   const query2 =
     "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ? ORDER BY id DESC LIMIT 1";
-  connection.query(
-    query2,
-    [nombreProf, apellido_p, apellido_m],
-    (err, results) => {
+  connection.query(query2,[nombreProf, apellido_p, apellido_m], (err, results) => {
       if (results.length.id === 0) {
         return res.status(400).send("No se encontro IDS");
       }
