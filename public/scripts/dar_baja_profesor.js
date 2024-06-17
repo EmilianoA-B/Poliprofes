@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
       var containerButton = document.createElement('div');
       containerButton.classList.add('container-button');
 
+      let carreraSpan = document.createElement('h3');
+      carreraSpan.innerText = profesor.carrera;
+
       var button = document.createElement('button');
       button.classList.add('baja-btn');
       var spanTrash = document.createElement('i');
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       containerButton.appendChild(button);
       divProfesor.appendChild(enlaceNombre);
+      divProfesor.appendChild(carreraSpan);
       divProfesor.appendChild(materiasParrafo);
       resultadosDiv.appendChild(divProfesor);
       divProfesor.appendChild(containerButton);
