@@ -84,7 +84,9 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
         errorDato.innerText = 'Sin seleccionar';
         errorDato.style.display = 'inline';
 
-    } else if (materiaSelect.value === "") {
+    } 
+    
+    if (materiaSelect.value === "") {
         valid = false;
         const errorD = document.getElementById('error-sindato2');
         errorD.innerText = 'Sin seleccionar';
