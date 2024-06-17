@@ -71,7 +71,7 @@ router.post("/regProf", (req, res) => {
   const verificado = req.body.verificado;
   console.log(req.body.selections);
   //QUERY PARA BUSCAR REPETIDOS
-  const queryRepetido = "`SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?`"
+  const queryRepetido = "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?"
   connection.query(queryRepetido,[nombreProf, apellido_p, apellido_m], (err, results) => {
     if (err) {
       console.error("Error al buscar repetidos", err);
