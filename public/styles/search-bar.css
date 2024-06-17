@@ -12,7 +12,7 @@
 }
 
 .search-button {
-  background-color: #ffffff;
+  background-color:#B3668C;
   color: #a1a1a1;
   width: 3rem;
   height: 2rem;
@@ -32,6 +32,7 @@
   border-bottom-left-radius: 2rem;
   border-top-left-radius: 2rem;
   border: none;
+  background-color: #993366;
 }
 
 ::placeholder {
