@@ -63,26 +63,14 @@ router.post("/regMateria", (req, res) => {
 });
 
 //Alta de profesores desde ADMIN ===> CUIDADO CON REGISTRAR REPETIDOS, SE PETA EL SERVIDOR
-router.post("/regProf", (req, res) => {
+router.post("/regProf", async (req, res) => {
   const nombreProf = req.body.nombreProf;
   const apellido_p = req.body.apellidoP;
   const apellido_m = req.body.apellidoM;
   const todasLasMaterias = req.body.selections;
   const verificado = req.body.verificado;
   console.log(req.body.selections);
-  //QUERY PARA BUSCAR REPETIDOS
-  const queryRepetido = "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?"
-  connection.query(queryRepetido,[nombreProf, apellido_p, apellido_m], (err, results) => {
-    if (err) {
-      console.error("Error al buscar repetidos", err);
-      res.status(500).send("Error al repetidos");
-      return;
-    }else if(results.length !== 0){
-      return res.status(400).json({error: "Se encontraron repetidos"});
-    }else{
-      console.log("No se encontraron repetidos");
-    }
-  });
+  
   //QUERY PARA INSERTAR
   const query1 =
     "INSERT INTO profesores (nombre, apellido_paterno, apellido_materno, verificado) VALUES (?, ?, ?, ?)";

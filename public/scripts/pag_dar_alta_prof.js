@@ -100,31 +100,47 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
         return; // Detener la ejecución si hay errores de validación
     }
 
-    try {
-        const response = await fetch('http://localhost:3000/endpoint/regProf', {
+    try{
+        const response = await fetch('http://localhost:3000/api/checkRepetidos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections: todasLasMaterias, id_carrera, verificado: 1 })
+            body: JSON.stringify({ nombreProf, apellidoP, apellidoM })
         });
-        if (response.ok) {
-            console.log('Se registro el profesor');
-            mostrarPopup(); //Mostrar confirmacion de alta
-            limpiarInput('altaProf');
-            document.getElementById("selectsDeMateria").innerHTML = "";
-        } else {
+        
+        if(response.ok) {
+            try {
+                const response = await fetch('http://localhost:3000/endpoint/regProf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombreProf, apellidoP, apellidoM, selections: todasLasMaterias, id_carrera, verificado: 1 })
+                });
+                if (response.ok) {
+                    console.log('Se registro el profesor');
+                    mostrarPopup(); //Mostrar confirmacion de alta
+                    limpiarInput('altaProf');
+                    document.getElementById("selectsDeMateria").innerHTML = "";
+                }
+            }catch (error) {
+                console.error('Error:', error);
+            }
+        }else{
             const errorData = await response.json(); // Parsear la respuesta de error del servidor
             if (!response.ok) {
                 console.error('El nombre del profesor ya existe.'); // Manejar error de nombre duplicado
                 alert('El nombre del profesor ya existe.');
             } else {
-                console.error('No se pudo registrar al profesor:', errorData.message); // Manejar otros errores
+                console.error('Error ajeno a repeticion', errorData.message); // Manejar otros errores
             }
         }
-    } catch (error) {
+    }catch(error){
         console.error('Error:', error);
     }
+
+    
 });
 
 //Para cuando cambias de carrera

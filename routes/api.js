@@ -469,6 +469,24 @@ router.get("/getComentariosV4", (req, res) => {
   });
 });
 
-
+router.post("/checkRepetidos", (req,res) => {
+  const nombreProf = req.body.nombreProf;
+  const apellido_p = req.body.apellidoP;
+  const apellido_m = req.body.apellidoM;
+  const queryRepetido = "SELECT id FROM profesores WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?"
+  connection.query(queryRepetido,[nombreProf, apellido_p, apellido_m], (err, results) => {
+    if (err) {
+      console.error("Error al buscar repetidos", err);
+      res.status(500).send("Error al repetidos");
+      return;
+    }else if(results.length !== 0){
+      res.status(400).json({error: "Se encontraron repetidos"});
+      return;
+    }else{
+      console.log("No se encontraron repetidos");
+      return res.status(200).json({message: "No se encontraron problemas"});
+    }
+  });
+});
 
 module.exports = router;
