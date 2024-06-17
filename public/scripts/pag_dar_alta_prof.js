@@ -97,28 +97,6 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     if (!valid) {
         return; // Detener la ejecución si hay errores de validación
     }
-
-        // Verificar duplicados
-        try {
-            const checkResponse = await fetch('http://localhost:3000/endpoint/checkProf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nombreProf, apellidoP, apellidoM })
-            });
-    
-            const checkResult = await checkResponse.json();
-            if (checkResult.isDuplicate) {
-                alert('Ya existe un profesor con el mismo nombre y apellidos.');
-                return; // Detener el registro si se encuentra un duplicado
-            }
-        } catch (error) {
-            console.error('Error al verificar duplicados:', error);
-            return; // Detener el registro en caso de error
-        }
-        
-
     try {
         const response = await fetch('http://localhost:3000/endpoint/regProf', {
             method: 'POST',
