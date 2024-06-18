@@ -52,7 +52,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
 
     let valid = true;
     // Validación de nombre
-    if (nombreProf === "") {
+    if (nombreProf.trim() === "") {
         valid = false;
         const errorNombre = document.getElementById('error-nombre');
         errorNombre.innerText = 'Necesita ser llenado';
@@ -60,7 +60,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     }
 
     // Validación de apellidos
-    if (apellidoP === "") {
+    if (apellidoP.trim() === "") {
         valid = false;
         const errorApellidoP = document.getElementById('error-apellidoP');
         errorApellidoP.innerText = 'Necesita ser llenado';
@@ -68,7 +68,7 @@ document.getElementById("altaProf").addEventListener("submit", async function (e
     }
 
     // Validación de apellidos
-    if (apellidoM === "") {
+    if (apellidoM.trim() === "") {
         valid = false;
         const errorApellidoM = document.getElementById('error-apellidoM');
         errorApellidoM.innerText = 'Necesita ser llenado';
