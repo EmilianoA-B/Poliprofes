@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 //Archivo de configuracion de conexion JSON
 const connectionJSON = {
-    host: 'localhost',
-    user: 'root',
-    password: 'hola123',
-    database: 'poliprofes'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 };
 
 let connection;

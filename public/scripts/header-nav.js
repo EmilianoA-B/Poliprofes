@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
           name: "Roberto Martinez ",
           email: "robertomartinez@alumno.ipn.mx",
         });
-      }, 1000); // Simula un retraso de 1 segundo
+      }, 1); // Simula un retraso de 1 segundo
     });
   }
 
