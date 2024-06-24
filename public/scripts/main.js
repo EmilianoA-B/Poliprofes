@@ -1,7 +1,7 @@
 //Profesores aleatorios
 document.addEventListener('DOMContentLoaded', async function(){
     try{
-        const response = await fetch('http://localhost:3000/api/getProfesAleatorios');
+        const response = await fetch('/api/getProfesAleatorios');
         if(!response.ok){
             throw new Error('Fallo al recibir profesores');
         }
