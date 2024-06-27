@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       var pMaterias = document.createElement("p");
       var strongMaterias = document.createElement("strong");
       strongMaterias.innerText = profesor.materias.join(", ");
-      pMaterias.appendChild(strongMaterias);
+      //pMaterias.appendChild(strongMaterias);
       profesorDiv.appendChild(carreraSpan);
       profesorDiv.appendChild(pMaterias);
       
@@ -134,45 +134,50 @@ document.addEventListener("DOMContentLoaded", () => {
      //Este es el div de Carrera y recomendacion
       let divContainerLeft = document.createElement("div");
       divContainerLeft.classList.add("divContainerLeft");
-      var carreraSpan = document.createElement("h3");
+      var carreraSpan = document.createElement("p");
       carreraSpan.innerText = profesor.carrera;
       carreraSpan.innerHTML += "<br>";
 
-      var comentarioParrafoIDMat = document.createElement("p");
+      var comentarioParrafoIDMat = document.createElement("h3");
       comentarioParrafoIDMat.classList.add("resultado-materias");
       comentarioParrafoIDMat.innerText = profesor.materia;
       comentarioParrafoIDMat.innerHTML += "<br>";
 
     
-      if (profesor.aprobo == 1) {
-        comentarioParrafoIDMat.innerHTML += 'Aprobado <i class="lar la-smile"></i>';
-        comentarioParrafoIDMat.innerHTML += "<br>";
-      }
-      else if (profesor.aprobo == 0) {
-        comentarioParrafoIDMat.innerHTML += 'No aprobado <i class="lar la-frown"></i>';
-        comentarioParrafoIDMat.innerHTML += "<br>";
-      }
-      if (profesor.recomienda == 1) {
-        comentarioParrafoIDMat.innerHTML += 'Recomendado <i class="lar la-thumbs-up"></i>';
-        comentarioParrafoIDMat.innerHTML += "<br>";
-      }
-      else if (profesor.recomienda == 0) {
-        comentarioParrafoIDMat.innerHTML += 'No recomendado <i class="lar la-thumbs-down"></i>';
-        comentarioParrafoIDMat.innerHTML += "<br>";
-      }
+     
 
-      var comentarioParrafo = document.createElement("h3"); // p class="materias"
+      var comentarioParrafo = document.createElement("p"); // p class="materias"
       comentarioParrafo.classList.add("resultado-materias1");
       // Agregar cada materia al párrafo en una línea separada
       //Este es el div de el puro comentario
       var calificacionSpan = document.createElement("span");
-      calificacionSpan.classList.add("resultado-calificacion"); //span class="calificacion"
+      calificacionSpan.classList.add("resultado-calificacion1"); //span class="calificacion"
       calificacionSpan.innerText = profesor.calificacion;
       comentarioParrafo.innerText = profesor.comentario;
       comentarioParrafo.innerHTML += "<br>";
       comentarioParrafo.innerHTML += "<br>";
       var divContainer = document.createElement('div');
       divContainer.classList.add("divContainer");
+
+      var recomend = document.createElement("p");
+      recomend.innerText = profesor.dificultad;
+      recomend.innerHTML += "<br>";
+      if (profesor.aprobo == 1) {
+        recomend.innerHTML += 'Aprobado <i class="lar la-smile"></i>';
+        recomend.innerHTML += "<br>";
+      }
+      else if (profesor.aprobo == 0) {
+        recomend.innerHTML += 'No aprobado <i class="lar la-frown"></i>';
+        recomend.innerHTML += "<br>";
+      }
+      if (profesor.recomienda == 1) {
+        recomend.innerHTML += 'Recomendado <i class="lar la-thumbs-up"></i>';
+        recomend.innerHTML += "<br>";
+      }
+      else if (profesor.recomienda == 0) {
+        recomend.innerHTML += 'No recomendado <i class="lar la-thumbs-down"></i>';
+        recomend.innerHTML += "<br>";
+      }
 
       //Esta es la fecha
       var comentarioParrafoFecha = document.createElement("p");
@@ -196,12 +201,13 @@ document.addEventListener("DOMContentLoaded", () => {
       };
      
       divProfesor.appendChild(enlaceNombre);
-      divProfesor.appendChild(calificacionSpan);
+      
 
       divProfesor.appendChild(divContainerLeft);
-
-      divContainerLeft.appendChild(carreraSpan);
       divContainerLeft.appendChild(comentarioParrafoIDMat);
+      divContainerLeft.appendChild(carreraSpan);
+      divContainerLeft.appendChild(calificacionSpan);
+      divContainerLeft.appendChild(recomend);
       divContainer.appendChild(divContainerLeft);
       divContainer.appendChild(comentarioParrafo);
       divProfesor.appendChild(divContainer);
