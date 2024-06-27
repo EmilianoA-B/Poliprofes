@@ -89,17 +89,24 @@ document.getElementById('registroForm').addEventListener('submit', async functio
             limpiarInput('registroForm');
             swal({
                 text: "Registro exitoso.",
-                button: "Vale",
+                button: false,
                 dangerMode: true,
                 className: "alerta"
             });
+            setTimeout(() => {
+                swal.close(); // Cierra la alerta después de 3 segundos
+            }, 3000);
         } else {
             swal({
                 text: "Registro erroneo.",
-                button: "Vale",
+                button: false,
                 dangerMode: true,
                 className: "alerta"
             });
+
+        setTimeout(() => {
+            swal.close(); // Cierra la alerta después de 3 segundos
+        }, 3000);
             console.error('Error adding user');
         }
     }catch (error) {
